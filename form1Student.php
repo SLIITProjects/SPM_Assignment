@@ -60,7 +60,6 @@
 							<div class='form-group'>
 								<label><b>Email address</b></label>
 								<input class='form-control' name='email1' placeholder='Enter Email' type='email'>
-								<small class='form-text text-muted'><b>Use commas(,) to separate multiple email addreses.</b></small>
 							</div>
 							<div class='form-group'>
 								<label for='exampleSelect1'><b>Year</b></label>
@@ -96,6 +95,7 @@
 
 
 <?php
+include('DBConnection.php');
 if($_SERVER['REQUEST_METHOD']=='POST')
 {
 	if(isset($_POST['submitStudent']))
@@ -138,6 +138,21 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 			{
 				echo"<script>alert('Invalid Email Address')</script>";	
 			}
+		}
+		/**
+			Inserting data into DB if data is valid
+		**/
+		else
+		{
+			$sql="INSERT INTO form1_student_details(stdID, address, homePhn, mobilePhn, email, year, semester, cgpa) VALUES('$sid', '$address', '$hphn', '$mphn', '$email', '$year', '$sem', '$cgpa')";
+			
+			if (!mysqli_query($con,$sql)) 
+			{
+				die('Error: ' . mysqli_error($con));
+			}
+
+			echo"<script>alert('Details sent to supervisor')</script>";	
+			mysqli_close($con);
 		}
 	}
 }
