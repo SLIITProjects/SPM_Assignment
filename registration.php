@@ -35,38 +35,23 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-md-8">
+            <div class="col-lg-6 col-md-8">
                 <div class="card">
                     <div class="card-body">
-                        <img src="img/person4.jpg" alt="" class="img-fluid rounded-circle w-50 mb-3">
-                        <h3>Susan Williams</h3>
-                        <h5 class="text-muted">Lead Writer</h5>
+                        <img src="img/student.png" alt="" class="img-fluid rounded-circle w-50 mb-3">
+                        <h3>Student</h3>
                         <p>But most of all aren’t you tired of not getting paid for doing what you really love</p>
                         <div class="d-flex fex-row justify-content-center">
-                            <a class="btn btn-success">Click here</a>
+                            <a class="btn btn-success" href="student_register.php">Click here</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-8">
+            <div class="col-lg-6 col-md-8">
                 <div class="card">
                     <div class="card-body">
-                        <img src="img/person4.jpg" alt="" class="img-fluid rounded-circle w-50 mb-3">
-                        <h3>Grace Smith</h3>
-                        <h5 class="text-muted">Core Writer</h5>
-                        <p>But most of all aren’t you tired of not getting paid for doing what you really love</p>
-                        <div class="d-flex fex-row justify-content-center">
-                            <a class="btn btn-success">Click here</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-8">
-                <div class="card">
-                    <div class="card-body">
-                        <img src="img/person4.jpg" alt="" class="img-fluid rounded-circle w-50 mb-3">
-                        <h3>Jhone Doe</h3>
-                        <h5 class="text-muted">Screen Writer</h5>
+                        <img src="img/company.png" alt="" class="img-fluid rounded-circle w-50 mb-3">
+                        <h3>Company</h3>
                         <p>But most of all aren’t you tired of not getting paid for doing what you really love</p>
                         <div class="d-flex fex-row justify-content-center">
                             <a class="btn btn-success">Click here</a>
