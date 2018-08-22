@@ -1,6 +1,13 @@
 <!--Include header from another file-->
 <?php include('inc/header.php'); ?>
 
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
+    $registerStudent = $student-> registerStudent($_POST);
+}
+?>
+?>
+
 <!--Start inline stylesheet-->
 <style>
     body{
@@ -35,13 +42,20 @@
                     <h2 class="display-5 pt-2 text-white">Stduent Registration</h2>
                         <div class="row justify-content-center">
 
-                                    <form class="mt-3" action="register.php" method="post">
+                                    <form class="mt-3" action="student_register.php" method="post">
 
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-graduation-cap"></i></span>
-                                                <select class="form-control" name="school">
+                                                <select class="form-control" name="university">
                                                     <option value="">Select University</option>
+                                                    <?php
+                                                        $getUniversity = $university->getUniversities();
+                                                        if($getUniversity){
+                                                            while($result=$getUniversity->fetch_assoc()){
+                                                    ?>
+                                                    <option value="<?php echo $result['unid'];?>"><?php echo $result['uname'];?></option>
+                                                    <?php }}?>
                                                 </select>
                                             </div>
                                         </div>
@@ -50,8 +64,15 @@
                                             <div class="form-group col-md-8">
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-graduation-cap"></i></span>
-                                                    <select class="form-control" name="role">
+                                                    <select class="form-control" name="company">
                                                         <option value="">Select Company</option>
+                                                        <?php
+                                                        $getCompany = $company->getCompanies();
+                                                        if($getCompany){
+                                                            while($result=$getCompany->fetch_assoc()){
+                                                    ?>
+                                                    <option value="<?php echo $result['cid'];?>"><?php echo $result['name'];?></option>
+                                                    <?php }}?>
                                                     </select>
                                                 </div>
                                             </div>
@@ -68,15 +89,22 @@
                                             <div class="form-group col-md-6">
                                                 <div class="input-group ">
                                                     <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
-                                                    <input type="text" class="form-control" name="nic" placeholder="Student ID">
+                                                    <input type="text" class="form-control" name="studentid" placeholder="Student ID">
                                                 </div>
                                             </div>
 
                                             <div class="form-group col-md-6">
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-graduation-cap"></i></span>
-                                                    <select class="form-control" name="role">
+                                                    <select class="form-control" name="faculty">
                                                         <option value="">Select Faculty</option>
+                                                        <?php
+                                                        $getFaculty = $faculty->getFaculties();
+                                                        if($getFaculty){
+                                                            while($result=$getFaculty->fetch_assoc()){
+                                                    ?>
+                                                    <option value="<?php echo $result['fid'];?>"><?php echo $result['fname'];?></option>
+                                                    <?php }}?>
                                                     </select>
                                                 </div>
                                             </div>
@@ -117,6 +145,7 @@
                                     </form>
                         </div>
                         <br/>
+                        <?php if(isset($registerStudent)){echo $registerStudent;}?>
                     </div>
                 </div>
                 <!--End user registration section-->
