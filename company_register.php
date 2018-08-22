@@ -1,6 +1,13 @@
 <!--Include header from another file-->
 <?php include('inc/header.php'); ?>
 
+<!-- Check post request and call registerCompany function in Student Class-->
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
+    $registerCompany = $company-> registerCompany($_POST);
+}
+?>
+
 <!--Start inline stylesheet-->
 <style>
     body{
@@ -35,21 +42,11 @@
                     <h2 class="display-5 pt-2 text-white">Company Registration</h2>
                         <div class="row justify-content-center">
 
-                                    <form class="mt-3" action="register.php" method="post">
+                                    <form class="mt-3" action="company_register.php" method="post">
                                         <div class="form-group">
                                             <div class="input-group ">
                                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                                <input type="text" class="form-control" name="name" placeholder="Name">
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-8">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-graduation-cap"></i></span>
-                                                    <select class="form-control" name="role">
-                                                        <option value="">Select Field</option>
-                                                    </select>
-                                                </div>
+                                                <input type="text" class="form-control" name="fullname" placeholder="Name">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -83,10 +80,16 @@
 
                                         </div>
                                         <br/>
+                                        <div class="form-row">
                                         <input type="submit" name="submit" class="btn btn-success btn-lg register" value="Register">
+                                        <a href="registration.php" style="margin-left:20px;"type="submit" name="submit" class="btn btn-warning btn-lg col-md-2 text-white">Back</a>
+                                        </div>
                                     </form>
                         </div>
                         <br/>
+                        <!-- Display notifications-->
+                        <?php if(isset($registerCompany)){echo $registerCompany;}?>
+
                     </div>
                 </div>
                 <!--End user registration section-->
