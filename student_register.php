@@ -1,11 +1,11 @@
 <!--Include header from another file-->
 <?php include('inc/header.php'); ?>
 
+<!-- Check post request and call registerStudent function in Student Class-->
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
     $registerStudent = $student-> registerStudent($_POST);
 }
-?>
 ?>
 
 <!--Start inline stylesheet-->
@@ -141,10 +141,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 
                                         </div>
                                         <br/>
+                                        <div class="form-row">
                                         <input type="submit" name="submit" class="btn btn-success btn-lg register" value="Register">
+                                        <a href="registration.php" style="margin-left:20px;"type="submit" name="submit" class="btn btn-warning btn-lg col-md-2 text-white">Back</a>
+                                        </div>
                                     </form>
                         </div>
                         <br/>
+                        <!-- Display notifications-->
                         <?php if(isset($registerStudent)){echo $registerStudent;}?>
                     </div>
                 </div>
