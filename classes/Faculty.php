@@ -15,10 +15,12 @@ class Faculty
         $this->db = new Database();
         $this->fm = new Format();
     }
-    public function addFaculty($data){
-
-
+    public function addFaculty($name){
+        $query = "insert into faculty(fname) VALUES('$name')";
+        $result = $this->db->insert($query);
+        return true;
     }
+
 
     public function getFaculties(){
         $query = "SELECT * from faculty";
@@ -26,6 +28,15 @@ class Faculty
         return $result;
 
     }
+
+    public function getOneFaculty($name){
+        $query = "SELECT * from faculty where fname='$name'";
+        $result = $this->db->select($query);
+        return $result;
+
+    }
+
+
 
 }
 
