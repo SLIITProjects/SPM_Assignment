@@ -9,10 +9,10 @@ spl_autoload_register(function($class){
 });
     $db = new Database();
     $fm = new Format();
-    $student = new Student();
+    $user = new User();
     $university = new University();
-    $company = new Company();
     $faculty = new Faculty();
+    $login = new Login();
   
 ?>
 

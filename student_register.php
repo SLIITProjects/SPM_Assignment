@@ -4,7 +4,7 @@
 <!-- Check post request and call registerStudent function in Student Class-->
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-    $registerStudent = $student-> registerStudent($_POST);
+    $registerStudent = $user-> registerStudent($_POST);
 }
 ?>
 
@@ -67,11 +67,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                                                     <select class="form-control" name="company">
                                                         <option value="">Select Company</option>
                                                         <?php
-                                                        $getCompany = $company->getCompanies();
+                                                        $getCompany = $user->getCompanies();
                                                         if($getCompany){
                                                             while($result=$getCompany->fetch_assoc()){
                                                     ?>
-                                                    <option value="<?php echo $result['cid'];?>"><?php echo $result['name'];?></option>
+                                                    <option value="<?php echo $result['uid'];?>"><?php echo $result['name'];?></option>
                                                     <?php }}?>
                                                     </select>
                                                 </div>
