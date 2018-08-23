@@ -54,7 +54,7 @@
                         <h3>Company</h3>
                         <p>But most of all aren’t you tired of not getting paid for doing what you really love</p>
                         <div class="d-flex fex-row justify-content-center">
-                            <a class="btn btn-success">Click here</a>
+                            <a class="btn btn-success" href="company_register.php">Click here</a>
                         </div>
                     </div>
                 </div>

@@ -31,7 +31,7 @@
 
         <form class="form-inline">
             <label>Welcome Guest &nbsp; </label>
-            <a href="register.php" class="btn btn-primary my-2 my-sm-0" type="submit">Register here</a>
+            <a href="registration.php" class="btn btn-primary my-2 my-sm-0" type="submit">Register here</a>
         </form>
     </div>
 </nav>
