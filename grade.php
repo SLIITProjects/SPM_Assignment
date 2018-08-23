@@ -22,10 +22,7 @@
                         <div class="list-group">
                             <a href="index.php" class="list-group-item list-group-item-action active">Home</a>
                             <a href="" class="list-group-item list-group-item-action">Functions</a>
-                            <a href="form-i-3.php" class="list-group-item list-group-item-action">Form I-3</a>
-                            <a href="grade.php" class="list-group-item list-group-item-action">Grading-From</a>
-							              <a href="form1Student.php" class="list-group-item list-group-item-action">Form I-1</a>
-
+                            <a href="grade.php" class="list-group-item list-group-item-action">Grading-Form</a>
                         </div>
                     </div>
                 </div>
@@ -36,7 +33,7 @@
         <div class="col col-md-9 col-lg-9">
                     <div class="jumbotron jumbotron-fluid text-center welcome">
                         <div class="container">
-                            <h1 class="display-4">Welcome!!!</h1>
+                            <h1 class="display-4">Grading Form</h1>
                         </div>
                     </div>
         </div>
