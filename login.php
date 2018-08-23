@@ -1,7 +1,19 @@
 <!--Include header from another file-->
 <?php include('inc/header.php'); ?>
 
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
+    $logUser = $login->loginUser($_POST);
+}
+?>
+<!--Check user login.If session found redirect the user to Main page-->
+<?php
+$login = Session::get('userLogin');
+if($login==true){
+    header("Location:index.php");
 
+}
+?>
 <!-- Start Inline Stylesheet-->
 <style>
     body{
@@ -106,6 +118,7 @@
                                     <input type="submit" name="submit" class="btn btn-success loginbtn" value="Login">
                                     <br/>
                                     <br/>
+                                    <?php if(isset($logUser)){echo $logUser;}?>
                                 </form>
                         </div>
                     </div>
