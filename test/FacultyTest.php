@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: nalin
- * Date: 8/22/2018
- * Time: 4:05 PM
- */
 include_once("../classes/Faculty.php");
 use PHPUnit\Framework\TestCase;
 
