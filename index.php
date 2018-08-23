@@ -23,6 +23,7 @@
                             <a href="index.php" class="list-group-item list-group-item-action active">Home</a>
                             <a href="" class="list-group-item list-group-item-action">Functions</a>
 							<a href="form1Student.php" class="list-group-item list-group-item-action">Form I-1</a>
+                            <a href="form-i-3.php" class="list-group-item list-group-item-action">Form I-3</a>
                         </div>
                     </div>
                 </div>
