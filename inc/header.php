@@ -1,3 +1,21 @@
+<?php
+include 'lib/Session.php';
+Session::init();
+include 'lib/Database.php';
+include 'helpers/Format.php';
+
+spl_autoload_register(function($class){
+   include_once "classes/".$class.".php";
+});
+    $db = new Database();
+    $fm = new Format();
+    $student = new Student();
+    $university = new University();
+    $company = new Company();
+    $faculty = new Faculty();
+  
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
