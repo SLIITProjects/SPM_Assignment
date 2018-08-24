@@ -97,20 +97,20 @@ if($login==true){
                 <!--End testimonial-->
 
                 <!--Start login form-->
-                <div class="col-lg-5 text-center py-5 loginForm">
+                <div class="col-md-5 text-center py-5 loginForm">
                     <div class="container-fluid">
                         <div class="row">
                                 <form class="login" action="login.php" method="post">
                                     <div class="form-group">
                                         <div class="input-group ">
-                                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-user mr-2 mt-2"></i></span>
                                             <input type="text" class="form-control" name="email" placeholder="Username">
                                         </div>
                                     </div>
                                     <div class="form-group">
 
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-lock mr-2 mt-2"></i></span>
                                             <input type="password" class="form-control" name="password" placeholder="Password">
                                         </div>
                                     </div>
