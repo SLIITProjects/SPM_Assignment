@@ -129,7 +129,7 @@
 							<div class='form-group'>
 								<label><b>Date</b></label>
 								<input class='form-control' name='date' type='date'>
-							</div><br>
+							</div><br><br>
 							<button type='submit' class='btn btn-primary' name='submitdetails'>Submit</button>
 						</fieldset>
 					</form>
