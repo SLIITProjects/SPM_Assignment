@@ -13,6 +13,7 @@ spl_autoload_register(function($class){
     $university = new University();
     $faculty = new Faculty();
     $login = new Login();
+    $page = new Pagination();
   
 ?>
 
