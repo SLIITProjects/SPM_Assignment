@@ -45,22 +45,27 @@
 								<label><b>Student ID</b></label>
 								<input class='form-control' name='stdID' placeholder='Enter Student ID' type='text'>
 							</div>
+							<br/>
 							<div class='form-group'>
 								<label><b>Address</b></label>
 							    <input class='form-control' name='address' placeholder='Enter Address' type='text'>
-							</div>	
+							</div>
+							<br/>
 							<div class='form-group'>
 								<label><b>Home Phone</b></label>
 								<input class='form-control' name='hphone' placeholder='Enter Home Phone' type='text'>
 							</div>
+							<br/>
 							<div class='form-group'>
 								<label><b>Mobile Phone</b></label>
 								<input class='form-control' name='mphone' placeholder='Enter Mobile Phone' type='text'>
 							</div>
+							<br/>
 							<div class='form-group'>
 								<label><b>Email address</b></label>
 								<input class='form-control' name='email1' placeholder='Enter Email' type='email'>
 							</div>
+							<br/>
 							<div class='form-group'>
 								<label for='exampleSelect1'><b>Year</b></label>
 								<select class='form-control' name='year'>
@@ -69,6 +74,7 @@
 									<option>4</option>
 								</select>
 							</div>
+							<br/>
 							<div class='form-group'>
 								<label for='exampleSelect1'><b>Semester</b></label>
 								<select class='form-control' name='sem'>
@@ -76,10 +82,12 @@
 									<option>2</option>
 								</select>
 							</div>
+							<br/>
 							<div class='form-group'>
 								<label><b>CGPA</b></label>
 								<input class='form-control' name='cgpa' placeholder='Enter CGPA' type='text'>
 							</div>
+							<br/>
 							<button type='submit' class='btn btn-primary' name='submitStudent'>Submit</button>
 						</fieldset>
 					</form>
