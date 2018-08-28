@@ -128,7 +128,7 @@
 							<br/>
 							<div class='form-group'>
 								<label><b>Supervisor's Email</b></label>
-								<input class='form-control' name='semail1' placeholder="Enter Supervisor's Email" type='email'>
+								<input class='form-control' name='semail' placeholder="Enter Supervisor's Email" type='email'>
 							</div>
 							<br/>
 							<div class='form-group'>
@@ -143,7 +143,7 @@
 							<br/>
 							<div class='form-group'>
 								<label><b>No. of Hours/Week</b></label>
-								<input class='form-control' name='edate' placeholder="Enter No. of Hours/Week" type='text'>
+								<input class='form-control' name='hourPerWeek' placeholder="Enter No. of Hours/Week" type='text'>
 							</div>
 							<br/>
 							<div class='form-group'>
@@ -156,7 +156,7 @@
 								<textarea rows="4" cols="50" class='form-control' name='learn'></textarea>
 							</div>
 							<br/>
-							<button type='submit' class='btn btn-primary' name='submitStudent'>Submit</button>
+							<button type='submit' class='btn btn-primary' name='submitSupervisor'>Submit</button>
 						</fieldset>
 					</form>
 					
@@ -174,6 +174,48 @@
 include('DBConnection.php');
 if($_SERVER['REQUEST_METHOD']=='POST')
 {
+	if(isset($_POST['submitSupervisor']))
+	{
+		$ename=$_POST['ename'];
+		$eaddress=$_POST['eaddress'];
+		$sname=$_POST['sname'];
+		$sphone=$_POST['sphone'];
+		$stitle=$_POST['stitle'];
+		$semail=$_POST['semail'];
+		$sdate=$_POST['sdate']." 00:00:00";
+		$edate=$_POST['edate']." 00:00:00";
+		$hoursPerWeek=$_POST['hourPerWeek'];
+		$taskList=$_POST['tasks'];
+		$learnList=$_POST['learn'];
+		
+		if(empty($ename)||empty($eaddress)||empty($sname)||empty($sphone)||empty($stitle)||empty($semail)||empty($sdate)||empty($edate)||empty($hoursPerWeek)||empty($taskList)||empty($learnList))
+		{
+			echo"<script>alert('One are more fields are empty')</script>";
+		}
+		else if(!preg_match("/^[0-9]{10}$/",$sphone)||!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i",$semail)||!preg_match("/^[0-9]{1}.[0-9]{1}|^[0-9]{2}.[0-9]{1}|^[0-9]{3}.[0-9]{1}|^[0-9]{1}|^[0-9]{2}|^[0-9]{3}$/",$hoursPerWeek)||strtotime($sdate) > strtotime($edate))
+		{
+			if(!preg_match("/^[0-9]{10}$/",$sphone))
+			{
+				echo"<script>alert('Invalid Phone')</script>";		
+			}
+			if(!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i",$semail))
+			{
+				echo"<script>alert('Invalid Supervisor Email')</script>";		
+			}
+			if(!preg_match("/^[0-9]{1}.[0-9]{1}|^[0-9]{2}.[0-9]{1}|^[0-9]{3}.[0-9]{1}|^[0-9]{1}|^[0-9]{2}|^[0-9]{3}$/",$hoursPerWeek))
+			{
+				echo"<script>alert('Invalid Hours Per Week')</script>";		
+			}
+			if(strtotime($sdate) > strtotime($edate))
+			{
+				echo"<script>alert('Start date should be less than End date')</script>";	
+			}
+		}
+		else
+		{
+				
+		}
+	}
 
 }
 ?>
