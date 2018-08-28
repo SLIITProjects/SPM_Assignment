@@ -1,12 +1,12 @@
 <!--Include header from another file-->
-<?php include('inc/header.php'); ?>
+<?php include('../../inc/header.php'); ?>
 
 <style>
 
 </style>
 
 <!--Include Navbar from another file-->
-<?php include('inc/navbar.php')?>
+<?php include('../../inc/navbar.php')?>
 
 <section id="authors" class="">
 <div class="container-fluid">
@@ -16,13 +16,13 @@
         <div class="col col-md-3 col-lg-3 text-center">
                 <div class="card">
                     <div class="card-body">
-                        <img src="img/mlogo.png" alt="" class="img-fluid rounded-circle w-50 mb-1">
+                        <img src="../../img/mlogo.png" alt="" class="img-fluid rounded-circle w-50 mb-1">
                         <h4>Rajitha lakshan</h4>
                         <h5 class="text-muted">Student</h5>
                         <div class="list-group">
-                            <a href="index.php" class="list-group-item list-group-item-action active">Home</a>
+                            <a href="../../index.php" class="list-group-item list-group-item-action active">Home</a>
                             <a href="" class="list-group-item list-group-item-action">Functions</a>
-							<a href="form1Student.php" class="list-group-item list-group-item-action">Form I-1</a>
+							<a href="../../form1Student.php" class="list-group-item list-group-item-action">Form I-1</a>
                         </div>
                     </div>
                 </div>
@@ -45,27 +45,22 @@
 								<label><b>Student ID</b></label>
 								<input class='form-control' name='stdID' placeholder='Enter Student ID' type='text'>
 							</div>
-							<br/>
 							<div class='form-group'>
 								<label><b>Address</b></label>
 							    <input class='form-control' name='address' placeholder='Enter Address' type='text'>
-							</div>
-							<br/>
+							</div>	
 							<div class='form-group'>
 								<label><b>Home Phone</b></label>
 								<input class='form-control' name='hphone' placeholder='Enter Home Phone' type='text'>
 							</div>
-							<br/>
 							<div class='form-group'>
 								<label><b>Mobile Phone</b></label>
 								<input class='form-control' name='mphone' placeholder='Enter Mobile Phone' type='text'>
 							</div>
-							<br/>
 							<div class='form-group'>
 								<label><b>Email address</b></label>
 								<input class='form-control' name='email1' placeholder='Enter Email' type='email'>
 							</div>
-							<br/>
 							<div class='form-group'>
 								<label for='exampleSelect1'><b>Year</b></label>
 								<select class='form-control' name='year'>
@@ -74,7 +69,6 @@
 									<option>4</option>
 								</select>
 							</div>
-							<br/>
 							<div class='form-group'>
 								<label for='exampleSelect1'><b>Semester</b></label>
 								<select class='form-control' name='sem'>
@@ -82,12 +76,10 @@
 									<option>2</option>
 								</select>
 							</div>
-							<br/>
 							<div class='form-group'>
 								<label><b>CGPA</b></label>
 								<input class='form-control' name='cgpa' placeholder='Enter CGPA' type='text'>
 							</div>
-							<br/>
 							<button type='submit' class='btn btn-primary' name='submitStudent'>Submit</button>
 						</fieldset>
 					</form>
@@ -103,7 +95,7 @@
 
 
 <?php
-include('DBConnection.php');
+include('../../DBConnection.php');
 if($_SERVER['REQUEST_METHOD']=='POST')
 {
 	if(isset($_POST['submitStudent']))
@@ -168,4 +160,6 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 
 
 <!--Include Footer from another file-->
-<?php include('inc/footer.php')?>
+<?php include('../../inc/footer.php')?>
+
+

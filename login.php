@@ -1,7 +1,19 @@
 <!--Include header from another file-->
 <?php include('inc/header.php'); ?>
 
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
+    $logUser = $login->loginUser($_POST);
+}
+?>
+<!--Check user login.If session found redirect the user to Main page-->
+<?php
+$login = Session::get('userLogin');
+if($login==true){
+    header("Location:index.php");
 
+}
+?>
 <!-- Start Inline Stylesheet-->
 <style>
     body{
@@ -85,20 +97,20 @@
                 <!--End testimonial-->
 
                 <!--Start login form-->
-                <div class="col-lg-5 text-center py-5 loginForm">
+                <div class="col-md-5 text-center py-5 loginForm">
                     <div class="container-fluid">
                         <div class="row">
                                 <form class="login" action="login.php" method="post">
                                     <div class="form-group">
                                         <div class="input-group ">
-                                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-user mr-2 mt-2"></i></span>
                                             <input type="text" class="form-control" name="email" placeholder="Username">
                                         </div>
                                     </div>
                                     <div class="form-group">
 
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-lock mr-2 mt-2"></i></span>
                                             <input type="password" class="form-control" name="password" placeholder="Password">
                                         </div>
                                     </div>
@@ -106,6 +118,7 @@
                                     <input type="submit" name="submit" class="btn btn-success loginbtn" value="Login">
                                     <br/>
                                     <br/>
+                                    <?php if(isset($logUser)){echo $logUser;}?>
                                 </form>
                         </div>
                     </div>
