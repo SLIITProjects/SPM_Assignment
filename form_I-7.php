@@ -5,6 +5,7 @@
 
 </style>
 
+<<<<<<< HEAD
 <?php
     $av = new Examiner();
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])){
@@ -13,6 +14,8 @@
 
 ?>
 
+=======
+>>>>>>> 53a5e5ec7dd15b06a48685de473cf9666e14c6ca
 <!--Include Navbar from another file-->
 <?php include('inc/navbar.php')?>
 
@@ -26,7 +29,11 @@
                     <div class="card-body">
                         <img src="img/mlogo.png" alt="" class="img-fluid rounded-circle w-50 mb-1">
                         <h4>Rajitha lakshan</h4>
+<<<<<<< HEAD
                         <h5 class="text-muted">Examiner</h5>
+=======
+                        <h5 class="text-muted">Student</h5>
+>>>>>>> 53a5e5ec7dd15b06a48685de473cf9666e14c6ca
                         <div class="list-group">
                             <a href="index.php" class="list-group-item list-group-item-action active">Home</a>
                             <a href="" class="list-group-item list-group-item-action">Functions</a>
@@ -38,6 +45,7 @@
         <!--End Sidebar Section-->
 
         <!--Start Main section-->
+<<<<<<< HEAD
 		<?php
       
         if(isset($_POST['view1'])){
@@ -125,6 +133,8 @@
 		}
 	
 	?>
+=======
+>>>>>>> 53a5e5ec7dd15b06a48685de473cf9666e14c6ca
         <div class="col col-md-9 col-lg-9">
                     <div class="jumbotron jumbotron-fluid text-center welcome">
                         <div class="container">
@@ -139,6 +149,7 @@
 						<label><h5><b>STUDENT INFORMATION</b></h5></label><br><br>
 							<div class='form-group'>
 								<label><b>Student IT number</b></label>
+<<<<<<< HEAD
 								<input class='form-control' name='stdid' placeholder='Enter Student ID' type='text' value="<?php echo $stdid; ?>"><br>
 								<button type='submit' class='btn btn-primary' name='view1'>Get details</button>
 							</div>
@@ -153,19 +164,44 @@
 							<div class='form-group'>
 								<label><b>Email</b></label>
 								<input class='form-control' name='email' placeholder='student email' type='email'value="<?php echo $email; ?>">
+=======
+								<input class='form-control' name='stdid' placeholder='Enter Student ID' type='text'><br>
+								<button type='submit' class='btn btn-primary' name='submitStudent'>Get details</button>
+							</div>
+							<div class='form-group'>
+								<label><b>Student Name</b></label>
+							    <input class='form-control' name='sname' placeholder='student name' type='text'>
+							</div>	
+							<div class='form-group'>
+								<label><b>Phone Number</b></label>
+								<input class='form-control' name='phone' placeholder='student Phone number' type='text'>
+							</div>
+							<div class='form-group'>
+								<label><b>Email</b></label>
+								<input class='form-control' name='email' placeholder='student email' type='email'>
+>>>>>>> 53a5e5ec7dd15b06a48685de473cf9666e14c6ca
 							</div><div></div><br><br><br>
 							<label><h5><b>EMPLOYEE INFORMATION</b></h5></label><br><br>
 							<div class='form-group'>
 								<label><b>Employee Name</b></label>
+<<<<<<< HEAD
 								<input class='form-control' name='ename' placeholder='Employee name' type='text'value="<?php echo $ename; ?>">
 							</div>
 					         <div class='form-group'>
 								<label><b>Supervisor Name</b></label>
 								<input class='form-control' name='name' placeholder='supervisor name' type='text'value="<?php echo $name; ?>">
+=======
+								<input class='form-control' name='ename' placeholder='Employee name' type='text'>
+							</div>
+					         <div class='form-group'>
+								<label><b>Supervisor Name</b></label>
+								<input class='form-control' name='sname' placeholder='supervisor name' type='text'>
+>>>>>>> 53a5e5ec7dd15b06a48685de473cf9666e14c6ca
 							</div><div></div><br><br><br>
 							<label><h5><b>ACADAMIC INFORMATION</b></h5></label><br><br>
 							<div class='form-group'>
 								<label><b>Degree Title</b></label>
+<<<<<<< HEAD
 								<input class='form-control' name='dtitle' placeholder='degree title' type='text'value="<?php echo $dtitle; ?>">
 							</div>
 							<div class='form-group'>
@@ -183,6 +219,25 @@
 							<div class='form-group'>
 								<label><b>Internship Title</b></label>
 								<input class='form-control' name='ititle' placeholder='internship title' type='text'value="<?php echo $ititle; ?>">
+=======
+								<input class='form-control' name='dtitle' placeholder='degree title' type='text'>
+							</div>
+							<div class='form-group'>
+								<label><b>Specialisation</b></label>
+							    <input class='form-control' name='spc' placeholder='specialisation' type='text'>
+							</div>	
+							<div class='form-group'>
+								<label><b>Internship Duration</b></label>
+								<input class='form-control' name='internd' placeholder='internship duration' type='text'>
+							</div>
+							<div class='form-group'>
+								<label><b>No Of Credits</b></label>
+								<input class='form-control' name='credit' placeholder='no of credits' type='text'>
+							</div>
+							<div class='form-group'>
+								<label><b>Internship Title</b></label>
+								<input class='form-control' name='ititle' placeholder='internship title' type='text'>
+>>>>>>> 53a5e5ec7dd15b06a48685de473cf9666e14c6ca
 							</div>
 
 							<br><br><br>
@@ -193,6 +248,7 @@
 							</div>
 							<div class='form-group'>
 								<label><b>Monthly progress (30%)</b></label>
+<<<<<<< HEAD
 							    <input class='form-control' name='monthly' placeholder='monthly progress' type='text'value="<?php echo $monthly; ?>">
 							</div>	
 							<div class='form-group'>
@@ -211,6 +267,21 @@
 							<div class='form-group'>
 								<label><b>Final Grade</b></label>
 								<input class='form-control' name='grade' placeholder='grade' type='text'value="<?php echo $grade; ?>">
+=======
+							    <input class='form-control' name='monthly' placeholder='monthly progress' type='text'>
+							</div>	
+							<div class='form-group'>
+								<label><b>Internship report (30%)</b></label>
+								<input class='form-control' name='report' placeholder='internship report' type='text'>
+							</div>
+							<div class='form-group'>
+								<label><b>Viva (40%)</b></label>
+								<input class='form-control' name='viva' placeholder='viva' type='text'>
+							</div>
+							<div class='form-group'>
+								<label><b>Final Grade</b></label>
+								<input class='form-control' name='grade' placeholder='grade' type='text'>
+>>>>>>> 53a5e5ec7dd15b06a48685de473cf9666e14c6ca
 							</div>
 							<br><br><br>
 							<div class='form-group'>
@@ -220,6 +291,7 @@
 							</div>
 							<div class='form-group'>
 								<label><b>Examiner name</b></label>
+<<<<<<< HEAD
 								<input class='form-control' name='exname' placeholder='examiner name' type='text'>
 							</div>
 							
@@ -228,6 +300,19 @@
 								<input class='form-control' name='date' type='date'value="<?php echo date('Y-m-d');?>">
 							</div>
 							<button type='submit' class='btn btn-primary' name='submit'>Submit</button>
+=======
+								<input class='form-control' name='ename' placeholder='examiner name' type='text'>
+							</div>
+							<div class='form-group'>
+								<label><b>Examiner signature</b></label>
+								<input class='form-control' name='sig' placeholder='signature' type='text'>
+							</div>
+							<div class='form-group'>
+								<label><b>Date</b></label>
+								<input class='form-control' name='date' type='date'>
+							</div><br><br>
+							<button type='submit' class='btn btn-primary' name='submitdetails'>Submit</button>
+>>>>>>> 53a5e5ec7dd15b06a48685de473cf9666e14c6ca
 						</fieldset>
 					</form>
 					
