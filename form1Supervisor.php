@@ -213,7 +213,16 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 		}
 		else
 		{
+			$StdID=$_SERVER['QUERY_STRING'];
+			$sql="INSERT INTO form1_supervisor(stdID,employer_name,employer_address,sup_name,sup_phone,sup_title,sup_email,internship_sDate,internship_eDate,noHoursPerWeek,tasks_desc,learn_desc) VALUES('$StdID','$ename','$eaddress','$sname','$sphone','$stitle','$semail','$sdate','$edate','$hoursPerWeek','$taskList','$learnList')";
 				
+			if (!mysqli_query($con,$sql)) 
+			{
+				die('Error: ' . mysqli_error($con));
+			}
+
+			echo"<script>alert('Details emailed to industrial training manager')</script>";	
+			mysqli_close($con);
 		}
 	}
 

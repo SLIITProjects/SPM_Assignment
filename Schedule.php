@@ -7,10 +7,27 @@
     $query="select Reg_no,Name,Company,Start_date,End_date from schedule_tab";
     $result=mysqli_query($con,$query);
 ?>
+
                 
 
-<style>
 
+<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.css" >
+  
+
+	<script>
+			$(function() {
+			$('.dates #usr1').datepicker({
+				'format': 'yyyy-mm-dd',
+				'autoclose': true
+			});
+		});
+	</script>
+
+    
+
+<style>
 </style>
 
 <!--Include Navbar from another file-->
@@ -20,7 +37,7 @@
 <div class="container-fluid">
     <div class="row">
 
-        <!--Start Sidebar section-->
+            <!--Start Sidebar section-->
         <div class="col col-md-3 col-lg-3 text-center">
                 <div class="card">
                     <div class="card-body">
@@ -36,15 +53,15 @@
         </div>
         <!--End Sidebar Section-->
 
-        <!--Start Main section-->
-        <div class="col col-md-9 col-lg-9">
+<!--Start Main section-->
+<div class="col col-md-9 col-lg-9">
                     <!--<div class="jumbotron jumbotron-fluid text-center welcome">
                         <div class="container">
                             <h1 class="display-5">Schedule Viva</h1>
                         </div>   
                     </div>-->
                     <div>
-                            <!-- Editable table -->
+                     <!-- Editable table -->
 <div class="card">
     <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Schedule Viva</h3>
     <div class="card-body">
@@ -60,37 +77,45 @@
                     <th class="text-center">Viva Date</th>
                     <th class="text-center">Time</th>
                 </tr>
-
                 <?php
                     while($rows=mysqli_fetch_assoc($result))
                     {
                 ?>
                 <tr>
 
-                    <td class="pt-3-half" contenteditable="true"><?php echo $rows['Reg_no']; ?></td>
-                    <td class="pt-3-half" contenteditable="true"><?php echo $rows['Name']; ?></td>
-                    <td class="pt-3-half" contenteditable="true"><?php echo $rows['Company']; ?></td>
-                    <td class="pt-3-half" contenteditable="true"><?php echo $rows['Start_date']; ?></td>
-                    <td class="pt-3-half" contenteditable="true"><?php echo $rows['End_date']; ?></td>
-                    <td class="pt-3-half">
-                   
+                <td class="pt-3-half" contenteditable="true"><?php echo $rows['Reg_no']; ?></td>
+                <td class="pt-3-half" contenteditable="true"><?php echo $rows['Name']; ?></td>
+                <td class="pt-3-half" contenteditable="true"><?php echo $rows['Company']; ?></td>
+                <td class="pt-3-half" contenteditable="true"><?php echo $rows['Start_date']; ?></td>
+                <td class="pt-3-half" contenteditable="true"><?php echo $rows['End_date']; ?></td>
+                <td class="pt-3-half">
+                
+
+            <div Class="dates">
+            <input type="text"  class="form-control" id="usr1" name="event_date" placeholder="YYYY-MM-DD" autocomplete="off" >
+            </div>
 
 
-                    </td>
-                    <td>
-                        
-                    </td>
+
+                </td>
+                <td>
+                    
+                </td>
                 </tr>
                 <?php
-                    }
+                }
                 ?>
-                                
-                
-            </table>
+
+        </table>
         </div>
     </div>
 </div>
 <!-- Editable table -->
+
+
+
+
+
 
                     </div>
         </div>
@@ -100,5 +125,4 @@
 </div>
 </section>
 
-<!--Include Footer from another file-->
-<?php include('inc/footer.php')?>
+        
