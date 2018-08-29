@@ -39,7 +39,7 @@
         <div class="col col-md-9 col-lg-9">
                     <div class="jumbotron jumbotron-fluid text-center welcome">
                         <div class="container">
-                            <h2>Form I-3</h2></br>
+                            <h2>Form I-3-Approval</h2></br>
 							<h4>Intern's Daily Diary</h4>
                         </div>
                     </div>
@@ -401,7 +401,9 @@
 
 			
 					
-						
+					<!--  -->
+                    <!--  -->
+					
 					
 					
         </div>
