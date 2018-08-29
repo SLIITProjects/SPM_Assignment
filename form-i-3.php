@@ -43,8 +43,8 @@
         <div class="col col-md-9 col-lg-9">
                     <div class="jumbotron jumbotron-fluid text-center welcome">
                         <div class="container">
-                            <h2>Form I-3</h2></br>
-							<h4>Intern's Daily Diary</h4>
+                            <h2><b>Form I-3</b></h2></br>
+							<h4><b>Intern's Daily Diary</b></h4>
                         </div>
                     </div>
 
@@ -129,7 +129,7 @@
 								
 								</div>
 								<div class='col'>
-								<?php echo " <label><b>Email-:-:".$email."</b></label>";
+								<?php echo " <label><b>Email-:".$email."</b></label>";
 								?>
 								
 								</div>
@@ -167,245 +167,46 @@
 
 <h4 style="text-align:center"><b>Internal Training Information</b></h4>
 							<hr>
-							<table style="width:100%" id="data" class="table-striped">
-  <tr>
-  <th>#</th>
-    <th>Training Party</th>
-    <th>Training Description</th> 
-    <th>From:</input></th>
-	<th>to</th>
-	<th>Action</th>
-  </tr>
-  <tr>
-  <td>1</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
 
 
+     <table class="table table-striped ">
+                           
+						   <tr>
+							   <th scope="col"><b>#Day</b></th>
+							   <th scope="col"><b>TrainingParty</b></th>
+							   <th scope="col"><b>TrainingDescription</b></th>
+							   <th scope="col"><b>From</b></th>
+							   <th scope="col"><b>To</b></th>
+						   </tr>
+						   </thead>
+						   <tbody>
+						   <?php
+						  	  $i=0;
+								   while($i<21){
+									   
+							// 								<th>Training Party</th>
+							// <th>Training Description</th> 
+							// <th>From:</input></th>
+							// <th>to</th>
+							// <th>Action</th>
 
-<tr>
-<td>2</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-<tr>
-<td>3</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-<tr>
-<td>4</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-<tr>
-<td>5</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-<tr>
-<td>6</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-<tr>
-<td>7</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-<tr>
-<td>8</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-<tr>
-<td>9</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
+							$trainingParty="traingParty".$i;
+							$TrainingDescription="TrainingDescription".$i;
+							$From="From".$i;
+							$to="to".$i;
 
 
-<tr>
-<td>10</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-<tr>
-<td>11</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-<tr>
-<td>12</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
+									   echo " <tr> <td ><b>$i</b></td><td ><input type='textarea'name='$trainingParty'></input></td>   <td><input type='textarea'name='$TrainingDescription'></input></td>    <td ><input type='date'name='$From'></input></td>  <td ><input type='date'name='$to'></input></td>   </tr>";
+									   
+									   $i++;
+									
+									}
+						   ?>
+						
+						   </tbody>
+					   </table>
 
 
-<tr>
-<td>13</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-<tr>
-<td>14</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-<tr>
-<td>15</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-<tr>
-<td>16</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-<tr>
-<td>17</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-
-<tr>
-<td>18</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-
-<tr>
-<td>19</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-<tr>
-<td>20</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-  </table>
-
-
-
-  
 <!--   
 //    $(document).ready(function(){
 //         $('#data').after('<div id="nav"></div>');
@@ -488,7 +289,6 @@
     </div>
 </div>
 </section>
-
 
 
 

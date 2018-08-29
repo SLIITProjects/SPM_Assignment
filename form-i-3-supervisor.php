@@ -388,11 +388,6 @@
 
 
 
-
-
-
-
-
 </div>
 <button type='submit' class='btn btn-primary' name='submitI3'>Submit</button>
 <button type='reset' class='btn btn-danger' name='resetI3'>Reset</button>
