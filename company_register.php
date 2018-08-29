@@ -4,7 +4,7 @@
 <!-- Check post request and call registerCompany function in Student Class-->
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-    $registerCompany = $company-> registerCompany($_POST);
+    $registerCompany = $user-> registerCompany($_POST);
 }
 ?>
 

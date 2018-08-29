@@ -4,7 +4,7 @@
 <!-- Check post request and call registerStudent function in Student Class-->
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-    $registerStudent = $student-> registerStudent($_POST);
+    $registerStudent = $user-> registerStudent($_POST);
 }
 ?>
 
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 
                                         <div class="form-group">
                                             <div class="input-group">
-                                                <span class="input-group-addon"><i class="fa fa-graduation-cap"></i></span>
+                                                <span class="input-group-addon"><i class="fa fa-graduation-cap mr-2 mt-2"></i></span>
                                                 <select class="form-control" name="university">
                                                     <option value="">Select University</option>
                                                     <?php
@@ -63,15 +63,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                                         <div class="form-row">
                                             <div class="form-group col-md-8">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-graduation-cap"></i></span>
+                                                    <span class="input-group-addon"><i class="fa fa-graduation-cap mr-2 mt-2"></i></span>
                                                     <select class="form-control" name="company">
                                                         <option value="">Select Company</option>
                                                         <?php
-                                                        $getCompany = $company->getCompanies();
+                                                        $getCompany = $user->getCompanies();
                                                         if($getCompany){
                                                             while($result=$getCompany->fetch_assoc()){
                                                     ?>
-                                                    <option value="<?php echo $result['cid'];?>"><?php echo $result['name'];?></option>
+                                                    <option value="<?php echo $result['uid'];?>"><?php echo $result['name'];?></option>
                                                     <?php }}?>
                                                     </select>
                                                 </div>
@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 
                                         <div class="form-group">
                                             <div class="input-group ">
-                                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                <span class="input-group-addon"><i class="fa fa-user mr-2 mt-2"></i></span>
                                                 <input type="text" class="form-control" name="fullname" placeholder="Full Name">
                                             </div>
                                         </div>
@@ -88,14 +88,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <div class="input-group ">
-                                                    <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
+                                                    <span class="input-group-addon"><i class="fa fa-id-card mr-2 mt-2"></i></span>
                                                     <input type="text" class="form-control" name="studentid" placeholder="Student ID">
                                                 </div>
                                             </div>
 
                                             <div class="form-group col-md-6">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-graduation-cap"></i></span>
+                                                    <span class="input-group-addon"><i class="fa fa-graduation-cap mr-2 mt-2"></i></span>
                                                     <select class="form-control" name="faculty">
                                                         <option value="">Select Faculty</option>
                                                         <?php
@@ -109,32 +109,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                                                 </div>
                                             </div>
                                         </div>
+                                        
+                                        <div class="form-row">
+                                            <div class="form-group col-md-7">
+                                                <div class="input-group ">
+                                                    <span class="input-group-addon"><i class="fa fa-map-marker mr-2 mt-2"></i></span>
+                                                    <textarea rows="3" class="form-control" name="address" placeholder="Address"></textarea>
+                                                </div>
+                                            </div>
 
-                                        <div class="form-group">
-                                            <div class="input-group ">
-                                                <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                                                <textarea rows="3" class="form-control" name="address" placeholder="Address"></textarea>
+                                            <div class="form-group col-md-5">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-phone mr-2 mt-2"></i></span>
+                                                    <input type="number" class="form-control" max="10" Min="10" name="contact" placeholder="Mobile Number">
+                                                </div>
                                             </div>
                                         </div>
 
                                         <div class="form-row">
                                             <div class="form-group col-md-4">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                                    <span class="input-group-addon"><i class="fa fa-envelope mr-2 mt-2"></i></span>
                                                     <input type="email" class="form-control" name="email" placeholder="Email">
                                                 </div>
                                             </div>
 
                                             <div class="form-group col-md-4">
                                                 <div class="input-group ">
-                                                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                                    <span class="input-group-addon"><i class="fa fa-lock mr-2 mt-2"></i></span>
                                                     <input type="password" class="form-control" name="password" placeholder="Password">
                                                 </div>
                                             </div>
 
                                             <div class="form-group col-md-4">
                                                 <div class="input-group ">
-                                                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                                    <span class="input-group-addon"><i class="fa fa-lock mr-2 mt-2"></i></span>
                                                     <input type="password" class="form-control" name="cpassword"  placeholder="Confirm Password">
                                                 </div>
                                             </div>
