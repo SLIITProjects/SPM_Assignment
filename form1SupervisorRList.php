@@ -26,7 +26,7 @@
 							
 							<?php
 								include('DBConnection.php');
-								$sql="SELECT * FROM form1_student_details";
+								$sql="SELECT * FROM form1_student_details WHERE sup_response='in progress'";
 								$result=mysqli_query($con,$sql);
 								$count=mysqli_num_rows($result);
 								echo "&nbsp&nbsp&nbsp<b>$count</b>";
@@ -50,7 +50,7 @@
 					
 					<?php
 						include('DBConnection.php');
-						$sql="SELECT * FROM form1_student_details";
+						$sql="SELECT * FROM form1_student_details  WHERE sup_response='in progress'";
 						$result=mysqli_query($con,$sql);
 						
 						while($row=mysqli_fetch_array($result))
@@ -59,6 +59,10 @@
 							echo"<label><b><a href=form1Supervisor.php?";
 							echo $row[1];
 							echo">$row[1]</a></b></label>";
+							echo" : Request ID - ";
+							echo $row[0];
+							echo" : Requested date - ";
+							echo $row[9];
 							echo"<br/><br/>";
 							echo"</center>";
 						}
