@@ -116,6 +116,7 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 		$year=$_POST['year'];
 		$sem=$_POST['sem'];
 		$cgpa=$_POST['cgpa'];
+		$date=date('Y-m-d H:i:s');
 		
 		/**
 			Form Validation
@@ -152,7 +153,7 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 		**/
 		else
 		{
-			$sql="INSERT INTO form1_student_details(stdID, address, homePhn, mobilePhn, email, year, semester, cgpa) VALUES('$sid', '$address', '$hphn', '$mphn', '$email', '$year', '$sem', '$cgpa')";
+			$sql="INSERT INTO form1_student_details(stdID, address, homePhn, mobilePhn, email, year, semester, cgpa, requested_date) VALUES('$sid', '$address', '$hphn', '$mphn', '$email', '$year', '$sem', '$cgpa', '$date')";
 			
 			if (!mysqli_query($con,$sql)) 
 			{
