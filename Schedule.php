@@ -14,20 +14,30 @@
 <script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.css" >
-  
 
-	<script>
-			$(function() {
-			$('.dates #usr1').datepicker({
-				'format': 'yyyy-mm-dd',
-				'autoclose': true
-			});
-		});
-	</script>
+    <link rel="stylesheet" type="text/css" href="css/timepicker.css">
+    <script type="text/javascript" src="js/timepicker.js"></script>
 
-    
+   
+                        <!--script of the datepicker-->
+                        <script>
+                        $(function() {
+                        $('.dates #usr1').datepicker({
+                            'format': 'yyyy-mm-dd',
+                            'autoclose': true
+                        });
+                        });
+                        </script>
+
 
 <style>
+        .dates{
+            margin top:0;
+            width:120px;
+            
+        }
+
+    
 </style>
 
 <!--Include Navbar from another file-->
@@ -77,10 +87,16 @@
                     <th class="text-center">Viva Date</th>
                     <th class="text-center">Time</th>
                 </tr>
+                
                 <?php
+                $a=1;
+                $b=2;
                     while($rows=mysqli_fetch_assoc($result))
                     {
-                ?>
+                        
+                        $timepicker=$a++;
+                        $datepicker=$b++;
+                 ?>
                 <tr>
 
                 <td class="pt-3-half" contenteditable="true"><?php echo $rows['Reg_no']; ?></td>
@@ -91,17 +107,27 @@
                 <td class="pt-3-half">
                 
 
-            <div Class="dates">
-            <input type="text"  class="form-control" id="usr1" name="event_date" placeholder="YYYY-MM-DD" autocomplete="off" >
-            </div>
-
-
-
+                <div Class="dates">
+                <input type="text"  class="form-control" id=usr1 placeholder="YYYY-MM-DD" autocomplete="off" >
+                </div>
                 </td>
+                
                 <td>
+                
+                <input type="text" style="width:200px;" class="form-control" id=$timepicker > 
+                
+                <!--script of the timepicker-->
+                    <script>
+	                $($timepicker).timepicker();
+                    </script>
+                        
                     
                 </td>
+
+                
                 </tr>
+
+
                 <?php
                 }
                 ?>
