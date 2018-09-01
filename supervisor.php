@@ -25,12 +25,12 @@
 							<a href="form1SupervisorRList.php" class="list-group-item list-group-item-action">Form I-1
 							<?php
 								include('DBConnection.php');
-								$sql="SELECT * FROM form1_student_details";
+								$sql="SELECT * FROM form1_student_details WHERE sup_response='in progress'";
 								$result=mysqli_query($con,$sql);
 								$count=mysqli_num_rows($result);
 								echo "&nbsp&nbsp&nbsp<b>$count</b>";
 							?>	
-							</a>
+							</a>					
                         </div>
                     </div>
                 </div>
