@@ -26,9 +26,13 @@
                         <h4>Rajitha lakshan</h4>
                         <h5 class="text-muted">Student</h5>
                         <div class="list-group">
-                            <a href="index.php" class="list-group-item list-group-item-action active">Home</a>
-                            <a href="" class="list-group-item list-group-item-action">Functions</a>
-							<a href="form1Student.php" class="list-group-item list-group-item-action">Form I-1</a>
+						<a href="index.php" class="list-group-item list-group-item-action active">Home</a>
+                            <a href="register_supervisor.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="CMP"){echo "display:none";}?>">Register Supervisor</a>
+                            <a href="student_list.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="CMP"){echo "display:none";}?>">Allocate Supervisor</a>
+                            <a href="form-i-3.php" class="list-group-item list-group-item-action">Form I-3</a>
+                            <a href="form-i-3-supervisor.php" class="list-group-item list-group-item-action">Certify And Email Form I-3</a>
+                            <a href="grade.php" class="list-group-item list-group-item-action">Grading-From</a>
+							              <a href="form1Student.php" class="list-group-item list-group-item-action">Form I-1</a>
                         </div>
                     </div>
                 </div>
@@ -39,13 +43,54 @@
         <div class="col col-md-9 col-lg-9">
                     <div class="jumbotron jumbotron-fluid text-center welcome">
                         <div class="container">
-                            <h2>Form I-3</h2></br>
-							<h4>Intern's Daily Diary</h4>
+                            <h2><b>Form I-3</b></h2></br>
+							<h4><b>Intern's Daily Diary</b></h4>
                         </div>
                     </div>
+
+				
+
 					
 					<!--Form filled by student-->	
 					<form name='form-i-3-student' method='POST' action='#'>
+
+
+					<?php
+						///
+						include('DBConnection-I-3.php');
+						
+						$StdID=$_SERVER['QUERY_STRING'];
+						$uid=$_SESSION["uid"];
+
+						$sql="SELECT * FROM users  WHERE uid='$uid'";
+						$result=mysqli_query($con,$sql);
+						if ($result->num_rows > 0) {
+							// output data of each row
+							while($row = $result->fetch_assoc()) {
+								$StudentId= $row["studentId"];
+								$address= $row["address"];
+								$contact= $row["contact"];
+								$email= $row["email"];
+								//$address= $row["studentId"];
+							}
+						} else {
+							echo "0 results";
+						}
+
+						// if (!$result)
+						// {	
+						// 	die(mysqli_error($con));	
+						// }
+						
+						// while($row=mysqli_fetch_array($result))
+						// {
+						// 	echo "<div>".$result['studentId'];
+							
+							
+							
+						// }
+					?>
+					
 						<fieldset>
 
 							<div>
@@ -54,22 +99,39 @@
 							<hr>
 							<div class='row'>
 							<div class='col'>
-								<label><b>Intern's Name-:{{Name}}</b></label>
-								</div>
+								<?php echo " <label><b>Intern's Name-:".$_SESSION["name"]."</b></label>";
+								?>
+								
+															</div>
 
 								<div class='col'>
-								<label><b>Student ID-:{{ID}}</b></label>
+
+								
+
+								<?php echo " <label><b>Student ID-:".$StudentId."</b></label>";
+								?>
+
+								
 								</div>
 								<div class='col'>
-								<label><b>Intern's Private Address-:{{Address}}</b></label>
+
+								
+
+									<?php echo " <label><b>Intern's Private Address-:".$address."</b></label>";
+								?>
+							
 								</div>
 								</div>
 								<div class='row'>
 								<div class='col'>
-								<label><b>Contact Number-:{{Num}}</b></label>
+								<?php echo " <label><b>Contact Number-:".$contact."</b></label>";
+								?>
+								
 								</div>
 								<div class='col'>
-								<label><b>Email-:{{Email}}</b></label>
+								<?php echo " <label><b>Email-:".$email."</b></label>";
+								?>
+								
 								</div>
 								<div class='col'>
 								<!-- <label><b>Address-:{{Address}}</b></label> -->
@@ -105,245 +167,46 @@
 
 <h4 style="text-align:center"><b>Internal Training Information</b></h4>
 							<hr>
-							<table style="width:100%" id="data" class="table-striped">
-  <tr>
-  <th>#</th>
-    <th>Training Party</th>
-    <th>Training Description</th> 
-    <th>From:</input></th>
-	<th>to</th>
-	<th>Action</th>
-  </tr>
-  <tr>
-  <td>1</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
 
 
+     <table class="table table-striped ">
+                           
+						   <tr>
+							   <th scope="col"><b>#Day</b></th>
+							   <th scope="col"><b>TrainingParty</b></th>
+							   <th scope="col"><b>TrainingDescription</b></th>
+							   <th scope="col"><b>From</b></th>
+							   <th scope="col"><b>To</b></th>
+						   </tr>
+						   </thead>
+						   <tbody>
+						   <?php
+						  	  $i=0;
+								   while($i<21){
+									   
+							// 								<th>Training Party</th>
+							// <th>Training Description</th> 
+							// <th>From:</input></th>
+							// <th>to</th>
+							// <th>Action</th>
 
-<tr>
-<td>2</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-<tr>
-<td>3</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-<tr>
-<td>4</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-<tr>
-<td>5</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-<tr>
-<td>6</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-<tr>
-<td>7</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-<tr>
-<td>8</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-<tr>
-<td>9</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
+							$trainingParty="traingParty".$i;
+							$TrainingDescription="TrainingDescription".$i;
+							$From="From".$i;
+							$to="to".$i;
 
 
-<tr>
-<td>10</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-<tr>
-<td>11</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-<tr>
-<td>12</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
+									   echo " <tr> <td ><b>$i</b></td><td ><input type='textarea'name='$trainingParty'></input></td>   <td><input type='textarea'name='$TrainingDescription'></input></td>    <td ><input type='date'name='$From'></input></td>  <td ><input type='date'name='$to'></input></td>   </tr>";
+									   
+									   $i++;
+									
+									}
+						   ?>
+						
+						   </tbody>
+					   </table>
 
 
-<tr>
-<td>13</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-<tr>
-<td>14</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-<tr>
-<td>15</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-<tr>
-<td>16</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-<tr>
-<td>17</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-
-<tr>
-<td>18</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-
-<tr>
-<td>19</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-
-<tr>
-<td>20</td>
-<td><input type="textarea"></input></td>
-<td><input type="textarea"></input></td>
-<td><input type="date"></input></td>
-<td><input type="date"></input></td>
-<td>
-<button type="button" class="btn btn-primary pull-right btn-sm" ">Update</button><button type="button" class="btn btn-danger pull-right btn-sm" ">Delete</button>
-</td>
-</tr>
-  </table>
-
-
-
-  
 <!--   
 //    $(document).ready(function(){
 //         $('#data').after('<div id="nav"></div>');
@@ -388,12 +251,26 @@
 
 
 
+	<div class='form-group'>
+								<label><b>Summary of Key Tasks Completed For The {{Month}} {{Year}}</b></label>
+								<textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+							</div>
 
+
+
+
+
+
+	<div class='form-group'>
+								<label><b>Details of the works,Problems</b></label>
+								<textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+							</div>
 
 
 
 
 </div>
+
 <button type='submit' class='btn btn-primary' name='submitI3'>Submit</button>
 <button type='reset' class='btn btn-danger' name='resetI3'>Reset</button>
 </div>
