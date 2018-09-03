@@ -39,27 +39,49 @@
                         </div>
                       
                     </div>
-                    <div>
-        <form class="form-inline" method="post" action="generate_pdf.php">
-        <h3>Computing Faculty :-</h3>
-<button type="submit" id="pdf" name="generate_pdf" class="btn btn-primary"><i class="fa fa-pdf"" aria-hidden="true"></i>
+                    <!-- <h3 class="text-primary"> Computing Faculty :</h3> <h3 class="text-warning">Business Faculty  :</h3>     <h3 class="text-success">Engineering Faculty :</h3> -->
+                    	
+					<!--Form filled by student-->	
+					 <form  method="post" action="generate_pdf.php">
+						<fieldset>
+							
+					
+							<div class='form-group'>
+							<label for='exampleSelect1'><b>Faculty</b></label>
+								<select class='form-control' name='faculty'>
+									<option>Computing</option>
+									<option>Business</option>
+									<option>Engineering</option>
+								</select>
+							</div>
+							<div class='form-group'>
+								<label for='exampleSelect1'><b>year</b></label>
+								<select class='form-control' name='year'>
+									<option>2019</option>
+									<option>2018</option>
+									<option>2017</option>
+                                    <option>2016</option>
+									<option>2015</option>
+                                    <option>2014</option>
+									<option>2013</option>
+                                    <option>2012</option>
+									<option>2011</option>
+								</select>
+							</div>
+							
+         <button type="submit" id="pdf" name="generate_pdf" class="btn btn-primary">
   Generate PDF</button>
-</form>
-</br>
- <form class="form-inline" method="post" action="generate_pdf.php">
-        <h3>Business Faculty  :-</h3>
-<button type="submit" id="pdf" name="generate_pdf" class="btn btn-primary"><i class="fa fa-pdf"" aria-hidden="true"></i>
-  Generate PDF</button>
-</form>
-</br>
 
- <form class="form-inline" method="post" action="generate_pdf.php">
-        <h3>Engineering Faculty :-</h3>
-<button type="submit" id="pdf" name="generate_pdf" class="btn btn-primary"><i class="fa fa-pdf"" aria-hidden="true"></i>
-  Generate PDF</button>
-</form>
+						</fieldset>
+					</form>
+					
+        
+                  
+        
 
-        </div>
+
+
+       
         </div>
 
       
