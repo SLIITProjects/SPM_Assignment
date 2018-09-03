@@ -25,7 +25,7 @@
 							<a href="form1SupervisorRList.php" class="list-group-item list-group-item-action">Form I-1
 							<?php
 								include('DBConnection.php');
-								$sql="SELECT * FROM form1_student_details";
+								$sql="SELECT * FROM form1_student_details WHERE sup_response='in progress'";
 								$result=mysqli_query($con,$sql);
 								$count=mysqli_num_rows($result);
 								echo "&nbsp&nbsp&nbsp<b>$count</b>";
@@ -214,13 +214,20 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 		else
 		{
 			$StdID=$_SERVER['QUERY_STRING'];
-			$sql="INSERT INTO form1_supervisor(stdID,employer_name,employer_address,sup_name,sup_phone,sup_title,sup_email,internship_sDate,internship_eDate,noHoursPerWeek,tasks_desc,learn_desc) VALUES('$StdID','$ename','$eaddress','$sname','$sphone','$stitle','$semail','$sdate','$edate','$hoursPerWeek','$taskList','$learnList')";
+			$sql="INSERT INTO form1_supervisor(supID,stdID,employer_name,employer_address,sup_name,sup_phone,sup_title,sup_email,internship_sDate,internship_eDate,noHoursPerWeek,tasks_desc,learn_desc) VALUES(2,'$StdID','$ename','$eaddress','$sname','$sphone','$stitle','$semail','$sdate','$edate','$hoursPerWeek','$taskList','$learnList')";
 				
 			if (!mysqli_query($con,$sql)) 
 			{
 				die('Error: ' . mysqli_error($con));
 			}
 
+			$sql="UPDATE form1_student_details SET sup_response='done' WHERE stdID='$StdID'";
+			if (!mysqli_query($con,$sql)) 
+			{
+				die('Error: ' . mysqli_error($con));
+			}
+
+			
 			echo"<script>alert('Details emailed to industrial training manager')</script>";	
 			mysqli_close($con);
 		}
