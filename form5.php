@@ -1,59 +1,44 @@
 <!--Include header from another file-->
 <?php include('inc/header.php'); ?>
-<?php
-$login = Session::get('userLogin');
-if($login==false){
-    header("Location:login.php");
-}
-?>
 
-<style>
 
-</style>
 
 <!--Include Navbar from another file-->
 <?php include('inc/navbar.php')?>
 
 <section id="authors" class="">
-    <div class="container-fluid">
-        <div class="row">
+<div class="container-fluid">
+    <div class="row">
 
-            <!--Start Sidebar section-->
-            <div class="col col-md-3 col-lg-3 text-center">
+        <!--Start Sidebar section-->
+        <div class="col col-md-3 col-lg-3 text-center">
                 <div class="card">
                     <div class="card-body">
                         <img src="img/mlogo.png" alt="" class="img-fluid rounded-circle w-50 mb-1">
-                        <h4><?php echo Session::get('name');?></h4>
-                        <h5 class="text-muted"><?php echo Session::get('role');?></h5>
+                        <h4>Rajitha lakshan</h4>
+                        <h5 class="text-muted">Student</h5>
                         <div class="list-group">
-                            <a href="index.php" class="list-group-item list-group-item-action">Home</a>
-                            <a href="register_supervisor.php" class="list-group-item list-group-item-action active" style="<?php if(Session::get('role')!="CMP"){echo "display:none";}?>">Register Supervisor</a>
-                            <a href="student_list.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="CMP"){echo "display:none";}?>">Allocate Supervisor</a>
-                            <a href="form-i-3.php" class="list-group-item list-group-item-action">Form I-3</a>
-                            <a href="form5.php" class="list-group-item list-group-item-action">Form I-5</a>
-                            <a href="grade.php" class="list-group-item list-group-item-action">Grading-From</a>
-                            <a href="form1Student.php" class="list-group-item list-group-item-action">Form I-1</a>
-
+                            <a href="index.php" class="list-group-item list-group-item-action active">Home</a>
+                            <a href="" class="list-group-item list-group-item-action">Functions</a>
+							<a href="form1Student.php" class="list-group-item list-group-item-action">Form I-5</a>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!--End Sidebar Section-->
+        </div>
+        <!--End Sidebar Section-->
 
-            <!--Start Main section-->
-            <div class="col col-md-9 col-lg-9">
-                <div class="jumbotron jumbotron-fluid text-center welcome">
-                    <div class="container">
-                        <h1 class="display-5">Final Evaluation of the Internship Student</h1>
+        <!--Start Main section-->
+        <div class="col col-md-9 col-lg-9">
+                    <div class="jumbotron jumbotron-fluid text-center welcome">
+                        <div class="container">
+                            <h2>Form I-5</h2><br>
+							<h4>Final Evaluation of Internship Student</h4>
+                        </div>
                     </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-body">
-
-                        <form action="form5.php" method="post">
-
-                          <fieldset>
+					
+					<!--Form filled by student-->	
+					<form name='form5' method='POST' action=' '>
+						<fieldset>
 							<div class='form-group'>
 								<label><b>Student ID</b></label>
 								<input class='form-control' name='stdID' placeholder='Enter Student ID' type='text'>
@@ -103,7 +88,7 @@ if($login==false){
                                 <th>Average</th> 
                                 <th>Below Average</th>
                                 <th>Comments,Examples</th>
-                                
+                                <th>Action</th>
                               </tr>
                                  
                             <tr>
@@ -111,7 +96,7 @@ if($login==false){
                             <td><input type="radio" name="volume" value="aboveavg"> </td>
                             <td><input type="radio" name="volume" value="average"> </td>
                             <td><input type="radio" name="volume" value="belowavg"> </td>
-                            <td><textarea class='form-control' name='volume' cols="20" rows="1"></textarea></td>
+                            <td></td>
                            
                             </tr>
                             
@@ -120,7 +105,7 @@ if($login==false){
                             <td><input type="radio" name="quality" value="aboveavg"> </td>
                             <td><input type="radio" name="quality" value="average"> </td>
                             <td><input type="radio" name="quality" value="belowavg"> </td>
-                            <td><textarea class='form-control' name='quality' cols="20" rows="1"></textarea></td>
+                            <td></td>
                            
                             </tr>
                                  
@@ -129,7 +114,7 @@ if($login==false){
                             <td><input type="radio" name="analytic" value="aboveavg"> </td>
                             <td><input type="radio" name="analytic" value="average"> </td>
                             <td><input type="radio" name="analytic" value="belowavg"> </td>
-                            <td><textarea class='form-control' name='analytic' cols="20" rows="1"></textarea></td>
+                            <td></td>
                            
                             </tr>
                         
@@ -138,7 +123,7 @@ if($login==false){
                             <td><input type="radio" name="resolve" value="aboveavg"> </td>
                             <td><input type="radio" name="resolve" value="average"> </td>
                             <td><input type="radio" name="resolve" value="belowavg"> </td>
-                            <td><textarea class='form-control' name='analytic' cols="20" rows="1"></textarea></td>
+                            <td></td>
                            
                             </tr>
                                  
@@ -147,7 +132,7 @@ if($login==false){
                             <td><input type="radio" name="resolve" value="aboveavg"> </td>
                             <td><input type="radio" name="resolve" value="average"> </td>
                             <td><input type="radio" name="resolve" value="belowavg"> </td>
-                            <td><textarea class='form-control' name='analytic' cols="20" rows="1"></textarea></td>
+                            <td></td>
                            
                             </tr>
 
@@ -156,7 +141,7 @@ if($login==false){
                             <td><input type="radio" name="Accuracy" value="aboveavg"> </td>
                             <td><input type="radio" name="Accuracy" value="average"> </td>
                             <td><input type="radio" name="Accuracy" value="belowavg"> </td>
-                            <td><textarea class='form-control' name='analytic' cols="20" rows="1"></textarea></td>
+                            <td></td>
                            
                             </tr>
                                  
@@ -165,141 +150,15 @@ if($login==false){
                             <td><input type="radio" name="pressure" value="aboveavg"> </td>
                             <td><input type="radio" name="pressure" value="average"> </td>
                             <td><input type="radio" name="pressure" value="belowavg"> </td>
-                           <td><textarea class='form-control' name='pressure' cols="20" rows="1"></textarea></td>
+                            <td></td>
                            
                             </tr>
-                        
-                            <tr>
-                            <td>Oral communication</td>
-                            <td><input type="radio" name="oral" value="aboveavg"> </td>
-                            <td><input type="radio" name="oral" value="average"> </td>
-                            <td><input type="radio" name="oral" value="belowavg"> </td>
-                            <td><textarea class='form-control' name='oral' cols="20" rows="1"></textarea></td>
                            
-                             </tr>
-                                 
-                            <tr>
-                            <td>Written communication</td>
-                            <td><input type="radio" name="written" value="aboveavg"> </td>
-                            <td><input type="radio" name="written" value="average"> </td>
-                            <td><input type="radio" name="written" value="belowavg"> </td>
-                            <td><textarea class='form-control' name='written' cols="20" rows="1"></textarea></td>
-                           
-                             </tr>
-                                 
-                            <tr>
-                            <td>Oral and critical thinking</td>
-                            <td><input type="radio" name="think" value="aboveavg"> </td>
-                            <td><input type="radio" name="think" value="average"> </td>
-                            <td><input type="radio" name="think" value="belowavg"> </td>
-                            <td><textarea class='form-control' name='think' cols="20" rows="1"></textarea></td>
-                           
-                             </tr>
-                                 
-                            <tr>
-                            <td>Ability to learn</td>
-                            <td><input type="radio" name="learn" value="aboveavg"> </td>
-                            <td><input type="radio" name="learn" value="average"> </td>
-                            <td><input type="radio" name="learn" value="belowavg"> </td>
-                            <td><textarea class='form-control' name='learn' cols="20" rows="1"></textarea></td>
-                           
-                             </tr>
-                                 
-                                 
-                             </table><br><br>
-                            </div>
+                            </table>
                             
-                               <div class ="jumbotron">
-
-                            <h4><b> Work Habbit of Student</b></h4>
-                                                        
-                             <table style="width:100%" id="data" class="table-striped">
-                              <tr>
-                              <th>Category</th>
-                                <th>Above Average</th>
-                                <th>Average</th> 
-                                <th>Below Average</th>
-                                <th>Comments,Examples</th>
-                                
-                              </tr>
-                                 
-                            <tr>
-                            <td>Effective in organizing work</td>
-                            <td><input type="radio" name="organizing" value="aboveavg"> </td>
-                            <td><input type="radio" name="organizing" value="average"> </td>
-                            <td><input type="radio" name="organizing" value="belowavg"> </td>
-                            <td><textarea class='form-control' name='organizing' cols="20" rows="1"></textarea></td>
-                           
-                            </tr>
                             
-                            <tr>
-                            <td>Takes the initiative</td>
-                            <td><input type="radio" name="initiative" value="aboveavg"> </td>
-                            <td><input type="radio" name="initiative" value="average"> </td>
-                            <td><input type="radio" name="initiative" value="belowavg"> </td>
-                            <td><textarea class='form-control' name='initiative' cols="20" rows="1"></textarea></td>
-                           
-                            </tr>
-                                 
-                            <tr>
-                            <td>Flexible to non-routine work</td>
-                            <td><input type="radio" name="non-routine" value="aboveavg"> </td>
-                            <td><input type="radio" name="non-routine" value="average"> </td>
-                            <td><input type="radio" name="non-routine" value="belowavg"> </td>
-                            <td><textarea class='form-control' name='"non-routine' cols="20" rows="1"></textarea></td>
-                           
-                            </tr>
-                        
-                            <tr>
-                            <td>Active and alert</td>
-                            <td><input type="radio" name="Active" value="aboveavg"> </td>
-                            <td><input type="radio" name="Active" value="average"> </td>
-                            <td><input type="radio" name="Active" value="belowavg"> </td>
-                            <td><textarea class='form-control' name='Active' cols="20" rows="1"></textarea></td>
-                           
-                            </tr>
-                                 
-                            <tr>
-                            <td>Attitude toward organization</td>
-                            <td><input type="radio" name="Attitude" value="aboveavg"> </td>
-                            <td><input type="radio" name="Attitude" value="average"> </td>
-                            <td><input type="radio" name="Attitude" value="belowavg"> </td>
-                            <td><textarea class='form-control' name='Attitude' cols="20" rows="1"></textarea></td>
-                           
-                            </tr>
-
-                            <tr>
-                            <td>Team player</td>
-                            <td><input type="radio" name="player" value="aboveavg"> </td>
-                            <td><input type="radio" name="player" value="average"> </td>
-                            <td><input type="radio" name="player" value="belowavg"> </td>
-                            <td><textarea class='form-control' name='player' cols="20" rows="1"></textarea></td>
-                           
-                            </tr>
-                                 
-                            <tr>
-                            <td>Diligence and perseverance</td>
-                            <td><input type="radio" name="Diligence" value="aboveavg"> </td>
-                            <td><input type="radio" name="Diligence" value="average"> </td>
-                            <td><input type="radio" name="Diligence" value="belowavg"> </td>
-                             <td><textarea class='form-control' name='Diligence' cols="20" rows="1"></textarea></td>
-                           
-                            </tr>
-                        
-                            <tr>
-                            <td>Accepts responsibility</td>
-                            <td><input type="radio" name="responsibility" value="aboveavg"> </td>
-                            <td><input type="radio" name="responsibility" value="average"> </td>
-                            <td><input type="radio" name="responsibility" value="belowavg"> </td>
-                            <td><textarea class='form-control' name='responsibility' cols="20" rows="1"></textarea></td>
-                           
-                             </tr>
-                
-                      
-                                 
-                                 
-                             </table><br><br>
-                            </div>
+                            
+                            
                             
                                 <div class='form-group'>
 								<label><b>List positive personal characteristics (Business Acumen, Vigor, Adaptability, Teamwork, Leadership, Confidence, etc.)</b></label>
@@ -340,12 +199,12 @@ if($login==false){
                             
                             
                                     <div class='form-group'>
-								<label><b>Overrall Student performance </b></label><br>
-								<input type="radio" name="performance " value=" Outstanding">  Outstanding<br>
-                                 <input type="radio" name="performance" value="Very Good"> Very Good<br>
-                                  <input type="radio" name="performance " value=" good">  good<br>
-                                 <input type="radio" name="performance" value="Marginal"> Marginal<br>
-                                 <input type="radio" name="performance" value="Unsatisfactory"> Unsatisfactory<br>      
+								<label><b>Overrall Student performance </b></label>
+								<input type="checkbox" name="performance " value=" Outstanding">  Outstanding<br>
+                                 <input type="checkbox" name="performance" value="Very Good"> Very Good<br>
+                                  <input type="checkbox" name="performance " value=" good">  good<br>
+                                 <input type="checkbox" name="performance" value="Marginal"> Marginal<br>
+                                 <input type="checkbox" name="performance" value="Unsatisfactory"> Unsatisfactory<br>      
 								
 							</div>
                             
@@ -356,26 +215,24 @@ if($login==false){
                             
                             <div class='form-group'>
 								<label><b>Date</b></label>
-								<input class='form-control' name='date' placeholder=' Enter Date' type="date">
+								<input class='form-control' name='date' placeholder=' Enter Date' type='text'>
 							</div>
                             
 						
 					
 							<button type='submit' class='btn btn-primary' name='submitStudent'>Submit</button>
 						</fieldset>
-                        </form>
-               
-                    
-                </div>
-
-             
-
-            </div>
-            <!--End main section-->
-
+					</form>
+					
         </div>
+		
+		
+        <!--End main section-->
+
     </div>
+</div>
 </section>
 
-<!--Include Footer from another file-->
+    <!--Include Footer from another file-->
 <?php include('inc/footer.php')?>
+
