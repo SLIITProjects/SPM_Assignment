@@ -1,6 +1,13 @@
 <!--Include header from another file-->
 <?php include('inc/header.php'); ?>
 
+<!-- Check post request and call registerCompany function in Student Class-->
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
+    $registerCompany = $user-> registerCompany($_POST);
+}
+?>
+
 <!--Start inline stylesheet-->
 <style>
     body{
@@ -29,69 +36,19 @@
     <div class="primary-overlay">
         <div class="container-fluid">
             <div class="row">
-
-                <div class="col-lg-5 text-center text-white py-5">
-                    <img class="img-fluid d-none d-lg-block mt-5" src="img/world.PNG" width="100%" height="60%">
-                    <h2 class="display-5 pt-2">
-                        Name here
-                    </h2>
-                    <p class="text-center">
-                        <p class="mb-0 h5">CloudSchool is a school management platform where you can manage your day to day school activities easily.</p>
-                    </p>
-                </div>
-
                 <!--Start user registration section-->
-                <div class="col-lg-7 text-center py-5">
+                <div class="col-lg-12 text-center py-5">
                     <div class="container">
+                    <h2 class="display-5 pt-2 text-white">Company Registration</h2>
                         <div class="row justify-content-center">
 
-                            <h2 class="display-5 pt-2 text-white">Registration</h2>
-
-                                    <form class="mt-3" action="register.php" method="post">
-
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><i class="fa fa-graduation-cap"></i></span>
-                                                <select class="form-control" name="school">
-                                                    <option value="">Select School</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-row">
-                                            <div class="form-group col-md-7">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-graduation-cap"></i></span>
-                                                    <select class="form-control" name="role">
-                                                        <option value="">Select Role</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
+                                    <form class="mt-3" action="company_register.php" method="post">
                                         <div class="form-group">
                                             <div class="input-group ">
                                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                                <input type="text" class="form-control" name="fullname" placeholder="Full Name">
+                                                <input type="text" class="form-control" name="fullname" placeholder="Name">
                                             </div>
                                         </div>
-
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <div class="input-group ">
-                                                    <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
-                                                    <input type="text" class="form-control" name="nic" placeholder="NIC">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group col-md-6">
-                                                <div class="input-group ">
-                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                    <input type="date" class="form-control" name="dob" placeholder="DOB">
-                                                </div>
-                                            </div>
-                                        </div>
-
                                         <div class="form-group">
                                             <div class="input-group ">
                                                 <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
@@ -123,10 +80,16 @@
 
                                         </div>
                                         <br/>
+                                        <div class="form-row">
                                         <input type="submit" name="submit" class="btn btn-success btn-lg register" value="Register">
+                                        <a href="registration.php" style="margin-left:20px;"type="submit" name="submit" class="btn btn-warning btn-lg col-md-2 text-white">Back</a>
+                                        </div>
                                     </form>
                         </div>
                         <br/>
+                        <!-- Display notifications-->
+                        <?php if(isset($registerCompany)){echo $registerCompany;}?>
+
                     </div>
                 </div>
                 <!--End user registration section-->
