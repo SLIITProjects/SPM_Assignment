@@ -1,13 +1,3 @@
-
-
-
-//helloooooooooooo
-
-
-
-
-
-
 <!--Include header from another file-->
 <?php include('inc/header.php'); ?>
 
