@@ -36,8 +36,10 @@ class Examiner
         if($stdid=="" || $sname=="" || $phone=="" || $email=="" || $ename==""||
         $name=="" || $dtitle=="" || $spc=="" || $internd=="" || $credit==""||
         $ititle=="" || $bcomment=="" || $pcomment==""|| $grade==""|| $exname=="" || $data==""){
+           
             $msg = "<span class='alert alert-warning'>Field cannot be Empty!</span>";
             return $msg;
+            	
         }
 
         $getperformance = "SELECT * FROM student_performance WHERE IT_number='$stdid' LIMIT 1";
@@ -72,7 +74,9 @@ class Examiner
             if($result){
                 $msg = "<span class='alert alert-success msg'>Added Successfully!</span>";
                 return $msg;
+              
             }else{
+                
                 $msg = "<span class='alert alert-danger msg'>Cannot Add!</span>";
                 return $msg;
             }
