@@ -3,7 +3,6 @@ $filepath = realpath(dirname(__FILE__));
 include_once ($filepath.'/../lib/Database.php');
 include_once ($filepath.'/../helpers/Format.php');
 ?>
-
 <?php
 
 class User
@@ -22,12 +21,12 @@ class User
         $name =  mysqli_real_escape_string($this->db->link,$data['fullname']);
         $studentid =  mysqli_real_escape_string($this->db->link,$data['studentid']);
         $address =  mysqli_real_escape_string($this->db->link,$data['address']);
-        $contact =  mysqli_real_escape_string($this->db->link,$data['contact']);
         $email =  mysqli_real_escape_string($this->db->link,$data['email']);
         $password =  mysqli_real_escape_string($this->db->link,md5($data['password']));
         $cpassword =  mysqli_real_escape_string($this->db->link,md5($data['cpassword']));
+        $phone =  mysqli_real_escape_string($this->db->link,$data['contact']);
 
-        if($university=="" || $company=="" || $name=="" || $studentid=="" || $faculty=="" || $address=="" || $email=="" || $password=="" || $cpassword=="" || $contact=""){
+        if($university=="" || $company=="" || $name=="" || $studentid=="" || $faculty=="" || $address=="" || $email=="" || $password=="" || $cpassword=="" || $phone==""){
             $msg = "<span class='alert alert-warning'>Field cannot be Empty!</span>";
             return $msg;
         }
@@ -50,7 +49,7 @@ class User
                           '$studentid',
                           '$company',
                           '$address',
-                          '$contact',
+                          '$phone',
                           '$email',
                           '$password',
                           'STD'
@@ -66,7 +65,6 @@ class User
         }
 
     }
-
 
     public function registerCompany($data){
         $name =  mysqli_real_escape_string($this->db->link,$data['fullname']);
@@ -138,13 +136,15 @@ class User
 
     public function allocateSupervisor($data,$stid){
         $sup =  mysqli_real_escape_string($this->db->link,$data['supervisor']);
+        $dep =  mysqli_real_escape_string($this->db->link,$data['department']);
 
-        if($sup==""){
+
+        if($sup=="" || $dep ==""){
             $msg = "<span class='alert alert-warning'>Field cannot be Empty!</span>";
             return $msg;
         }else{
 
-            $query="UPDATE users SET supervisor='$sup' WHERE uid='$stid'";
+            $query="UPDATE users SET supervisor='$sup',department='$dep' WHERE uid='$stid'";
 
             $result=$this->db->update($query);
             if($result){
@@ -158,10 +158,10 @@ class User
 
     }
 
-    public function getAllStudents($company){
+    public function getAllStudents($company,$stdid){
         $query = "SELECT * 
         from users 
-        WHERE delete_status =0 AND role='STD' AND company='$company'";
+        WHERE delete_status =0 AND uid='$stdid' AND role='STD' AND company='$company'";
         $result = $this->db->select($query);
         return $result;
     }
@@ -184,6 +184,7 @@ class User
         $email =  mysqli_real_escape_string($this->db->link,$data['email']);
         $password =  mysqli_real_escape_string($this->db->link,md5($data['password']));
         $cpassword =  mysqli_real_escape_string($this->db->link,md5($data['cpassword']));
+        $department =  mysqli_real_escape_string($this->db->link,md5($data['department']));
 
         if($name=="" || $address=="" || $email=="" || $password=="" || $cpassword=="" || $contact=""){
             $msg = "<span class='alert alert-warning'>Field cannot be Empty!</span>";
@@ -200,9 +201,10 @@ class User
             $msg = "<span class='alert alert-danger'>Email already exists!</span>";
             return $msg;
         }else{
-            $query = "INSERT INTO users(name,company,address,contact,email,password,role,status)
+            $query = "INSERT INTO users(name,department,company,address,contact,email,password,role,status)
                       VALUES(
                           '$name',
+                          '$department',
                           '$company',
                           '$address',
                           '$contact',
@@ -223,8 +225,7 @@ class User
 
     }
 
-     /*This method delete Supervisor using subject_id*/
-     public function delSupervisor($uid){
+    public function delSupervisor($uid){
         $query = "UPDATE users SET delete_status=1 WHERE uid='$uid'";
         $result = $this->db->update($query);
         if($result){

@@ -121,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                                             <div class="form-group col-md-5">
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-phone mr-2 mt-2"></i></span>
-                                                    <input type="number" class="form-control" max="10" Min="10" name="contact" placeholder="Mobile Number">
+                                                    <input type="number" class="form-control"  name="contact" placeholder="Mobile Number">
                                                 </div>
                                             </div>
                                         </div>
