@@ -4,19 +4,20 @@
 $login = Session::get('userLogin');
 if($login==false){
     header("Location:login.php");
+
 }
 ?>
 <?php
-$stid='';
+$stdid='';
 if(!isset($_GET['stdid']) || $_GET['stdid'] == NULL){
-    echo "<script>window.location = 'student_list.php';</script>";
+    header("Refresh:5;url=student_list.php");
 }else{
-    $stid = $_GET['stdid'];
+    $stdid = $_GET['stdid'];
 }
 
 
-if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])){
-    $allocate = $user->allocateSupervisor($_POST,$stid);
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $allocate = $user->allocateSupervisor($_POST,$stdid);
 }
 
 ?>
@@ -64,7 +65,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])){
                     <div class="card-body">
 
                         <?php
-                                        $getStudents= $user->getAllStudents(Session::get('uid'));
+                                        $getStudents= $user->getAllStudents(Session::get('uid'),$stdid);
                                         if($getStudents){
                                             while($value=$getStudents->fetch_assoc()){
                                                 ?>
@@ -72,7 +73,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])){
                         <form action="allocate_supervisor.php" method="post">
                             <div class="form-group col-md-4">
                                 <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-graduation-cap mr-2 mt-2"></i></span>
+                                    <label class="mt-3 mr-5"><b>Supervisor</b></label>
                                     <select class="form-control" name="supervisor">
                                         <option value="">Select Supervisor</option>
                                         <?php
@@ -89,9 +90,28 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])){
                                     </select>
                                 </div>
                             </div>
+                            <div class="form-group col-md-4">
+                                <div class="input-group">
+                                    <label class="mt-3 mr-5"><b>Department</b></label>
+                                    <select class="form-control" name="department">
+                                        <option value="">Select Department</option>
+                                        <?php
+                                        $getdepartments = $department->getCompanyDepartment(Session::get('uid'));
+                                        if($getdepartments){
+                                            while($result=$getdepartments->fetch_assoc()){
+                                                ?>
+                                                <option <?php
+                                                if($value['department']==$result['did']){?>
+                                                    selected = "selected"
+                                                <?php }?>
+                                                        value="<?php echo $result['did'];?>"><?php echo $result['dname'];?></option>
+                                            <?php }}?>
+                                    </select>
+                                </div>
+                            </div>
 
 
-                            <button type="submit" name="submit" class="btn btn-info"><i class="fa fa-plus"></i> Allocate</button>
+                            <button type="submit" name="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Allocate</button>
                             <a href="student_list.php" name="submit" class="btn btn-success"><i class="fa fa-arrow-left"></i>Back</a>
 
                             <?php if(isset($allocate )){echo $allocate ;}?>
