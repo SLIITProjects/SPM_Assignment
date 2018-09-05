@@ -8,18 +8,20 @@
     $result=mysqli_query($con,$query);
 ?>
 
-                
+    
 
+<!--Include Navbar from another file-->
+<?php include('inc/navbar.php')?>
 
 <script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.css" >
 
-    <link rel="stylesheet" type="text/css" href="css/timepicker.css">
+<link rel="stylesheet" type="text/css" href="css/timepicker.css">
     <script type="text/javascript" src="js/timepicker.js"></script>
 
-   
-                        <!--script of the datepicker-->
+
+<!--script of the datepicker-->
                         <script>
                         $(function() {
                         $('.dates #usr1').datepicker({
@@ -29,19 +31,46 @@
                         });
                         </script>
 
-
 <style>
-        .dates{
-            margin top:0;
-            width:120px;
-            
-        }
+    .bg-modal{
+        width: 100%;
+        height: 100%;
+        background-color: rgbo(0, 0, 0, 0.7);
+        position: absolute;
+        top: 0;
+        display: flex;
+        justify-content: center;
+        display: none;
+        
+    }
 
-    
+    .modal-content{
+        width: 500px;
+        height: 300px;
+        background-color: white;
+        border-radius: 4px;
+        text-align: center;
+        padding: 20px;
+        position: relative;
+        
+    }
+    input{
+        width: 50%;
+        display: block;
+        margin: 15px auto;
+    }
+    .close{
+        position: absolute;
+        top: 1;
+        right: 14px;
+        font-size: 42px;
+        transform: rotate(45deg);
+        cursor: pointer;
+    }
 </style>
 
-<!--Include Navbar from another file-->
-<?php include('inc/navbar.php')?>
+
+  
 
 <section id="authors" class="">
 <div class="container-fluid">
@@ -77,72 +106,99 @@
     <div class="card-body">
         <div id="table" class="table-editable">
             <!--<span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i class="fa fa-plus fa-2x" aria-hidden="true"></i></a></span>-->
-            <table class="table table-bordered table-responsive-md table-striped text-center">
+
+            
+			
+            <table class="table table-bordered table-responsive-md table-striped text-center" id="table">
                 <tr>
                     <th class="text-center">Registration No</th>
                     <th class="text-center">Name</th>
                     <th class="text-center">Company Name</th>
                     <th class="text-center">Start Date</th>
                     <th class="text-center">End Date</th>
-                    <th class="text-center">Viva Date</th>
-                    <th class="text-center">Time</th>
+                    <th class="text-center"> </th>   
                 </tr>
                 
                 <?php
-                $a=1;
-                $b=2;
+                $count=1;
+                
                     while($rows=mysqli_fetch_assoc($result))
-                    {
-                        
-                        $timepicker=$a++;
-                        $datepicker=$b++;
+                    {      
                  ?>
-                <tr>
+                <tr id="<?php echo $rows['Reg_no']; ?>">
 
-                <td class="pt-3-half" contenteditable="true"><?php echo $rows['Reg_no']; ?></td>
+                <td class="pt-3-half" contenteditable="true" > <?php echo $rows['Reg_no']; ?> </td>
                 <td class="pt-3-half" contenteditable="true"><?php echo $rows['Name']; ?></td>
                 <td class="pt-3-half" contenteditable="true"><?php echo $rows['Company']; ?></td>
                 <td class="pt-3-half" contenteditable="true"><?php echo $rows['Start_date']; ?></td>
                 <td class="pt-3-half" contenteditable="true"><?php echo $rows['End_date']; ?></td>
-                <td class="pt-3-half">
-                
-
-                <div Class="dates">
-                <input type="text"  class="form-control" id=usr1 placeholder="YYYY-MM-DD" autocomplete="off" >
-                </div>
+                <td class="pt-3-half" contenteditable="true">
+                <button type="button" data-role="update"  onclick="myFunction(this.id)" id='<?php echo $rows['Reg_no'];?>' >Schedule</button>
                 </td>
-                
-                <td>
-                
-                <input type="text" style="width:200px;" class="form-control" id=$timepicker > 
-                
-                <!--script of the timepicker-->
-                    <script>
-	                $($timepicker).timepicker();
-                    </script>
-                        
-                    
-                </td>
-
                 
                 </tr>
 
 
                 <?php
+                $count++;
                 }
                 ?>
-
+                     
         </table>
+<script>
+function myFunction(elem) {
+    document.querySelector('.bg-modal').style.display = 'flex'; 
+    document.querySelector('#regId').value=elem;    
+}
+</script>
+
+        
         </div>
     </div>
 </div>
+
+
+
 <!-- Editable table -->
 
 
+<div class="bg-modal">
+    <div class="modal-content">
+        <form method="POST" action="">
+        <div class="close" >+</div>
+
+                <input type="text" style="width:200px;" name="regId" id="regId" value=""/>
+
+        
+        <div class="dates" style="color:#2471a3;">
+    <input type="text" style="width:200px;background-color:#aed6f1;" class="form-control" id="usr1" name="viva_date" placeholder="YYYY-MM-DD" autocomplete="off" >
+  </div>
+
+         
+              
+         <input type="text" style="width:200px;" class="form-control" name="time" id="timepicker" > 
+                
+                <!--script of the timepicker-->
+                    <script>
+	                $('#timepicker').timepicker();
+                    </script>
+                
+        <button type='submit' class='btn btn-primary' name='submitSchedule'>Submit</button>
+                
+
+    <script>
+    document.querySelector('.close').addEventListener('click',function(){
+    document.querySelector('.bg-modal').style.display = 'none'; 
+    });
+    </script>
+        
+        </form>    
+    </div>
+
+</div>
 
 
-
-
+    
                     </div>
         </div>
         <!--End main section-->
@@ -150,5 +206,28 @@
     </div>
 </div>
 </section>
+
+<?php
+include('DBConnection.php');
+if($_SERVER['REQUEST_METHOD']=='POST')
+{
+	if(isset($_POST['submitSchedule']))
+	{
+        $vdate=$_POST['viva_date'];
+        $regNo=$_POST['regId'];
+        $time=$_POST['time'];
+        
+        $sql="update schedule_tab set Viva_date='$vdate', Time='$time' where Reg_no='$regNo'";
+			
+			if (!mysqli_query($con,$sql)) 
+			{
+				die('Error: ' . mysqli_error($con));
+			}
+
+			echo"<script>alert('Details saved')</script>";	
+			mysqli_close($con);
+    }
+}
+?>
 
         
