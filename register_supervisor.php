@@ -7,9 +7,9 @@ if($login==false){
 }
 ?>
 <?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']) || isset($_POST['image'])) {
     $company=Session::get('uid');
-    $registerSup = $user->registerSupervisor($_POST,$company);
+    $registerSup = $user->registerSupervisor($_POST,$company,$_FILES);
 }
 ?>
 
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
         <div class="col col-md-3 col-lg-3 text-center">
                 <div class="card">
                     <div class="card-body">
-                        <img src="img/mlogo.png" alt="" class="img-fluid rounded-circle w-50 mb-1">
+                        <img src="<?php echo Session::get('photo');?>" alt="" class="img-fluid rounded-circle w-50 mb-1">
                         <h4><?php echo Session::get('name');?></h4>
                         <h5 class="text-muted"><?php echo Session::get('role');?></h5>
                         <div class="list-group">
@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
         <div class="card">
                     <div class="card-body">
 
-                        <form action="register_supervisor.php" method="post">
+                        <form action="register_supervisor.php" method="post" enctype="multipart/form-data">
 
                             <div class="form-row">
 
@@ -95,7 +95,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                                 </div>
 
                             </div>
-
                             <div class="form-row">
                                 <div class="form-group col-md-5">
                                     <textarea class="form-control" name="address" placeholder="Address" rows="2"></textarea>
@@ -129,6 +128,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 
                                 <div class="form-group col-md-3">
                                     <input type="password" class="form-control" name="cpassword" placeholder="Confirm password">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-5 mt-3">
+                                <label><b>Upload profile photo</b></label>
+                                <div class="input-group">
+                                    <input name="image" type="file"/>
                                 </div>
                             </div>
                             <button type="submit" name="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Add</button>
