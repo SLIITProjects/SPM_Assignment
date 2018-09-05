@@ -29,7 +29,7 @@ if($login==false){
         <div class="col col-md-3 col-lg-3 text-center">
                 <div class="card">
                     <div class="card-body">
-                        <img src="img/mlogo.png" alt="" class="img-fluid rounded-circle w-50 mb-1">
+                        <img src="<?php echo Session::get('photo');?>" alt="" class="img-fluid rounded-circle w-50 mb-1">
                         <h4><?php echo Session::get('name');?></h4>
                         <h5 class="text-muted"><?php echo Session::get('role');?></h5>
                         <div class="list-group">
