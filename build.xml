@@ -20,6 +20,6 @@
 
  <target name="deploy" depends="zpk">
  <exec command="php /usr/local/bin/zs-client.phar installApp --zpk='${project.basedir}/itms_application.zpk' --zsurl='${host}' --zskey='${key}' --zssecret='${secret}' --baseUri='${base}' --userAppName='${app}'
---userParams='${params}'" checkreturn="true"/>
+--userParams='${params}'"/>
  </target>
 </project>
