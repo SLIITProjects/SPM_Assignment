@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="SPM_Assignment" basedir="." default="unittest">
  <target name="unittest">
- <phpunit bootstrap="test/bootstrap.php">
+ <phpunit>
  <formatter type="summary" usefile="false" />
  <batchtest>
  <fileset dir="test">
- <include name="**/*Test.php"/>
+ <include name="**/*FacultyTest.php"/>
  </fileset>
  </batchtest>
  </phpunit>
