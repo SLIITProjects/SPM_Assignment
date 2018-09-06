@@ -1,5 +1,7 @@
 <?php
-include_once("../classes/Faculty.php");
+$filepath = realpath(dirname(__FILE__));
+include_once ($filepath.'/../classes/Faculty.php');
+
 use PHPUnit\Framework\TestCase;
 
 class FacultyTest extends TestCase
@@ -11,6 +13,7 @@ class FacultyTest extends TestCase
 
         $faculty->addFaculty('Hospitality');
         $actual=null;
+
         $getFaculty=$faculty->getOneFaculty('Hospitality');
         if($getFaculty){
             while($result=$getFaculty->fetch_assoc()){

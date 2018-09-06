@@ -25,6 +25,8 @@ class User
         $password =  mysqli_real_escape_string($this->db->link,md5($data['password']));
         $cpassword =  mysqli_real_escape_string($this->db->link,md5($data['cpassword']));
         $phone =  mysqli_real_escape_string($this->db->link,$data['contact']);
+        $year =  mysqli_real_escape_string($this->db->link,$data['year']);
+        $sem =  mysqli_real_escape_string($this->db->link,$data['sem']);
 
         $permit = array('jpg','jpeg','png','gif');
         $file_name = $_FILES['image']['name'];
@@ -36,7 +38,7 @@ class User
         $unique_image = substr(md5(time()),0,10).'.'.$file_ext;
         $uploaded_image = "uploads/".$unique_image;
 
-        if($university=="" || $company=="" || $name=="" || $studentid=="" || $faculty=="" || $address=="" || $email=="" || $password=="" || $cpassword=="" || $phone==""){
+        if($university=="" || $company=="" || $name=="" || $studentid=="" || $faculty=="" || $address=="" || $email=="" || $password=="" || $cpassword=="" || $phone=="" || $year=="" || $sem==""){
             $msg = "<span class='alert alert-warning'>Field cannot be Empty!</span>";
             return $msg;
         }else {
@@ -59,11 +61,13 @@ class User
                     $msg = "<span class='alert alert-danger'>Email already exists!</span>";
                     return $msg;
                 }else{
-                    $query = "INSERT INTO users(name,university,faculty,studentid,company,address,contact,photo,email,password,role)
+                    $query = "INSERT INTO users(name,university,faculty,cyear,csem,studentid,company,address,contact,photo,email,password,role)
                       VALUES(
                           '$name',
                           '$university',
                           '$faculty',
+                          '$year',
+                          '$sem',
                           '$studentid',
                           '$company',
                           '$address',
@@ -83,10 +87,6 @@ class User
                         return $msg;
                     }
                 }
-
-
-
-
 
             }
         }
@@ -191,14 +191,19 @@ class User
     public function allocateSupervisor($data,$stid){
         $sup =  mysqli_real_escape_string($this->db->link,$data['supervisor']);
         $dep =  mysqli_real_escape_string($this->db->link,$data['department']);
+        $sdate =  mysqli_real_escape_string($this->db->link,$data['sdate']);
+        $edate =  mysqli_real_escape_string($this->db->link,$data['edate']);
 
-
-        if($sup=="" || $dep ==""){
+        if($sup=="" || $dep =="" || $sdate=="" || $edate==""){
             $msg = "<span class='alert alert-warning'>Field cannot be Empty!</span>";
             return $msg;
-        }else{
+        }elseif(strtotime($sdate)>strtotime($edate)){
+            $msg = "<span class='alert alert-warning'>End date cannot be a previous day!</span>";
+            return $msg;
+        }
+        else{
 
-            $query="UPDATE users SET supervisor='$sup',department='$dep' WHERE uid='$stid'";
+            $query="UPDATE users SET supervisor='$sup',department='$dep',sdate='$sdate',edate='$edate' WHERE uid='$stid'";
 
             $result=$this->db->update($query);
             if($result){
@@ -215,6 +220,8 @@ class User
     public function getAllStudents($company,$stdid){
         $query = "SELECT * 
         from users 
+        INNER JOIN university ON users.university = university.unid
+        INNER JOIN faculty ON users.faculty = faculty.fid
         WHERE delete_status =0 AND uid='$stdid' AND role='STD' AND company='$company'";
         $result = $this->db->select($query);
         return $result;

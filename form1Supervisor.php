@@ -194,7 +194,8 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 		$hoursPerWeek=$_POST['hourPerWeek'];
 		$taskList=$_POST['tasks'];
 		$learnList=$_POST['learn'];
-		
+		$sup_id = Session::get('uid');
+
 		if(empty($ename)||empty($eaddress)||empty($sname)||empty($sphone)||empty($stitle)||empty($semail)||empty($sdate)||empty($edate)||empty($hoursPerWeek)||empty($taskList)||empty($learnList))
 		{
 			echo"<script>alert('One are more fields are empty')</script>";
@@ -221,7 +222,7 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 		else
 		{
 			$StdID=$_SERVER['QUERY_STRING'];
-			$sql="INSERT INTO form1_supervisor(supID,stdID,employer_name,employer_address,sup_name,sup_phone,sup_title,sup_email,internship_sDate,internship_eDate,noHoursPerWeek,tasks_desc,learn_desc) VALUES(2,'$StdID','$ename','$eaddress','$sname','$sphone','$stitle','$semail','$sdate','$edate','$hoursPerWeek','$taskList','$learnList')";
+			$sql="INSERT INTO form1_supervisor(supID,stdID,employer_name,employer_address,sup_name,sup_phone,sup_title,sup_email,internship_sDate,internship_eDate,noHoursPerWeek,tasks_desc,learn_desc) VALUES('$sup_id','$StdID','$ename','$eaddress','$sname','$sphone','$stitle','$semail','$sdate','$edate','$hoursPerWeek','$taskList','$learnList')";
 				
 			if (!mysqli_query($con,$sql)) 
 			{

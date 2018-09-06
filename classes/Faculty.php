@@ -16,10 +16,8 @@ class Faculty
         $this->fm = new Format();
     }
     public function addFaculty($name){
-        $query = "insert into faculty(fname) VALUES('$name')";
-        $result = $this->db->insert($query);
 
-        $getredundant = "SELECT * FROM facaulty WHERE fname='$name' LIMIT 1";
+        $getredundant = "SELECT * FROM faculty WHERE fname='$name' LIMIT 1";
         $res = $this->db->select($getredundant);
 
         if($res!=false){
@@ -27,8 +25,12 @@ class Faculty
             return $msg;
         }
         else{
-            $msg = "<span class='alert alert-danger'>Successfully added!</span>";
-            return $msg;
+            $query = "insert into faculty(fname) VALUES('$name')";
+            $result = $this->db->insert($query);
+            if($res) {
+                $msg = "<span class='alert alert-danger'>Successfully added!</span>";
+                return $msg;
+            }
         }
     }
 

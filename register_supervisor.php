@@ -1,18 +1,20 @@
 <!--Include header from another file-->
 <?php include('inc/header.php'); ?>
+<!--if invalid access redirect to login.php--!>
 <?php
 $login = Session::get('userLogin');
 if($login==false){
     header("Location:login.php");
 }
 ?>
+<!--Register supervisor--!>
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']) || isset($_POST['image'])) {
     $company=Session::get('uid');
     $registerSup = $user->registerSupervisor($_POST,$company,$_FILES);
 }
 ?>
-
+<!--Delete supervisor--!>
 <?php
     if(isset($_GET['delid'])){
         $uid = $_GET['delid'];
