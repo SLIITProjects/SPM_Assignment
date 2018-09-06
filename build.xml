@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="SPM_Assignment" basedir=".SPM_Assignment" default="unittest">
+<project name="SPM_Assignment" basedir="." default="unittest">
  <target name="unittest">
  <phpunit>
  <formatter type="summary" usefile="false" />
@@ -12,13 +12,12 @@
  </target>
 
  <target name="zpk" depends="unittest">
- <exec command="php /usr/local/bin/zs-client.phar packZpk --folder=’${project.basedir}’
---destination=’${project.basedir}’ --name=’application.zpk’" checkreturn="true"/>
+ <exec command="php /usr/local/bin/zs-client.phar packZpk --folder='${project.basedir}'--destination='${project.basedir}' --name='application.zpk'" checkreturn="true"/>
  </target>
 
  <target name="deploy" depends="zpk">
- <exec command="php /usr/local/bin/zs-client.phar installApp --zpk=’${project.basedir}/application.
-zpk’ --zsurl=’${host}’ --zskey=’${key}’ --zssecret=’${secret}’ --baseUri=’${base}’ --userAppName=’${app}’
---userParams=’${params}’" checkreturn="true"/>
+ <exec command="php /usr/local/bin/zs-client.phar installApp --zpk='${project.basedir}/application.
+zpk' --zsurl='${host}' --zskey='${key}' --zssecret='${secret}' --baseUri='${base}' --userAppName='${app}'
+--userParams='${params}'" checkreturn="true"/>
  </target>
 </project>
