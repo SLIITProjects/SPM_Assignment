@@ -4,8 +4,8 @@
 
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-    $company=Session::get('uid');
-    $registerSup = $user->registerSupervisor($_POST,$company);
+    $sid=Session::get('search');
+    $InsertEvaluation = $user->InsertEvaluation($_POST,$sid);
 }
 ?>
 
@@ -101,19 +101,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                             
                             <div class='form-group'>
 								<label><b>Describe the differences if any, between student's initial contract and actual assignment which developed</b></label>
-								<textarea class='form-control' name='bcomment'></textarea><br>
+								<textarea class='form-control' name='area1'></textarea><br>
 								
 							</div>
                         
+<!--
                             
                             <div class='form-group'>
 								<label><b>Comments on how the internship benifited the student</b></label>
-								<textarea class='form-control' name='bcomment'></textarea><br>
+								<textarea class='form-control' name='area2'></textarea><br>
 								
 							</div>
                             
-                            
-                            
+-->
                             
                             <div class ="jumbotron">
 
@@ -326,38 +326,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                             
                                 <div class='form-group'>
 								<label><b>List positive personal characteristics (Business Acumen, Vigor, Adaptability, Teamwork, Leadership, Confidence, etc.)</b></label>
-								<textarea class='form-control' name='bcomment'></textarea><br>
+								<textarea class='form-control' name='area2'></textarea><br>
 								
 							</div>
                             
                                 <div class='form-group'>
 								<label><b>List personal characteristics that will help the student in his/her professional development</b></label>
-								<textarea class='form-control' name='bcomment'></textarea><br>
+								<textarea class='form-control' name='area3'></textarea><br>
 								
 							</div>
                             
                                 <div class='form-group'>
 								<label><b>How effective has the Internship Program been in meeting the needs of your organization?</b></label>
-								<textarea class='form-control' name='bcomment'></textarea><br>
+								<textarea class='form-control' name='area4'></textarea><br>
 								
 							</div>
                             
                                    <div class='form-group'>
 								<label><b>Please suggest ways you feel we could make our program more meaningful to the student and you, the employer.</b></label>
-								<textarea class='form-control' name='bcomment'></textarea><br>
+								<textarea class='form-control' name='area5'></textarea><br>
 								
 							</div>
                             
                                    <div class='form-group'>
 								<label><b>Please comment on the appropriateness of the student's academic training as it related to a position in your organization.</b></label>
-								<textarea class='form-control' name='bcomment'></textarea><br>
+								<textarea class='form-control' name='area6'></textarea><br>
 								
 							</div>
                             
                             
                                           <div class='form-group'>
 								<label><b>Any other comments about the student or on the Faculty Advisor:.</b></label>
-								       <textarea class='form-control' name='bcomment'></textarea><br>         
+								       <textarea class='form-control' name='area7'></textarea><br>         
 								
 							</div>
                             
@@ -384,7 +384,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                             
 						
 					
-							<button type='submit' class='btn btn-primary' name='submitStudent'>Submit</button>
+							<button type='submit' class='btn btn-primary' name='submit'>Submit</button>
 						</fieldset>
                         </form>
                
