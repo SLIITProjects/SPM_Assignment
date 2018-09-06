@@ -15,11 +15,11 @@
  <exec command="php /usr/local/bin/zs-client.phar packZpk
                 --folder='${project.basedir}'
                 --destination='${project.basedir}'
-                --name='itms_application.zpk'" checkreturn="true"/>
+                --name='itms_application.zpk'" checkreturn="false"/>
  </target>
 
  <target name="deploy" depends="zpk">
  <exec command="php /usr/local/bin/zs-client.phar installApp --zpk='${project.basedir}/itms_application.zpk' --zsurl='${host}' --zskey='${key}' --zssecret='${secret}' --baseUri='${base}' --userAppName='${app}'
---userParams='${params}'" checkreturn="true"/>
+--userParams='${params}'" checkreturn="false"/>
  </target>
 </project>
