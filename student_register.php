@@ -1,7 +1,7 @@
 <!--Include header from another file-->
 <?php include('inc/header.php'); ?>
 
-<!-- Check post request and call registerStudent function in Student Class-->
+<!-- Check post request and call registerStudent function in  User Class-->
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']) || isset($_POST['image'])) {
     $registerStudent = $user-> registerStudent($_POST,$_FILES);
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']) || isset($_P
                 <!--Start user registration section-->
                 <div class="col-lg-12 text-center py-5">
                     <div class="container">
-                    <h2 class="display-5 pt-2 text-white">Stduent Registration</h2>
+                    <h2 class="display-5 pt-2 text-white">Student Registration</h2>
                         <div class="row justify-content-center">
 
                                     <form class="mt-3" action="student_register.php" method="post" enctype="multipart/form-data">
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']) || isset($_P
                                         </div>
 
                                         <div class="form-row">
-                                            <div class="form-group col-md-8">
+                                            <div class="form-group col-md-4">
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-graduation-cap mr-2 mt-2"></i></span>
                                                     <select class="form-control" name="company">
@@ -73,6 +73,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']) || isset($_P
                                                     ?>
                                                     <option value="<?php echo $result['uid'];?>"><?php echo $result['name'];?></option>
                                                     <?php }}?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <div class="input-group ">
+                                                    <span class="input-group-addon"><i class="fa fa-user mr-2 mt-2"></i></span>
+                                                    <select name="year" class="form-control">
+                                                        <option>Current year</option>
+                                                        <option value="1st Year">1st Year</option>
+                                                        <option value="2nd Year">2nd Year</option>
+                                                        <option value="3rd Year">3rd Year</option>
+                                                        <option value="4th Year">4th Year</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <div class="input-group ">
+                                                    <span class="input-group-addon"><i class="fa fa-user mr-2 mt-2"></i></span>
+                                                    <select name="sem" class="form-control">
+                                                        <option>Current Semester</option>
+                                                        <option value="1st Semester">1st Semester</option>
+                                                        <option value="2nd Semester">2nd Semester</option>
                                                     </select>
                                                 </div>
                                             </div>
