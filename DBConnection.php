@@ -1,6 +1,6 @@
 <?php
 
-$con=mysqli_connect("localhost","root","","industrial_training");
+$con=mysqli_connect("localhost","root","","itms");
 
 if(mysqli_connect_errno())
 {
