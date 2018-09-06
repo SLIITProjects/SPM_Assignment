@@ -6,6 +6,11 @@
 </style>
 
 <!--Include DB connection from another file-->
+<?php
+    include('DBConnection.php');
+    $query="select Reg_no,Name,Company,Start_date,End_date,Viva_date,Time from schedule_tab";
+    $result=mysqli_query($con,$query);
+?>
 
 
 
@@ -71,13 +76,13 @@
                  ?>
                 <tr>
 
-                <td class="pt-3-half" contenteditable="true" > </td>
-                <td class="pt-3-half" contenteditable="true"></td>
-                <td class="pt-3-half" contenteditable="true"></td>
-                <td class="pt-3-half" contenteditable="true"></td>
-                <td class="pt-3-half" contenteditable="true"></td>
-                <td class="pt-3-half" contenteditable="true"></td>
-                <td class="pt-3-half" contenteditable="true"> </td>
+                <td class="pt-3-half" contenteditable="true" > <?php echo $rows['Reg_no']; ?> </td>
+                <td class="pt-3-half" contenteditable="true"><?php echo $rows['Name']; ?></td>
+                <td class="pt-3-half" contenteditable="true"><?php echo $rows['Company']; ?></td>
+                <td class="pt-3-half" contenteditable="true"><?php echo $rows['Start_date']; ?></td>
+                <td class="pt-3-half" contenteditable="true"><?php echo $rows['End_date']; ?></td>
+                <td class="pt-3-half" contenteditable="true"><?php echo $rows['Viva_date']; ?></td>
+                <td class="pt-3-half" contenteditable="true"><?php echo $rows['Time']; ?></td>
                 
                 </tr>
 
