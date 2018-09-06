@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="SPM_Assignment" basedir="." default="unittest">
+ <target name="unittest">
+ <phpunit bootstrap="test/bootstrap.php">
+ <formatter type="summary" usefile="false" />
+ <batchtest>
+ <fileset dir="test">
+ <include name="**/*Test.php"/>
+ </fileset>
+ </batchtest>
+ </phpunit>
+ </target>
+
+ <target name="zpk" depends="unittest">
+ <exec command="php /usr/local/bin/zs-client.phar packZpk --folder=’${project.basedir}’
+--destination=’${project.basedir}’ --name=’application.zpk’" checkreturn="true"/>
+ </target>
+
+ <target name="deploy" depends="zpk">
+ <exec command="php /usr/local/bin/zs-client.phar installApp --zpk=’${project.basedir}/application.
+zpk’ --zsurl=’${host}’ --zskey=’${key}’ --zssecret=’${secret}’ --baseUri=’${base}’ --userAppName=’${app}’
+--userParams=’${params}’" checkreturn="true"/>
+ </target>
+</project>
