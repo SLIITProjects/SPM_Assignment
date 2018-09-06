@@ -3,8 +3,8 @@
 
 <!-- Check post request and call registerCompany function in Student Class-->
 <?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-    $registerCompany = $company-> registerCompany($_POST);
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']) || isset($_POST['image'])) {
+    $registerCompany = $user-> registerCompany($_POST,$_FILES);
 }
 ?>
 
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                     <h2 class="display-5 pt-2 text-white">Company Registration</h2>
                         <div class="row justify-content-center">
 
-                                    <form class="mt-3" action="company_register.php" method="post">
+                                    <form class="mt-3" action="company_register.php" method="post" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <div class="input-group ">
                                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -80,6 +80,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 
                                         </div>
                                         <br/>
+                                        <div class="form-group col-md-5">
+                                            <label style="margin-left:-80px;"><b>Upload profile photo</b></label>
+                                            <div class="input-group">
+                                                <input name="image" type="file"/>
+                                            </div>
+                                        </div>
+
                                         <div class="form-row">
                                         <input type="submit" name="submit" class="btn btn-success btn-lg register" value="Register">
                                         <a href="registration.php" style="margin-left:20px;"type="submit" name="submit" class="btn btn-warning btn-lg col-md-2 text-white">Back</a>

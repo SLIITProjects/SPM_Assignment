@@ -2,7 +2,6 @@
 <?php include('inc/header.php'); ?>
 
 <style>
-
 </style>
 
 <?php
@@ -10,16 +9,13 @@
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])){
         $addPerformance = $av->addPerformance($_POST);
     }
-
 ?>
 
 <!--Include Navbar from another file-->
 <?php include('inc/navbar.php')?>
-
 <section id="authors" class="">
 <div class="container-fluid">
     <div class="row">
-
         <!--Start Sidebar section-->
         <div class="col col-md-3 col-lg-3 text-center">
                 <div class="card">
@@ -28,7 +24,6 @@
                         <h4>Rajitha lakshan</h4>
           				
                         <h5 class="text-muted">Examiner</h5>
-
                         <div class="list-group">
                             <a href="index.php" class="list-group-item list-group-item-action active">Home</a>
                             <a href="" class="list-group-item list-group-item-action">Functions</a>
@@ -38,11 +33,8 @@
                 </div>
         </div>
         <!--End Sidebar Section-->
-
         <!--Start Main section-->
-
 		<?php
-
 		
         if(isset($_POST['view1'])){
           $stdid=$_POST['stdid'];
@@ -53,10 +45,8 @@
 		  $query="select Student_Id ,Student_name ,Phone ,Email,Employee_name, Supervisor_name,Degree_title,Sepcialisation , Intern_duration,No_of_credits,
 		  Intern_title,Monthly_progress,Report,Viva,Total From student_d where Student_Id='$stdid' LIMIT 1";
           $result=mysqli_query($connect,$query);
-
           if(mysqli_num_rows($result)>0){
           while($row =mysqli_fetch_array($result)){
-
             $stdid=$row['Student_Id'];
             $sname=$row['Student_name'];
             $phone=$row['Phone'];
@@ -75,7 +65,6 @@
             //$grade=$row['Grade'];
   
           }
-
         }
         
           mysqli_free_result($result);

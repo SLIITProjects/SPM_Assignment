@@ -1,10 +1,10 @@
 <!--Include header from another file-->
 <?php include('inc/header.php'); ?>
 
-<!-- Check post request and call registerStudent function in Student Class-->
+<!-- Check post request and call registerStudent function in  User Class-->
 <?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-    $registerStudent = $student-> registerStudent($_POST);
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']) || isset($_POST['image'])) {
+    $registerStudent = $user-> registerStudent($_POST,$_FILES);
 }
 ?>
 
@@ -39,14 +39,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 <!--Start user registration section-->
                 <div class="col-lg-12 text-center py-5">
                     <div class="container">
-                    <h2 class="display-5 pt-2 text-white">Stduent Registration</h2>
+                    <h2 class="display-5 pt-2 text-white">Student Registration</h2>
                         <div class="row justify-content-center">
 
-                                    <form class="mt-3" action="student_register.php" method="post">
+                                    <form class="mt-3" action="student_register.php" method="post" enctype="multipart/form-data">
 
                                         <div class="form-group">
                                             <div class="input-group">
-                                                <span class="input-group-addon"><i class="fa fa-graduation-cap"></i></span>
+                                                <span class="input-group-addon"><i class="fa fa-graduation-cap mr-2 mt-2"></i></span>
                                                 <select class="form-control" name="university">
                                                     <option value="">Select University</option>
                                                     <?php
@@ -61,18 +61,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                                         </div>
 
                                         <div class="form-row">
-                                            <div class="form-group col-md-8">
+                                            <div class="form-group col-md-4">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-graduation-cap"></i></span>
+                                                    <span class="input-group-addon"><i class="fa fa-graduation-cap mr-2 mt-2"></i></span>
                                                     <select class="form-control" name="company">
                                                         <option value="">Select Company</option>
                                                         <?php
-                                                        $getCompany = $company->getCompanies();
+                                                        $getCompany = $user->getCompanies();
                                                         if($getCompany){
                                                             while($result=$getCompany->fetch_assoc()){
                                                     ?>
-                                                    <option value="<?php echo $result['cid'];?>"><?php echo $result['name'];?></option>
+                                                    <option value="<?php echo $result['uid'];?>"><?php echo $result['name'];?></option>
                                                     <?php }}?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <div class="input-group ">
+                                                    <span class="input-group-addon"><i class="fa fa-user mr-2 mt-2"></i></span>
+                                                    <select name="year" class="form-control">
+                                                        <option>Current year</option>
+                                                        <option value="1st Year">1st Year</option>
+                                                        <option value="2nd Year">2nd Year</option>
+                                                        <option value="3rd Year">3rd Year</option>
+                                                        <option value="4th Year">4th Year</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <div class="input-group ">
+                                                    <span class="input-group-addon"><i class="fa fa-user mr-2 mt-2"></i></span>
+                                                    <select name="sem" class="form-control">
+                                                        <option>Current Semester</option>
+                                                        <option value="1st Semester">1st Semester</option>
+                                                        <option value="2nd Semester">2nd Semester</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -80,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 
                                         <div class="form-group">
                                             <div class="input-group ">
-                                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                <span class="input-group-addon"><i class="fa fa-user mr-2 mt-2"></i></span>
                                                 <input type="text" class="form-control" name="fullname" placeholder="Full Name">
                                             </div>
                                         </div>
@@ -88,14 +110,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <div class="input-group ">
-                                                    <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
+                                                    <span class="input-group-addon"><i class="fa fa-id-card mr-2 mt-2"></i></span>
                                                     <input type="text" class="form-control" name="studentid" placeholder="Student ID">
                                                 </div>
                                             </div>
 
                                             <div class="form-group col-md-6">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-graduation-cap"></i></span>
+                                                    <span class="input-group-addon"><i class="fa fa-graduation-cap mr-2 mt-2"></i></span>
                                                     <select class="form-control" name="faculty">
                                                         <option value="">Select Faculty</option>
                                                         <?php
@@ -109,36 +131,51 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                                                 </div>
                                             </div>
                                         </div>
+                                        
+                                        <div class="form-row">
+                                            <div class="form-group col-md-7">
+                                                <div class="input-group ">
+                                                    <span class="input-group-addon"><i class="fa fa-map-marker mr-2 mt-2"></i></span>
+                                                    <textarea rows="2" class="form-control" name="address" placeholder="Address"></textarea>
+                                                </div>
+                                            </div>
 
-                                        <div class="form-group">
-                                            <div class="input-group ">
-                                                <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                                                <textarea rows="3" class="form-control" name="address" placeholder="Address"></textarea>
+                                            <div class="form-group col-md-5 mt-5">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-phone mr-2 mt-2"></i></span>
+                                                    <input type="text" class="form-control"  name="contact" placeholder="Mobile Number">
+                                                </div>
                                             </div>
                                         </div>
 
                                         <div class="form-row">
                                             <div class="form-group col-md-4">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                                    <span class="input-group-addon"><i class="fa fa-envelope mr-2 mt-2"></i></span>
                                                     <input type="email" class="form-control" name="email" placeholder="Email">
                                                 </div>
                                             </div>
 
                                             <div class="form-group col-md-4">
                                                 <div class="input-group ">
-                                                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                                    <span class="input-group-addon"><i class="fa fa-lock mr-2 mt-2"></i></span>
                                                     <input type="password" class="form-control" name="password" placeholder="Password">
                                                 </div>
                                             </div>
 
                                             <div class="form-group col-md-4">
                                                 <div class="input-group ">
-                                                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                                    <span class="input-group-addon"><i class="fa fa-lock mr-2 mt-2"></i></span>
                                                     <input type="password" class="form-control" name="cpassword"  placeholder="Confirm Password">
                                                 </div>
                                             </div>
 
+                                        </div>
+                                        <div class="form-group col-md-5">
+                                            <label style="margin-left:-80px;"><b>Upload profile photo</b></label>
+                                            <div class="input-group">
+                                                <input name="image" type="file"/>
+                                            </div>
                                         </div>
                                         <br/>
                                         <div class="form-row">
