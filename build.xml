@@ -5,7 +5,7 @@
  <formatter type="summary" usefile="false" />
  <batchtest>
  <fileset dir="test">
- <include name="**/*FacultyTest.php"/>
+ <include name="**/*Test.php"/>
  </fileset>
  </batchtest>
  </phpunit>
