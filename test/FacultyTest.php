@@ -1,8 +1,4 @@
 <?php
-$filepath = realpath(dirname(__FILE__));
-include_once ($filepath.'/../classes/Faculty.php');
-
-use PHPUnit\Framework\TestCase;
 
 class FacultyTest extends PHPUnit_Framework_TestCase
 {
