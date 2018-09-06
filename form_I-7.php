@@ -97,7 +97,7 @@
 			$report="";
             $viva="";
             $total="";
-            //$grade="";
+            $grade="";
         }
 		
 		$grade="";

@@ -39,6 +39,7 @@ class Examiner
            
             $msg = "<span class='alert alert-warning'>Field cannot be Empty!</span>";
             return $msg;
+            echo"<script>alert('Field cannot be Empty!')</script>";
             	
         }
 
@@ -46,10 +47,9 @@ class Examiner
         $res = $this->db->select($getperformance);
 
         if($res!=false){
-            $msg = "<span class='alert alert-danger'>Student Id is already exists!</span>";
-            return $msg;
+            echo"<script>alert('Student Id is already exist')</script>";
         }else{
-            $query = "INSERT INTO student_performance(Student_name,IT_number,Phone,Email,Employee_name,Supervisor_name
+            $query = "INSERT INTO student_performance(IT_number,Student_name,Phone,Email,Employee_name,Supervisor_name
             ,Degree_title,Specialisation,Intern_duration,No_of_credits,Intern_title,Comments_benifits
             ,Comment_performance,Grade,Examiner_name,Date)
                       VALUES(
@@ -74,11 +74,12 @@ class Examiner
             if($result){
                 $msg = "<span class='alert alert-success msg'>Added Successfully!</span>";
                 return $msg;
-              
+                echo"<script>alert('Added Successfully!!')</script>";
             }else{
                 
                 $msg = "<span class='alert alert-danger msg'>Cannot Add!</span>";
                 return $msg;
+                echo"<script>alert('NOT Added Successfully!!')</script>";
             }
         }
 
