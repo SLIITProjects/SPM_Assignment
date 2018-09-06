@@ -15,8 +15,7 @@
  <exec command="php /usr/local/bin/zs-client.phar packZpk
                 --folder='${project.basedir}'
                 --destination='${project.basedir}'
-                --name='itms_application.zpk'"
-       checkreturn="true"/>
+                --name='itms_application.zpk'"/>
  </target>
 
  <target name="deploy" depends="zpk">
