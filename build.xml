@@ -12,7 +12,10 @@
  </target>
 
  <target name="zpk" depends="unittest">
- <exec command="php /usr/local/bin/zs-client.phar packZpk --folder='${project.basedir}'--destination='${project.basedir}' --name='application.zpk'" checkreturn="true"/>
+ <exec command="php /usr/local/bin/zs-client.phar packZpk
+                --folder='${project.basedir}'
+                --destination='${project.basedir}'
+                --name='application.zpk'" checkreturn="true"/>
  </target>
 
  <target name="deploy" depends="zpk">
