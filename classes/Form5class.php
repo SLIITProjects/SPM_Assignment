@@ -15,8 +15,6 @@ class User
         $this->db = new Database();
         $this->fm = new Format();
     }
-   
-    
     
     public function getStudentById($sid){
         $query = "SELECT name,supervisor FROM users WHERE studentId='$sid'";

@@ -48,7 +48,7 @@ tr:nth-child(even) {
         <?php
       
 
-          $connect=mysqli_connect("localhost","root","","industrial_training") ;
+          $connect=mysqli_connect("localhost","root","toor","itms") ;
 
 
               $query6="select * from student_performance ";
