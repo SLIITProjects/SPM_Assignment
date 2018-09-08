@@ -18,20 +18,14 @@ class form1StudentTest extends PHPUnit_Framework_TestCase
 		$_POST['year']="2";
 		$_POST['sem']="2";
 		$_POST['cgpa']="1.2";
-		Session::get('uid')= '1';
+		
         $user->form1Student();
 
         $actual=null;
 
 		$getStdDetails=$user->getStudentLastRow();
 		$actual = $getStdDetails[1];
-       /* $getFaculty=$faculty->getOneFaculty('Hospitality');
-        if($getFaculty){
-            while($result=$getFaculty->fetch_assoc()){
-                $actual = $result['fname'];
-            }
-        }
-		*/
+      
         $this->assertEquals('IT16019232',$actual);
     }
 }

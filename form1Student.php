@@ -121,6 +121,9 @@
 include('DBConnection.php');
 if($_SERVER['REQUEST_METHOD']=='POST')
 {
+	/**
+		calling function in User class
+	**/
 	$user->form1Student();
 }
 ?>
