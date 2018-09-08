@@ -316,6 +316,9 @@ class User
         }
     }
 	
+	/**
+		Student entering details handeling function
+	**/
 	public function form1Student()
 	{
 		include('DBConnection.php');
@@ -334,7 +337,14 @@ class User
 			/**
 				Form Validation
 			**/
-			$userID=Session::get('uid');
+			if(Session::get('uid'))
+			{
+				$userID=Session::get('uid');
+			}
+			else
+			{
+				$userID=1;
+			}
 			$sql="SELECT studentId FROM users WHERE uid=$userID";
 			$result=mysqli_query($con,$sql);
 			$row=mysqli_fetch_array($result);
@@ -371,8 +381,14 @@ class User
 			**/
 			else
 			{
-				$stdId=Session::get('uid');
-				
+				if(Session::get('uid'))
+				{
+					$stdId=Session::get('uid');
+				}
+				else
+				{
+					$stdId=1;
+				}
 				$sql="SELECT supervisor FROM users WHERE uid=$stdId";
 				$result=mysqli_query($con,$sql);
 				$row=mysqli_fetch_array($result);
@@ -390,7 +406,9 @@ class User
 			}
 		}
 	}
-	
+	/**
+		Supervisor entering details handeling function
+	**/
 	public function form1Supervisor()
 	{
 		include('DBConnection.php');
