@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']) || isset($_P
                             <a href="student_list.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="CMP"){echo "display:none";}?>">Allocate Supervisor</a>
                             <a href="form-i-3.php" class="list-group-item list-group-item-action">Form I-3</a>
                             <a href="grade.php" class="list-group-item list-group-item-action">Grading-From</a>
-							              <a href="form1Student.php" class="list-group-item list-group-item-action">Form I-1</a>
+							<a href="form1Student.php" class="list-group-item list-group-item-action">Form I-1</a>
 
                         </div>
                     </div>
