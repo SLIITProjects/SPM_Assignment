@@ -191,19 +191,14 @@ class User
     public function allocateSupervisor($data,$stid){
         $sup =  mysqli_real_escape_string($this->db->link,$data['supervisor']);
         $dep =  mysqli_real_escape_string($this->db->link,$data['department']);
-        $sdate =  mysqli_real_escape_string($this->db->link,$data['sdate']);
-        $edate =  mysqli_real_escape_string($this->db->link,$data['edate']);
 
-        if($sup=="" || $dep =="" || $sdate=="" || $edate==""){
+        if($sup=="" || $dep ==""){
             $msg = "<span class='alert alert-warning'>Field cannot be Empty!</span>";
-            return $msg;
-        }elseif(strtotime($sdate)>strtotime($edate)){
-            $msg = "<span class='alert alert-warning'>End date cannot be a previous day!</span>";
             return $msg;
         }
         else{
 
-            $query="UPDATE users SET supervisor='$sup',department='$dep',sdate='$sdate',edate='$edate' WHERE uid='$stid'";
+            $query="UPDATE users SET supervisor='$sup',department='$dep' WHERE uid='$stid'";
 
             $result=$this->db->update($query);
             if($result){
@@ -320,7 +315,147 @@ class User
             return $msg;
         }
     }
+	
+	public function form1Student()
+	{
+		include('DBConnection.php');
+		if(isset($_POST['submitStudent']))
+		{
+			$sid=$_POST['stdID'];
+			$address=$_POST['address'];
+			$hphn=$_POST['hphone'];
+			$mphn=$_POST['mphone'];
+			$email=$_POST['email1'];
+			$year=$_POST['year'];
+			$sem=$_POST['sem'];
+			$cgpa=$_POST['cgpa'];
+			$date=date('Y-m-d H:i:s');
+			
+			/**
+				Form Validation
+			**/
+			$userID=Session::get('uid');
+			$sql="SELECT studentId FROM users WHERE uid=$userID";
+			$result=mysqli_query($con,$sql);
+			$row=mysqli_fetch_array($result);
+			if(empty($sid)||empty($address)||empty($hphn)||empty($mphn)||empty($email)||empty($cgpa))
+			{
+				echo"<script>alert('One are more fields are empty')</script>";
+			}
+			else if($row[0]!=$sid)
+			{
+				echo"<script>alert('Invalid Student ID')</script>";		
+			}
+			else if(!preg_match("/^[0-9]{10}$/",$hphn)||!preg_match("/^[0-9]{10}$/",$mphn)||!preg_match("/^[0-3]{1}.[0-99]$/",$cgpa)||!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i",$email))
+			{
+				
+				if(!preg_match("/^[0-9]{10}$/",$hphn))
+				{
+					echo"<script>alert('Invalid Home Phone Number')</script>";	
+				}
+				if(!preg_match("/^[0-9]{10}$/",$mphn))
+				{
+					echo"<script>alert('Invalid Mobile Phone Number')</script>";	
+				}
+				if(!preg_match("/^[0-3]{1}.[0-99]$/",$cgpa))
+				{
+					echo"<script>alert('Invalid CGPA')</script>";	
+				}
+				if(!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i",$email))
+				{
+					echo"<script>alert('Invalid Email Address')</script>";	
+				}
+			}
+			/**
+				Inserting data into DB if data is valid
+			**/
+			else
+			{
+				$stdId=Session::get('uid');
+				
+				$sql="SELECT supervisor FROM users WHERE uid=$stdId";
+				$result=mysqli_query($con,$sql);
+				$row=mysqli_fetch_array($result);
+				$supervisor=$row[0];
+				
+				$sql="INSERT INTO form1_student_details(stdID, address, homePhn, mobilePhn, email, year, semester, cgpa, requested_date, supervisor) VALUES('$sid', '$address', '$hphn', '$mphn', '$email', '$year', '$sem', '$cgpa', '$date',$supervisor)";
+				
+				if (!mysqli_query($con,$sql)) 
+				{
+					die('Error: ' . mysqli_error($con));
+				}
 
+				echo"<script>alert('Details sent to supervisor')</script>";	
+				mysqli_close($con);
+			}
+		}
+	}
+	
+	public function form1Supervisor()
+	{
+		include('DBConnection.php');
+		if(isset($_POST['submitSupervisor']))
+		{
+			$ename=$_POST['ename'];
+			$eaddress=$_POST['eaddress'];
+			$sname=$_POST['sname'];
+			$sphone=$_POST['sphone'];
+			$stitle=$_POST['stitle'];
+			$semail=$_POST['semail'];
+			$sdate=$_POST['sdate']." 00:00:00";
+			$edate=$_POST['edate']." 00:00:00";
+			$hoursPerWeek=$_POST['hourPerWeek'];
+			$taskList=$_POST['tasks'];
+			$learnList=$_POST['learn'];
+			$sup_id = Session::get('uid');
+
+			if(empty($ename)||empty($eaddress)||empty($sname)||empty($sphone)||empty($stitle)||empty($semail)||empty($sdate)||empty($edate)||empty($hoursPerWeek)||empty($taskList)||empty($learnList))
+			{
+				echo"<script>alert('One are more fields are empty')</script>";
+			}
+			else if(!preg_match("/^[0-9]{10}$/",$sphone)||!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i",$semail)||!preg_match("/^[0-9]{1}.[0-9]{1}|^[0-9]{2}.[0-9]{1}|^[0-9]{3}.[0-9]{1}|^[0-9]{1}|^[0-9]{2}|^[0-9]{3}$/",$hoursPerWeek)||strtotime($sdate) > strtotime($edate))
+			{
+				if(!preg_match("/^[0-9]{10}$/",$sphone))
+				{
+					echo"<script>alert('Invalid Phone')</script>";		
+				}
+				if(!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i",$semail))
+				{
+					echo"<script>alert('Invalid Supervisor Email')</script>";		
+				}
+				if(!preg_match("/^[0-9]{1}.[0-9]{1}|^[0-9]{2}.[0-9]{1}|^[0-9]{3}.[0-9]{1}|^[0-9]{1}|^[0-9]{2}|^[0-9]{3}$/",$hoursPerWeek))
+				{
+					echo"<script>alert('Invalid Hours Per Week')</script>";		
+				}
+				if(strtotime($sdate) > strtotime($edate))
+				{
+					echo"<script>alert('Start date should be less than End date')</script>";	
+				}
+			}
+			else
+			{
+				$StdID=$_SERVER['QUERY_STRING'];
+				$sql="INSERT INTO form1_supervisor(supID,stdID,employer_name,employer_address,sup_name,sup_phone,sup_title,sup_email,internship_sDate,internship_eDate,noHoursPerWeek,tasks_desc,learn_desc) VALUES('$sup_id','$StdID','$ename','$eaddress','$sname','$sphone','$stitle','$semail','$sdate','$edate','$hoursPerWeek','$taskList','$learnList')";
+					
+				if (!mysqli_query($con,$sql)) 
+				{
+					die('Error: ' . mysqli_error($con));
+				}
+
+				$sql="UPDATE form1_student_details SET sup_response='done' WHERE stdID='$StdID'";
+				if (!mysqli_query($con,$sql)) 
+				{
+					die('Error: ' . mysqli_error($con));
+				}
+
+				
+				echo"<script>alert('Details emailed to industrial training manager')</script>";	
+				mysqli_close($con);
+			}
+		}
+	}
+
+	
 
 }
 
