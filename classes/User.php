@@ -460,6 +460,15 @@ class User
 		}
 	}
 
+	public function getStudentLastRow()
+	{
+		include('DBConnection.php');
+		$sql="SELECT * FROM form1_student_details ORDER BY ID DESC LIMIT 1";
+		$result=mysqli_query($con,$sql);
+		$row=mysqli_fetch_array($result);
+		
+		return $row;
+	}
 	
 
 }
