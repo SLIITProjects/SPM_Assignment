@@ -3,10 +3,11 @@
  * Created by PhpStorm.
  * User: thilina
  */
-include_once("../classes/Manager.php");
+$filepath = realpath(dirname(__FILE__));
+include_once ($filepath.'/../classes/Manager.php');
 use PHPUnit\Framework\TestCase;
 
-class MarkingTest extends TestCase
+class MarkingTest extends PHPUnit_Framework_TestCase
 {
 /*Test whether Marks are insert correctly and get specific student  marks correctly*/
     public function testTotal()
