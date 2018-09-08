@@ -29,3 +29,6 @@
  * - ZS_<PARAMNAME> - will contain value of parameter defined in deployment.xml, as specified by
  *   user during deployment.
  */  
+$applicationEnv = getenv(‘ZS_APPLICATION_ENV’);
+$applicationBaseDir = getenv(‘ZS_APPLICATION_BASE_DIR’);
+$config = new Zend_Config($applicationBaseDir.’/config.ini’, $applicationEnv);

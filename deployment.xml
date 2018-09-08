@@ -5,4 +5,20 @@
         <release>1.0.0</release>
     </version>
     <appdir>data</appdir>
+   <scriptsdir>scripts</scriptsdir>
+ <dependencies>
+ </dependencies>
+ <parameters>
+ <parameter display="Application Environment:" id="APPLICATION_ENV" readonly="false"
+required="true" type="choice">
+ <validation>
+ <enums>
+ <enum>testing</enum>
+ <enum>staging</enum>
+ <enum>production</enum>
+ </enums>
+ </validation>
+ <defaultvalue>testing</defaultvalue>
+ </parameter>
+ </parameters>
 </package>

@@ -7,12 +7,12 @@
     $query="select Reg_no,Name,Company,Start_date,End_date from schedule_tab";
     $result=mysqli_query($con,$query);
 ?>
-
-    
+   
 
 <!--Include Navbar from another file-->
 <?php include('inc/navbar.php')?>
 
+<!--scripts-->
 <script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.css" >
@@ -20,6 +20,8 @@
 <link rel="stylesheet" type="text/css" href="css/timepicker.css">
     <script type="text/javascript" src="js/timepicker.js"></script>
 
+<!--stylesheet of the modal-->
+<link rel="stylesheet" type="text/css" href="css/modal.css" >
 
 <!--script of the datepicker-->
                         <script>
@@ -30,44 +32,6 @@
                         });
                         });
                         </script>
-
-<style>
-    .bg-modal{
-        width: 100%;
-        height: 100%;
-        background-color: rgbo(0, 0, 0, 0.7);
-        position: absolute;
-        top: 0;
-        display: flex;
-        justify-content: center;
-        display: none;
-        
-    }
-
-    .modal-content{
-        width: 500px;
-        height: 300px;
-        background-color: white;
-        border-radius: 4px;
-        text-align: center;
-        padding: 20px;
-        position: relative;
-        
-    }
-    input{
-        width: 50%;
-        display: block;
-        margin: 15px auto;
-    }
-    .close{
-        position: absolute;
-        top: 1;
-        right: 14px;
-        font-size: 42px;
-        transform: rotate(45deg);
-        cursor: pointer;
-    }
-</style>
 
 
   
@@ -85,7 +49,8 @@
                         <h5 class="text-muted">Industrial Training Manager</h5>
                         <div class="list-group">
                             <a href="index.php" class="list-group-item list-group-item-action active">Home</a>
-                            <a href="" class="list-group-item list-group-item-action">Functions</a>
+                            <a href="Schedule.php" class="list-group-item list-group-item-action">Schedule viva</a>
+                            <a href="schedule_report.php" class="list-group-item list-group-item-action">Generate Report</a>
                         </div>
                     </div>
                 </div>
@@ -94,11 +59,7 @@
 
 <!--Start Main section-->
 <div class="col col-md-9 col-lg-9">
-                    <!--<div class="jumbotron jumbotron-fluid text-center welcome">
-                        <div class="container">
-                            <h1 class="display-5">Schedule Viva</h1>
-                        </div>   
-                    </div>-->
+                    
                     <div>
                      <!-- Editable table -->
 <div class="card">
@@ -159,9 +120,9 @@ function myFunction(elem) {
 
 
 
-<!-- Editable table -->
+<!-- /Editable table -->
 
-
+<!--pop up modal-->
 <div class="bg-modal">
     <div class="modal-content">
         <form method="POST" action="">
@@ -171,26 +132,18 @@ function myFunction(elem) {
 
         
         <div class="dates" style="color:#2471a3;">
-    <input type="text" style="width:200px;background-color:#aed6f1;" class="form-control" id="usr1" name="viva_date" placeholder="YYYY-MM-DD" autocomplete="off" >
-  </div>
-
-         
-              
-         <input type="text" style="width:200px;" class="form-control" name="time" id="timepicker" > 
-                
-                <!--script of the timepicker-->
-                    <script>
-	                $('#timepicker').timepicker();
-                    </script>
-                
+        <input type="text" style="width:200px;background-color:#aed6f1;" class="form-control" id="usr1" name="viva_date" placeholder="YYYY-MM-DD" autocomplete="off" >
+        </div>
+      
+         <input type="time" style="width:200px;" class="form-control" name="time">    
         <button type='submit' class='btn btn-primary' name='submitSchedule'>Submit</button>
                 
 
-    <script>
-    document.querySelector('.close').addEventListener('click',function(){
-    document.querySelector('.bg-modal').style.display = 'none'; 
-    });
-    </script>
+            <script>
+            document.querySelector('.close').addEventListener('click',function(){
+            document.querySelector('.bg-modal').style.display = 'none'; 
+            });
+            </script>
         
         </form>    
     </div>
@@ -199,9 +152,9 @@ function myFunction(elem) {
 
 
     
-                    </div>
-        </div>
-        <!--End main section-->
+</div>
+</div>
+<!--End main section-->
 
     </div>
 </div>

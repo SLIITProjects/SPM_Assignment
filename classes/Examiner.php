@@ -36,18 +36,23 @@ class Examiner
         if($stdid=="" || $sname=="" || $phone=="" || $email=="" || $ename==""||
         $name=="" || $dtitle=="" || $spc=="" || $internd=="" || $credit==""||
         $ititle=="" || $bcomment=="" || $pcomment==""|| $grade==""|| $exname=="" || $data==""){
+           
+<<<<<<< HEAD
             $msg = "<span class='alert alert-warning'>Field cannot be Empty!</span>";
             return $msg;
+=======
+>>>>>>> b3cbb81a9c5a4719882acb971f9f7241a1de6c1a
+            echo"<script>alert('Field cannot be Empty!')</script>";
+            	
         }
 
         $getperformance = "SELECT * FROM student_performance WHERE IT_number='$stdid' LIMIT 1";
         $res = $this->db->select($getperformance);
 
         if($res!=false){
-            $msg = "<span class='alert alert-danger'>Student Id is already exists!</span>";
-            return $msg;
+            echo"<script>alert('Student Id is already exist')</script>";
         }else{
-            $query = "INSERT INTO student_performance(Student_name,IT_number,Phone,Email,Employee_name,Supervisor_name
+            $query = "INSERT INTO student_performance(IT_number,Student_name,Phone,Email,Employee_name,Supervisor_name
             ,Degree_title,Specialisation,Intern_duration,No_of_credits,Intern_title,Comments_benifits
             ,Comment_performance,Grade,Examiner_name,Date)
                       VALUES(
@@ -72,9 +77,16 @@ class Examiner
             if($result){
                 $msg = "<span class='alert alert-success msg'>Added Successfully!</span>";
                 return $msg;
+                echo"<script>alert('Added Successfully!!')</script>";
             }else{
+                
+<<<<<<< HEAD
                 $msg = "<span class='alert alert-danger msg'>Cannot Add!</span>";
                 return $msg;
+                echo"<script>alert('NOT Added Successfully!!')</script>";
+=======
+                echo"<script>alert(' NOT Added Successfully!!')</script>";
+>>>>>>> b3cbb81a9c5a4719882acb971f9f7241a1de6c1a
             }
         }
 
