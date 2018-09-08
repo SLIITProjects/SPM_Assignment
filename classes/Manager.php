@@ -5,7 +5,6 @@ include_once ($filepath.'/../helpers/Format.php');
 ?>
 
 <?php
-
 class Manager
 {
     private $db;
@@ -28,7 +27,6 @@ class Manager
            
             echo"<script>alert('Insert a Time!')</script>";    	
         }
-
         
         
             $query = "update schedule_tab set Viva_date='$vdate', Time='$time' where Reg_no='$regNo'";
@@ -43,17 +41,12 @@ class Manager
                 echo"<script>alert(' NOT Scheduled Successfully!!')</script>";
             }
         
-
     }
-
-
     public function addMarks($data){
-
         $sid =  mysqli_real_escape_string($this->db->link,$data['sid']);   
         $vmark =  mysqli_real_escape_string($this->db->link,$data['vmark']);   
         $mpmark =  mysqli_real_escape_string($this->db->link,$data['mpmark']);   
         $irmark =  mysqli_real_escape_string($this->db->link,$data['irmark']);   
-
         /**
 			Form Validation
 		**/
@@ -61,7 +54,6 @@ class Manager
 		{
 			echo"<script>alert('One are more fields are empty')</script>";
         }
-
             
             if($vmark>"41" || $vmark<"0")
 			{
@@ -79,7 +71,6 @@ class Manager
         else
         {
             $tot=$vmark+$mpmark+$irmark;
-
             $query="INSERT INTO total_marks(ssid,Vmark, MPmark, IRmark,Total) VALUES('$sid', '$vmark', '$mpmark', '$irmark','$tot')";
             
             $result = $this->db->insert($query);
@@ -92,13 +83,10 @@ class Manager
                 
                 echo"<script>alert(' NOT Added Successfully!!')</script>";
             }
-
-
         }
     }
     
     public function addMarksTest($id,$vmark,$mpmark,$irmark,$tot){
-
         $query = "insert into total_marks(ssid,Vmarks,MPmark,IRmark,Total) VALUES('$id','$vmark','$mpmark','$irmark','$tot')";
         $result = $this->db->insert($query);
         return true;
@@ -110,5 +98,4 @@ class Manager
         return $result;
     }
 }
-
 ?>

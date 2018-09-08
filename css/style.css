@@ -35,7 +35,7 @@ body {
 }
 
 #showcase .fa {
-  font-size: 25px;
+  margin-right: 10px;
 }
 
 #showcase .card:hover {
