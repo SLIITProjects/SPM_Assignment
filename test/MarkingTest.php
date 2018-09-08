@@ -14,7 +14,7 @@ class MarkingTest extends PHPUnit_Framework_TestCase
     {
         $manager = new Manager();
 
-        $manager->addMarksTest('IT00000000',12,10,5,27);
+        $manager->addMarksTest('IT10000000',12,10,5,27);
         $actual=null;
         $getMarks=$manager->getTotal('IT10000000');
         if($getMarks){
