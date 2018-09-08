@@ -79,20 +79,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 mt-lg-5" style="border-left: 1px solid #595959">
+                                                    <?php if(isset($allocate )){echo $allocate ;}?>
+                                                    <br/><br/>
                                                     <form action="" method="post">
-
-                                                        <div class="form-group col-md-8">
-                                                            <div class="input-group ">
-                                                                <label class="mt-3 mr-5 h6"><b>Start date: </b></label>
-                                                                <input type="date" class="form-control" name="sdate" value="<?php echo $value['sdate']?>" <?php if($value['sdate']!=null){echo 'disabled';}?>>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group col-md-8">
-                                                            <div class="input-group ">
-                                                                <label class="mt-3 mr-5 h6"><b>End date: </b></label>
-                                                                <input type="date" class="form-control" name="edate" value="<?php echo $value['edate']?>" <?php if($value['edate']!=null){echo 'disabled';}?>>
-                                                            </div>
-                                                        </div>
                                                         <div class="form-group col-md-8">
                                                             <div class="input-group">
                                                                 <label class="mt-3 mr-5 h6"><b>Supervisor</b></label>
@@ -136,7 +125,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                                         <button type="submit" name="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Allocate</button>
                                                         <a href="student_list.php" name="submit" class="btn btn-success"><i class="fa fa-arrow-left"></i>Back</a>
 
-                                                        <?php if(isset($allocate )){echo $allocate ;}?>
+
                                                     </form>
 
                                                 </div>

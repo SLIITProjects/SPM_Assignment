@@ -191,19 +191,14 @@ class User
     public function allocateSupervisor($data,$stid){
         $sup =  mysqli_real_escape_string($this->db->link,$data['supervisor']);
         $dep =  mysqli_real_escape_string($this->db->link,$data['department']);
-        $sdate =  mysqli_real_escape_string($this->db->link,$data['sdate']);
-        $edate =  mysqli_real_escape_string($this->db->link,$data['edate']);
 
-        if($sup=="" || $dep =="" || $sdate=="" || $edate==""){
+        if($sup=="" || $dep ==""){
             $msg = "<span class='alert alert-warning'>Field cannot be Empty!</span>";
-            return $msg;
-        }elseif(strtotime($sdate)>strtotime($edate)){
-            $msg = "<span class='alert alert-warning'>End date cannot be a previous day!</span>";
             return $msg;
         }
         else{
 
-            $query="UPDATE users SET supervisor='$sup',department='$dep',sdate='$sdate',edate='$edate' WHERE uid='$stid'";
+            $query="UPDATE users SET supervisor='$sup',department='$dep' WHERE uid='$stid'";
 
             $result=$this->db->update($query);
             if($result){
