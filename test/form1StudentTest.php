@@ -23,7 +23,7 @@ class form1StudentTest extends PHPUnit_Framework_TestCase
         $actual=null;
 
 		$getStdDetails=$user->getStudentLastRow()
-		$actual = $row[1];
+		$actual = $getStdDetails[1];
        /* $getFaculty=$faculty->getOneFaculty('Hospitality');
         if($getFaculty){
             while($result=$getFaculty->fetch_assoc()){
