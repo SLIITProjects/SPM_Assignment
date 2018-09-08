@@ -9,7 +9,7 @@
          syntaxCheck="true">
     <testsuites>
         <testsuite name="Test Suite">
-            <directory>./test</directory>
+            <directory>./</directory>
         </testsuite>
     </testsuites>
 
