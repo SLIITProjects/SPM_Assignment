@@ -181,6 +181,9 @@
 include('DBConnection.php');
 if($_SERVER['REQUEST_METHOD']=='POST')
 {
+	/**
+		Calling the function in the user class
+	**/
 	$user->form1Supervisor();
 
 }
