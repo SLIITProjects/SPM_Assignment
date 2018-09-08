@@ -37,11 +37,6 @@ class Examiner
         $name=="" || $dtitle=="" || $spc=="" || $internd=="" || $credit==""||
         $ititle=="" || $bcomment=="" || $pcomment==""|| $grade==""|| $exname=="" || $data==""){
            
-<<<<<<< HEAD
-            $msg = "<span class='alert alert-warning'>Field cannot be Empty!</span>";
-            return $msg;
-=======
->>>>>>> b3cbb81a9c5a4719882acb971f9f7241a1de6c1a
             echo"<script>alert('Field cannot be Empty!')</script>";
             	
         }
@@ -80,13 +75,7 @@ class Examiner
                 echo"<script>alert('Added Successfully!!')</script>";
             }else{
                 
-<<<<<<< HEAD
-                $msg = "<span class='alert alert-danger msg'>Cannot Add!</span>";
-                return $msg;
-                echo"<script>alert('NOT Added Successfully!!')</script>";
-=======
                 echo"<script>alert(' NOT Added Successfully!!')</script>";
->>>>>>> b3cbb81a9c5a4719882acb971f9f7241a1de6c1a
             }
         }
 
