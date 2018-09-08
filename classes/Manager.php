@@ -89,11 +89,10 @@ class Manager
     public function addMarksTest($id,$vmark,$mpmark,$irmark,$tot){
         $query = "insert into total_marks(ssid,Vmark,MPmark,IRmark,Total) VALUES('$id','$vmark','$mpmark','$irmark','$tot')";
         $result = $this->db->insert($query);
-        return $result;
+        return true;
     }
     
     public function getTotal($id){
-
         $query = "SELECT * from total_marks where ssid='$id'";
         $result = $this->db->select($query);
         return $result;
