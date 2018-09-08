@@ -24,7 +24,7 @@ class form1StudentTest extends PHPUnit_Framework_TestCase
         $actual=null;
 
 		$getStdDetails=$user->getStudentLastRow();
-		$actual = $getStdDetails[1]+', '+$getStdDetails[2]+', '+$getStdDetails[3]+', '+$getStdDetails[4]+', '+$getStdDetails[5]+', '+$getStdDetails[6]+', '+$getStdDetails[7]+', '+$getStdDetails[8];
+		$actual = $getStdDetails['stdID']+', '+$getStdDetails['address']+', '+$getStdDetails['homePhn']+', '+$getStdDetails['mobilePhn']+', '+$getStdDetails['email']+', '+$getStdDetails['year']+', '+$getStdDetails['semester']+', '+$getStdDetails['cgpa'];
       
         $this->assertEquals('IT16019232, 15 Malabe, 0111824578, 0779645781, kamal@gmail.com, 2, 2, 1.2',$actual);
     }
