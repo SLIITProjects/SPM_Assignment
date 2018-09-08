@@ -476,7 +476,7 @@ class User
 
 	public function getStudentLastRow()
 	{
-		$sql="SELECT * FROM form1_student_details ORDER BY ID DESC LIMIT 1";
+		$sql="SELECT * FROM form1_student_details ORDER BY stdID DESC LIMIT 1";
 		$result=$this->db->select($sql);	
 		return $result;
 	}
