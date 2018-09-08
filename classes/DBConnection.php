@@ -1,6 +1,6 @@
 <?php
 
-$con=mysqli_connect("localhost","root","","itms");
+$con=mysqli_connect("localhost","root","toor","itms");
 
 if(mysqli_connect_errno())
 {
