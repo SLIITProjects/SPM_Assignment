@@ -29,7 +29,7 @@ class form1StudentTest extends PHPUnit_Framework_TestCase
 	    	$actual = $result['stdID'].", ".$result['address'].", ".$result['homePhn'].", ".$result['mobilePhn'].", ".$result['email'].", ".$result['year'].", ".$result['semester'].", ".$result['cgpa'];
 	    }
 		}
-        $this->assertEquals('IT16019232, 15 Malabe, 0111824578, 0779645781, kamal@gmail.com, 2, 2, 1.2',$actual);
+        $this->assertEquals('IT16019232, 15 Malabe, 111824578, 779645781, kamal@gmail.com, 2, 2, 1.2',$actual);
     }
 }
 
