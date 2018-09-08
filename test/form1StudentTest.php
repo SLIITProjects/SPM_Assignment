@@ -19,7 +19,7 @@ class form1StudentTest extends PHPUnit_Framework_TestCase
 		$_POST['sem']="2";
 		$_POST['cgpa']="1.2";
 		
-        $user->form1Student();
+        $user->form1Student1();
 
         $actual=null;
 
