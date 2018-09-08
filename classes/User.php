@@ -476,12 +476,9 @@ class User
 
 	public function getStudentLastRow()
 	{
-		include('DBConnection.php');
-		$sql="SELECT * FROM form1_student_details ORDER BY ID DESC LIMIT 1";
-		$result=mysqli_query($con,$sql);
-		$row=mysqli_fetch_array($result);
-		
-		return $row;
+		$sql="SELECT * FROM form1_student_details ORDER BY stdID DESC LIMIT 1";
+		$result=$this->db->select($sql);	
+		return $result;
 	}
 	
 	public function form1Student1()

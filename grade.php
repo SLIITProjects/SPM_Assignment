@@ -1,6 +1,11 @@
 <!--Include header from another file-->
 <?php include('inc/header.php'); ?>
-
+<?php
+$login = Session::get('userLogin');
+if($login==false){
+    header("Location:login.php");
+}
+?>
 <style>
 
 </style>
@@ -16,14 +21,18 @@
         <div class="col col-md-3 col-lg-3 text-center">
                 <div class="card">
                     <div class="card-body">
-                        <img src="img/mlogo.png" alt="" class="img-fluid rounded-circle w-50 mb-1">
-                        <h4>Rajitha lakshan</h4>
-                        <h5 class="text-muted">Student</h5>
+                        <img src="<?php echo Session::get('photo');?>" alt="" class="img-fluid rounded-circle w-50 mb-1">
+                        <h4><?php echo Session::get('name');?></h4>
+                        <h5 class="text-muted"><?php echo Session::get('role');?></h5>
                         <div class="list-group">
                             <a href="index.php" class="list-group-item list-group-item-action active">Home</a>
-                            <a href="" class="list-group-item list-group-item-action">Functions</a>
-                            <a href="grade.php" class="list-group-item list-group-item-action">Grading-Form</a>
-                        </div>
+                            <a href="Schedule.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Schedule Viva</a>
+                            <a href="schedule_report.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Generate Schedule Report</a>
+							<a href="marking_summary.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Marking Summary Form</a>
+							<a href="grade.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Grading Form</a>	
+                            <a href="form_I-7.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Student Performance Evaluation Form</a>
+							<a href="getPerformances.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Get Student Performance</a>	
+                      </div>
                     </div>
                 </div>
         </div>
@@ -160,56 +169,11 @@ $con->close();
 </section>
 
 <?php
-include('DBConnection.php');
-if($_SERVER['REQUEST_METHOD']=='POST')
-{
-	if(isset($_POST['submitgrade']))
-	{
-		$sid=$_POST['sid'];
-		$vmark=$_POST['vmark'];
-		$mpmark=$_POST['mpmark'];
-		$irmark=$_POST['irmark'];
-
-
-        /**
-			Form Validation
-		**/
-		if(empty($vmark)||empty($mpmark)||empty($irmark))
-		{
-			echo"<script>alert('One are more fields are empty')</script>";
+include('classes/Manager.php');
+    $ma =new Manager();
+    if($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['submitgrade'])){
+        $addMarks=$ma->addMarks($_POST);
         }
-
-            
-            if($vmark>"41" || $vmark<"0")
-			{
-				echo"<script>alert('Invalid Mark')</script>";	
-            }
-            if("0">$mpmark || $mpmark>"31")
-			{
-				echo"<script>alert('Invalid Mark')</script>";	
-            }
-            if("0">$irmark || $irmark>"31")
-			{
-				echo"<script>alert('Invalid Mark')</script>";	
-			}
-        
-    
-        else
-        {
-            $tot=$vmark+$mpmark+$irmark;
-
-            $sql="INSERT INTO total_marks(ssid,Vmark, MPmark, IRmark,Total) VALUES('$sid', '$vmark', '$mpmark', '$irmark','$tot')";
-			
-			if (!mysqli_query($con,$sql)) 
-			{
-				die('Error: ' . mysqli_error($con));
-			}
-
-			echo"<script>alert('Marks Added Succesfull')</script>";	
-			mysqli_close($con);
-        }
-    }
-}
 ?>
 <!--Include Footer from another file-->
 <?php include('inc/footer.php')?>
