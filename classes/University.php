@@ -15,9 +15,6 @@ class University
         $this->db = new Database();
         $this->fm = new Format();
     }
-    public function addUniversity($data){
-
-    }
 
     public function getUniversities(){
         $query = "SELECT * from university";

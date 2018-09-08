@@ -253,7 +253,7 @@ class User
         $unique_image = substr(md5(time()),0,10).'.'.$file_ext;
         $uploaded_image = "uploads/".$unique_image;
 
-        if($name=="" || $address=="" || $email=="" || $password=="" || $cpassword=="" || $contact=""){
+        if($name=="" || $address=="" || $email=="" || $password=="" || $cpassword=="" || $contact==""){
             $msg = "<span class='alert alert-warning'>Field cannot be Empty!</span>";
             return $msg;
         }else {
@@ -318,7 +318,6 @@ class User
 	
 	public function form1Student()
 	{
-		include('DBConnection.php');
 		if(isset($_POST['submitStudent']))
 		{
 			$sid=$_POST['stdID'];
@@ -338,6 +337,7 @@ class User
 			$sql="SELECT studentId FROM users WHERE uid=$userID";
 			$result=mysqli_query($con,$sql);
 			$row=mysqli_fetch_array($result);
+
 			if(empty($sid)||empty($address)||empty($hphn)||empty($mphn)||empty($email)||empty($cgpa))
 			{
 				echo"<script>alert('One are more fields are empty')</script>";
