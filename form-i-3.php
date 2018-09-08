@@ -217,7 +217,7 @@
 <div class='form-group'>
 								<label><b>Select the Month</b></label>
 							
-								<select class="form-control"id="month"name="month">
+								<select class="form-control"id="month"name="month" onchange="myFunction(this.value)">
   <option value="1"><b>1st Month</b></option>
   <option value="2"><b>2nd Month</b></option>
   <option value="3"><b>3rd Month</b></option>
@@ -227,6 +227,42 @@
   <option value="6"><b>6th Month</b></option>
 
 </select>	
+
+<script>
+function myFunction(val) {
+
+	<?php
+	
+	$detailsnew='';
+	include('DBConnection-I-3.php');
+						
+	//	$StdID=$_SERVER['QUERY_STRING'];
+		$uid=$_SESSION["uid"];
+
+		$month=$_POST['month'];
+
+		$sql="SELECT * FROM i3_details  WHERE studentId='$StudentId' and month='$month'";
+		$result=mysqli_query($con,$sql);
+		if ($result->num_rows > 0) {
+
+			$detailsnew=$row['details'];
+			
+			
+
+			//echo"<script>alert('Form I-3 for ".$month." has been already submited to supervisor ,try update option')</script>";
+
+		}
+
+
+		
+		
+		?>
+            var s = document.getElementsByName("traingParty1");
+            s.value = "new value";
+		
+    //alert("The input value has changed. The new value is: " + val);
+}
+</script>
 							
 							</div>
 <br>
@@ -290,34 +326,7 @@
 					   </table>
 
 
-<!--   
-//    $(document).ready(function(){
-//         $('#data').after('<div id="nav"></div>');
-//         var rowsShown = 10;
-//         var rowsTotal = $('#data tbody tr').length;
-//         var numPages = rowsTotal/rowsShown;
-//         for(i = 0;i < numPages;i++) {
-//             var pageNum = i + 1;
-//             $('#nav').append('<a href="#" rel="'+i+'">'+pageNum+'</a> ');
-//         }
-//         $('#data tbody tr').hide();
-//         $('#data tbody tr').slice(0, rowsShown).show();
-//         $('#nav a:first').addClass('active');
-//         $('#nav a').bind('click', function(){
 
-//             $('#nav a').removeClass('active');
-//             $(this).addClass('active');
-//             var currPage = $(this).attr('rel');
-//             var startItem = currPage * rowsShown;
-//             var endItem = startItem + rowsShown;
-//             $('#data tbody tr').css('opacity','0.0').hide().slice(startItem, endItem).
-//                     css('display','table-row').animate({opacity:1}, 300);
-//         });
-//     });
-	
-	
-	
-// 	</script> -->
   <br>
  
 
@@ -354,8 +363,15 @@
 
 </div>
 
-<button type='submit' class='btn btn-primary' name='submitI3'>Submit</button>
-<button type='reset' class='btn btn-danger' name='resetI3'>Reset</button>
+<div class="row">
+<div class="col"style="text-align:right">
+<button type='submit' class='btn btn-primary' name='submitI3'>Submit</button></div>
+<div class="col"style="text-align:center">
+<button type='submit' class='btn btn-default' name='updateI3'>Update</button></div>
+<div class="col"style="text-align:left">
+
+<button type='reset' class='btn btn-danger' name='resetI3'>Reset</button></div>
+</div>
 </form>
 </div>
 
@@ -414,81 +430,58 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 				echo "0 results";
 			}
 
-
-
-
-			$myObj->name = "John";
-			$myObj->age = 30;
-			$myObj->city = "New York";
-			
-			$details= json_encode($myObj);
-			
-			
-			// array();
-  
-
-			// $i=1;
-			//     while($i<21){
-			//  array	(
-			// 		array($trainingParty.$i,$TrainingDescription.$i,$From.$i,$to.$i)
-					
-			// 		);
-		
-			// 	}
-
-
-			
-			
-			// $sql="SELECT supervisor FROM users WHERE uid=$StudentId";
-			// $result= mysqli_query($con,$sql);
-			// $row=mysqli_fetch_array($result);
-			// //mixed mysqli_fetch_array ( mysqli_result $result [int $resulttype = MYSQLI_BOTH ] );
-			// $supervisor=$row[0];
-
-
-			// $trainingParty="traingParty".$i;
-			// $TrainingDescription="TrainingDescription".$i;
-			// $From="From".$i;
-			// $to="to".$i;
-
-			
-
-		
-
-			// $Title=" ";
-			// $Price=" ";
-			// $Number=" ";
-
-			// $details = array( 
 				
-			// 	array( Title => "rose", 
-            //           Price => 1.25,
-            //           Number => 15 
-            //         ),
-            //    array( Title => "daisy", 
-            //           Price => 0.75,
-            //           Number => 25,
-            //         ),
-            //    array( Title => "orchid", 
-            //           Price => 1.15,
-            //           Number => 7 
-            //         )
-            //  );
+			
+			
+				
 
-			// for ($row = 1; $row < 21; $row++) {
-				// echo "<p><b>Row number $row</b></p>";
-				// echo "<ul>";
-			// 	$day=$row;
-			// 	for ($col = 1; $col < 5; $col++) {
-			// 		$trainingParty="traingParty".$row;
-			// 		$TrainingDescription="TrainingDescription".$row;
-			// 		$From="From".$row;
-			// 		$to="to".$row;
+				//$trainingParty=$_POST['traingParty'.$i];
+//$summary=$_POST['summary'];
+				//$myObj->name= $trainingParty;
+				
 
-			// 	  echo "<li>".$details[$day][$trainingParty][$TrainingDescription][$From][$to]."</li>";
-			// 	}
-			// 	echo "</ul>";
-			//   }
+			   $myArr = array(
+				   
+				
+				array(1,$_POST['traingParty1'],$_POST['TrainingDescription1'],$_POST['From1'],$_POST['to1']),
+				array(2,$_POST['traingParty2'],$_POST['TrainingDescription2'],$_POST['From2'],$_POST['to2']),
+				array(3,$_POST['traingParty3'],$_POST['TrainingDescription3'],$_POST['From3'],$_POST['to3']),
+				array(4,$_POST['traingParty4'],$_POST['TrainingDescription4'],$_POST['From4'],$_POST['to4']),
+				array(5,$_POST['traingParty5'],$_POST['TrainingDescription5'],$_POST['From5'],$_POST['to5']),
+				array(6,$_POST['traingParty6'],$_POST['TrainingDescription6'],$_POST['From6'],$_POST['to6']),
+				array(7,$_POST['traingParty7'],$_POST['TrainingDescription7'],$_POST['From7'],$_POST['to7']),
+				array(8,$_POST['traingParty8'],$_POST['TrainingDescription8'],$_POST['From8'],$_POST['to8']),
+				array(9,$_POST['traingParty9'],$_POST['TrainingDescription9'],$_POST['From9'],$_POST['to9']),
+
+				array(10,$_POST['traingParty10'],$_POST['TrainingDescription10'],$_POST['From10'],$_POST['to10']),
+				array(11,$_POST['traingParty11'],$_POST['TrainingDescription11'],$_POST['From11'],$_POST['to11']),
+				array(12,$_POST['traingParty12'],$_POST['TrainingDescription12'],$_POST['From12'],$_POST['to12']),
+				array(13,$_POST['traingParty13'],$_POST['TrainingDescription13'],$_POST['From13'],$_POST['to13']),
+				array(14,$_POST['traingParty14'],$_POST['TrainingDescription14'],$_POST['From14'],$_POST['to14']),
+				array(15,$_POST['traingParty15'],$_POST['TrainingDescription15'],$_POST['From15'],$_POST['to15']),
+				array(16,$_POST['traingParty16'],$_POST['TrainingDescription16'],$_POST['From16'],$_POST['to16']),
+				array(17,$_POST['traingParty17'],$_POST['TrainingDescription17'],$_POST['From17'],$_POST['to17']),
+				array(18,$_POST['traingParty18'],$_POST['TrainingDescription18'],$_POST['From18'],$_POST['to18']),
+				array(19,$_POST['traingParty19'],$_POST['TrainingDescription19'],$_POST['From19'],$_POST['to19']),
+				array(20,$_POST['traingParty20'],$_POST['TrainingDescription20'],$_POST['From20'],$_POST['to20'])
+
+			
+			
+			
+			);
+
+			   
+				
+
+				$details = json_encode($myArr);
+					//$myJSON = json_encode($myObj);
+
+			
+
+	
+
+			//$details = json_encode($myObj);
+
 			
 		
 			$Time=" ";
@@ -510,9 +503,34 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 
 		// 	echo"<script>alert('form I-3 sent to supervisor')</script>";	
 		// 	mysqli_close($con);
+		include('DBConnection-I-3.php');
+						
+	//	$StdID=$_SERVER['QUERY_STRING'];
+		$uid=$_SESSION["uid"];
 
-		if ($con->query($sql1) === TRUE) {
-			echo "New record created successfully";
+		$month=$_POST['month'];
+
+		$sql="SELECT * FROM i3_details  WHERE studentId='$StudentId' and month='$month'";
+		$result=mysqli_query($con,$sql);
+		if ($result->num_rows > 0) {
+
+			echo"<script>alert('Form I-3 for ".$month." has been already submited to supervisor ,try update option')</script>";
+
+			// output data of each row
+			// while($row = $result->fetch_assoc()) {
+			// // $StudentId	= $row["studentId"];
+			// // 	$address= $row["address"];
+			// // 	$contact= $row["contact"];
+			// // 	$email= $row["email"];
+			// 	//$address= $row["studentId"];
+			// }
+		} 
+
+
+		
+
+		else if ($con->query($sql1) === TRUE) {
+			echo"<script>alert('Form I-3 for ".$month." has been successfully sent to supervisor')</script>";
 		} else {
 			echo "Error: " . $sql1 . "<br>" . $con->error;
 		}
@@ -520,6 +538,166 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 
 		}
 	}
+
+
+	////Update start
+
+
+
+	
+if($_SERVER['REQUEST_METHOD']=='POST')
+{
+	if(isset($_POST['updateI3']))
+	{
+
+	
+
+		 $summary=$_POST['summary'];
+		 $problems=$_POST['problems'];
+		 $month=$_POST['month'];
+	
+				$supervisor;
+			// $stdId=Session::get('uid');
+
+
+
+
+
+
+			
+			$sql="SELECT * FROM users WHERE uid=$uid";
+			$result=mysqli_query($con,$sql);
+			if ($result->num_rows > 0) {
+				// output data of each row
+				while($row = $result->fetch_assoc()) {
+					
+					$supervisor=$row["supervisor"];
+					
+					//$address= $row["studentId"];
+				}
+			} else {
+				echo "0 results";
+			}
+
+				
+			
+			
+				
+
+				//$trainingParty=$_POST['traingParty'.$i];
+//$summary=$_POST['summary'];
+				//$myObj->name= $trainingParty;
+				
+
+			   $myArr = array(
+				   
+				
+				array(1,$_POST['traingParty1'],$_POST['TrainingDescription1'],$_POST['From1'],$_POST['to1']),
+				array(2,$_POST['traingParty2'],$_POST['TrainingDescription2'],$_POST['From2'],$_POST['to2']),
+				array(3,$_POST['traingParty3'],$_POST['TrainingDescription3'],$_POST['From3'],$_POST['to3']),
+				array(4,$_POST['traingParty4'],$_POST['TrainingDescription4'],$_POST['From4'],$_POST['to4']),
+				array(5,$_POST['traingParty5'],$_POST['TrainingDescription5'],$_POST['From5'],$_POST['to5']),
+				array(6,$_POST['traingParty6'],$_POST['TrainingDescription6'],$_POST['From6'],$_POST['to6']),
+				array(7,$_POST['traingParty7'],$_POST['TrainingDescription7'],$_POST['From7'],$_POST['to7']),
+				array(8,$_POST['traingParty8'],$_POST['TrainingDescription8'],$_POST['From8'],$_POST['to8']),
+				array(9,$_POST['traingParty9'],$_POST['TrainingDescription9'],$_POST['From9'],$_POST['to9']),
+
+				array(10,$_POST['traingParty10'],$_POST['TrainingDescription10'],$_POST['From10'],$_POST['to10']),
+				array(11,$_POST['traingParty11'],$_POST['TrainingDescription11'],$_POST['From11'],$_POST['to11']),
+				array(12,$_POST['traingParty12'],$_POST['TrainingDescription12'],$_POST['From12'],$_POST['to12']),
+				array(13,$_POST['traingParty13'],$_POST['TrainingDescription13'],$_POST['From13'],$_POST['to13']),
+				array(14,$_POST['traingParty14'],$_POST['TrainingDescription14'],$_POST['From14'],$_POST['to14']),
+				array(15,$_POST['traingParty15'],$_POST['TrainingDescription15'],$_POST['From15'],$_POST['to15']),
+				array(16,$_POST['traingParty16'],$_POST['TrainingDescription16'],$_POST['From16'],$_POST['to16']),
+				array(17,$_POST['traingParty17'],$_POST['TrainingDescription17'],$_POST['From17'],$_POST['to17']),
+				array(18,$_POST['traingParty18'],$_POST['TrainingDescription18'],$_POST['From18'],$_POST['to18']),
+				array(19,$_POST['traingParty19'],$_POST['TrainingDescription19'],$_POST['From19'],$_POST['to19']),
+				array(20,$_POST['traingParty20'],$_POST['TrainingDescription20'],$_POST['From20'],$_POST['to20'])
+
+			
+			
+			
+			);
+
+			   
+				
+
+				$details = json_encode($myArr);
+					//$myJSON = json_encode($myObj);
+
+			
+
+	
+
+			//$details = json_encode($myObj);
+
+			
+		
+			$Time=" ";
+
+
+
+
+			
+
+//$sql="INSERT INTO form1_student_details(stdID, address, homePhn, mobilePhn, email, year, semester, cgpa, requested_date, supervisor) VALUES('$sid', '$address', '$hphn', '$mphn', '$email', '$year', '$sem', '$cgpa', '$date',$supervisor)";
+
+			 
+
+$sql = "UPDATE MyGuests SET lastname='Doe' WHERE id=2";
+
+//$sql1="INSERT INTO form-i-3(studentId, supervisor, details, summary, problems, month) VALUES('$StudentId', '$supervisor','$details','$summary','$problems','$month')";
+	$sql1="UPDATE i3_details set supervisor='$supervisor',problems='$problems',details='$details',summary='$summary' where studentId='$StudentId'and month='$month'";
+	
+	// " VALUES('$StudentId','$supervisor','$problems','$details','$summary','$month')";
+		
+		// 	if (!mysqli_query($con,$sql1)) 
+		// 	{
+		// 		die('Error: ' . mysqli_error($con));
+		// 	}
+
+		// 	echo"<script>alert('form I-3 sent to supervisor')</script>";	
+		// 	mysqli_close($con);
+	//	include('DBConnection-I-3.php');
+						
+	//	$StdID=$_SERVER['QUERY_STRING'];
+		
+
+	    if ($con->query($sql1) === TRUE) {
+			echo"<script>alert('Form I-3 for ".$month." has been successfully updated')</script>";
+		} else {
+			echo "Error: " . $sql1 . "<br>" . $con->error;
+		}
+
+
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+	///end of update
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ?>
 
