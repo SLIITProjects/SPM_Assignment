@@ -52,7 +52,7 @@
 
 					
 					<!--Form filled by student-->	
-					<form name='form-i-3-student' method='POST' action='#'>
+					<form name='form-i-3-student' method='POST' action=' '>
 
 
 					<?php
@@ -67,7 +67,7 @@
 						if ($result->num_rows > 0) {
 							// output data of each row
 							while($row = $result->fetch_assoc()) {
-								$StudentId= $row["studentId"];
+							$StudentId	= $row["studentId"];
 								$address= $row["address"];
 								$contact= $row["contact"];
 								$email= $row["email"];
@@ -137,7 +137,7 @@
 								<!-- <label><b>Address-:{{Address}}</b></label> -->
 								<br>
 								<br>
-								<button type="button" class="btn btn-secondary pull-right btn-sm">Edit Details</button>
+								<button type="submit" class="btn btn-secondary pull-right btn-sm" formaction="/SPM/SPM_Assignment/student_register.php" target="blank" >Edit Details</button>
 								</div>
 								
 								</div>
@@ -147,17 +147,62 @@
 							</div>
 							
 							<div class ="jumbotron">
+
+
+<?php
+     					 $start="";
+						$end="";
+						$company="";
+						$supname="";
+
+						///
+						include('DBConnection-I-3.php');
+						
+//$StdID=$_SERVER['QUERY_STRING'];
+						$uid=$_SESSION["uid"];
+                        $StudentId="IT12345678";
+						$sql2="SELECT * FROM form1_supervisor  WHERE stdID='$StudentId'";
+						$result=mysqli_query($con,$sql2);
+						if ($result->num_rows > 0) {
+							// output data of each row
+							while($row = $result->fetch_assoc()) {
+								// $StudentId= $row["studentId"];
+								// $address= $row["address"];
+								// $contact= $row["contact"];
+								// $email= $row["email"];
+								//$address= $row["studentId"];
+								$start=$row["internship_sDate"];
+								$end=$row["internship_eDate"];
+                                $company=$row['employer_name'];
+                                $supname=$row["sup_name"];
+
+
+							}
+						} else {
+							echo "0 results";
+						}
+
+					?>
+					
+
+
+
 							<h4 style="text-align:center"><b>Internship Information</b></h4>
 							<hr>
 
 							<div class="row">
-							<div class="col"><b>Internship Title-:{{title}}</b></div>
-							<div class="col"><b>Specialization-:{{Specialization}}</b></div>
+							<div class="col"><?php echo " <label><b>Internship Title-:Intern</b></label>";?></div>
+
+						    <div class="col"><?php echo " <label><b>Company-:".$company."</b></label>";?></div>
+
 							</div>
 
 							<div class="row">
-							<div class="col"><b>Overall internship period from-:{{from}}</b></div>
-							<div class="col"><b>Overall internship period from-:{{to}}</b></div>
+
+							<div class="col"><?php echo " <label><b>Overall internship period from-:".$start."</b></label>";?></div>
+
+							<div class="col"><?php echo " <label><b>Overall internship period to-:".$end."</b></label>";?></div>
+
 							</div>
 </div>
 
@@ -165,7 +210,34 @@
 
 <div class ="jumbotron">
 
+
 <h4 style="text-align:center"><b>Internal Training Information</b></h4>
+
+
+<div class='form-group'>
+								<label><b>Select the Month</b></label>
+							
+								<select class="form-control"id="month"name="month">
+  <option value="1"><b>1st Month</b></option>
+  <option value="2"><b>2nd Month</b></option>
+  <option value="3"><b>3rd Month</b></option>
+  <option value="4"><b>4th Month</b></option>
+  <option value="5"><b>5th Month</b></option>
+
+  <option value="6"><b>6th Month</b></option>
+
+</select>	
+							
+							</div>
+<br>
+<br>
+
+
+					
+								
+							
+
+
 							<hr>
 
 
@@ -181,8 +253,18 @@
 						   </thead>
 						   <tbody>
 						   <?php
-						  	  $i=0;
+
+
+							 
+							//array();
+  
+
+						  	  $i=1;
 								   while($i<21){
+								// array	(
+								// 		array($trainingParty.$i,$TrainingDescription.$i,$From.$i,$to.$i)
+										
+								// 		);
 									   
 							// 								<th>Training Party</th>
 							// <th>Training Description</th> 
@@ -201,6 +283,7 @@
 									   $i++;
 									
 									}
+									//$details=$array
 						   ?>
 						
 						   </tbody>
@@ -253,7 +336,7 @@
 
 	<div class='form-group'>
 								<label><b>Summary of Key Tasks Completed For The {{Month}} {{Year}}</b></label>
-								<textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+								<textarea class="form-control" id="summary" name="summary" rows="5"></textarea>
 							</div>
 
 
@@ -263,7 +346,7 @@
 
 	<div class='form-group'>
 								<label><b>Details of the works,Problems</b></label>
-								<textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+								<textarea class="form-control" id="problems" rows="5" name="problems"></textarea>
 							</div>
 
 
@@ -273,6 +356,7 @@
 
 <button type='submit' class='btn btn-primary' name='submitI3'>Submit</button>
 <button type='reset' class='btn btn-danger' name='resetI3'>Reset</button>
+</form>
 </div>
 
 
@@ -291,6 +375,153 @@
 </section>
 
 
+
+
+<?php
+include('DBConnection-I-3.php');
+
+if($_SERVER['REQUEST_METHOD']=='POST')
+{
+	if(isset($_POST['submitI3']))
+	{
+
+	
+
+		 $summary=$_POST['summary'];
+		 $problems=$_POST['problems'];
+		 $month=$_POST['month'];
+	
+				$supervisor;
+			// $stdId=Session::get('uid');
+
+
+
+
+
+
+			
+			$sql="SELECT * FROM users WHERE uid=$uid";
+			$result=mysqli_query($con,$sql);
+			if ($result->num_rows > 0) {
+				// output data of each row
+				while($row = $result->fetch_assoc()) {
+					
+					$supervisor=$row["supervisor"];
+					
+					//$address= $row["studentId"];
+				}
+			} else {
+				echo "0 results";
+			}
+
+
+
+
+			$myObj->name = "John";
+			$myObj->age = 30;
+			$myObj->city = "New York";
+			
+			$details= json_encode($myObj);
+			
+			
+			// array();
+  
+
+			// $i=1;
+			//     while($i<21){
+			//  array	(
+			// 		array($trainingParty.$i,$TrainingDescription.$i,$From.$i,$to.$i)
+					
+			// 		);
+		
+			// 	}
+
+
+			
+			
+			// $sql="SELECT supervisor FROM users WHERE uid=$StudentId";
+			// $result= mysqli_query($con,$sql);
+			// $row=mysqli_fetch_array($result);
+			// //mixed mysqli_fetch_array ( mysqli_result $result [int $resulttype = MYSQLI_BOTH ] );
+			// $supervisor=$row[0];
+
+
+			// $trainingParty="traingParty".$i;
+			// $TrainingDescription="TrainingDescription".$i;
+			// $From="From".$i;
+			// $to="to".$i;
+
+			
+
+		
+
+			// $Title=" ";
+			// $Price=" ";
+			// $Number=" ";
+
+			// $details = array( 
+				
+			// 	array( Title => "rose", 
+            //           Price => 1.25,
+            //           Number => 15 
+            //         ),
+            //    array( Title => "daisy", 
+            //           Price => 0.75,
+            //           Number => 25,
+            //         ),
+            //    array( Title => "orchid", 
+            //           Price => 1.15,
+            //           Number => 7 
+            //         )
+            //  );
+
+			// for ($row = 1; $row < 21; $row++) {
+				// echo "<p><b>Row number $row</b></p>";
+				// echo "<ul>";
+			// 	$day=$row;
+			// 	for ($col = 1; $col < 5; $col++) {
+			// 		$trainingParty="traingParty".$row;
+			// 		$TrainingDescription="TrainingDescription".$row;
+			// 		$From="From".$row;
+			// 		$to="to".$row;
+
+			// 	  echo "<li>".$details[$day][$trainingParty][$TrainingDescription][$From][$to]."</li>";
+			// 	}
+			// 	echo "</ul>";
+			//   }
+			
+		
+			$Time=" ";
+
+
+
+
+			
+
+//$sql="INSERT INTO form1_student_details(stdID, address, homePhn, mobilePhn, email, year, semester, cgpa, requested_date, supervisor) VALUES('$sid', '$address', '$hphn', '$mphn', '$email', '$year', '$sem', '$cgpa', '$date',$supervisor)";
+
+		 	//$sql1="INSERT INTO form-i-3(studentId, supervisor, details, summary, problems, month) VALUES('$StudentId', '$supervisor','$details','$summary','$problems','$month')";
+	$sql1="INSERT INTO i3_details(studentId,supervisor,problems,details,summary,month) VALUES('$StudentId','$supervisor','$problems','$details','$summary','$month')";
+		
+		// 	if (!mysqli_query($con,$sql1)) 
+		// 	{
+		// 		die('Error: ' . mysqli_error($con));
+		// 	}
+
+		// 	echo"<script>alert('form I-3 sent to supervisor')</script>";	
+		// 	mysqli_close($con);
+
+		if ($con->query($sql1) === TRUE) {
+			echo "New record created successfully";
+		} else {
+			echo "Error: " . $sql1 . "<br>" . $con->error;
+		}
+
+
+		}
+	}
+
+?>
 
 <!--Include Footer from another file-->
 <?php include('inc/footer.php')?>
