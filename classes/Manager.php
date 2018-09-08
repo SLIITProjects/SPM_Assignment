@@ -87,7 +87,7 @@ class Manager
     }
     
     public function addMarksTest($id,$vmark,$mpmark,$irmark,$tot){
-        $query = "insert into total_marks(ssid,Vmarks,MPmark,IRmark,Total) VALUES('$id','$vmark','$mpmark','$irmark','$tot')";
+        $query = "insert into total_marks(ssid,Vmark,MPmark,IRmark,Total) VALUES('$id','$vmark','$mpmark','$irmark','$tot')";
         $result = $this->db->insert($query);
         return true;
     }
