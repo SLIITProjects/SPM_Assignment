@@ -49,20 +49,25 @@
     <div class="row">
 
             <!--Start Sidebar section-->
-        <div class="col col-md-3 col-lg-3 text-center">
+            <div class="col col-md-3 col-lg-3 text-center">
                 <div class="card">
                     <div class="card-body">
-                        <img src="img/mlogo.png" alt="" class="img-fluid rounded-circle w-50 mb-1">
-                        <h4>Rajitha lakshan</h4>
-                        <h5 class="text-muted">Industrial Training Manager</h5>
+                        <img src="<?php echo Session::get('photo');?>" alt="" class="img-fluid rounded-circle w-50 mb-1">
+                        <h4><?php echo Session::get('name');?></h4>
+                        <h5 class="text-muted"><?php echo Session::get('role');?></h5>
                         <div class="list-group">
                             <a href="index.php" class="list-group-item list-group-item-action active">Home</a>
-                            <a href="Schedule.php" class="list-group-item list-group-item-action">Schedule viva</a>
-                            <a href="schedule_report.php" class="list-group-item list-group-item-action">Generate Report</a>
-                        </div>
+                            <a href="Schedule.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Schedule Viva</a>
+                            <a href="schedule_report.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Generate Schedule Report</a>
+							<a href="marking_summary.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Marking Summary Form</a>
+							<a href="grade.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Grading Form</a>	
+                            <a href="form_I-7.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Student Performance Evaluation Form</a>
+							<a href="getPerformances.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Get Student Performance</a>	
+                      </div>
                     </div>
                 </div>
         </div>
+      
         <!--End Sidebar Section-->
 
 <!--Start Main section-->
