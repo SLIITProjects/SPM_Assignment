@@ -7,7 +7,7 @@ class FacultyTest extends PHPUnit_Framework_TestCase
 {
 /*Test whether faulty is insert correctly and get specific faculty correctly*/
     /**
-     * @covers BankAccount::getBalance
+     * @covers Faculty::addFaculty
      */
     public function testGetOneFaculty()
     {
