@@ -318,6 +318,7 @@ class User
 	
 	public function form1Student()
 	{
+        include('DBConnection.php');
 		if(isset($_POST['submitStudent']))
 		{
 			$sid=$_POST['stdID'];
@@ -454,8 +455,6 @@ class User
 			}
 		}
 	}
-
-	
 
 }
 
