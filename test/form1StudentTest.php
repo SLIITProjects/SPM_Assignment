@@ -18,7 +18,7 @@ class form1StudentTest extends PHPUnit_Framework_TestCase
 		$_POST['year']="2";
 		$_POST['sem']="2";
 		$_POST['cgpa']="1.2";
-		Session::get('uid')= 1;
+		Session::get('uid')= '1';
         $user->form1Student();
 
         $actual=null;
