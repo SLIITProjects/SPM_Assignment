@@ -12,15 +12,5 @@
             <directory>./test</directory>
         </testsuite>
     </testsuites>
-    <filter>
-        <whitelist>
-            <directory>.</directory>
-        </whitelist>
-            <logging>
-            <log type="coverage-html" target="test/coverage"/>
-            <log type="coverage-clover" target="test/logs/clover.xml"/>
-            <log type="coverage-crap4j" target="test/logs/crap4j.xml"/>
-        </logging>
-    </filter>
 
 </phpunit>
