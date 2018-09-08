@@ -32,6 +32,7 @@ class Login
                 Session::set("uid",$data['uid']);
                 Session::set("email",$data['email']);
                 Session::set("role",$data['role']);
+                Session::set("photo",$data['photo']);
                 header("Location:index.php");
 
 

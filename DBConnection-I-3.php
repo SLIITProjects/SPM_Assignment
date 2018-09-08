@@ -1,11 +1,17 @@
 <?php
 
-$con=mysqli_connect("localhost","root","toor","itms");
 
-if(mysqli_connect_errno())
-{
-	echo "Failed to connect".mysqli_connect_error();
-}
 
+$servername = "localhost";
+$username = "root";
+$password = "toor";
+$dbname = "itms";
+
+// Create connection
+$con = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($con->connect_error) {
+    die("Connection failed: " . $con->connect_error);
+} 
 
 ?>
