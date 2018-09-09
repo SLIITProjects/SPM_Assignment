@@ -1,5 +1,6 @@
 <?php
-include_once("../classes/Form.php");
+$filepath = realpath(dirname(__FILE__));
+include_once ($filepath.'/../classes/Form.php');
 use PHPUnit\Framework\TestCase;
 
 class FormTest extends PHPUnit_Framework_TestCase
