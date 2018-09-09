@@ -97,5 +97,11 @@ class Manager
         $result = $this->db->select($query);
         return $result;
     }
+
+    public function getSheduleById($id){
+        $query = "SELECT * from schedule_tab where Reg_no='$id'";
+        $result = $this->db->select($query);
+        return $result;
+    }
 }
 ?>
