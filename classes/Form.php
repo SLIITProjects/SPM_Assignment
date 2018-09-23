@@ -6,7 +6,7 @@ include_once ($filepath.'/../helpers/Format.php');
 
 <?php
 
-class User
+class Form
 {
     private $db;
     private $fm;
@@ -23,6 +23,13 @@ class User
         $result = $this->db->select($query);
         return $result;
     }
+    
+       public function getdata($sid){
+        $query = "SELECT * FROM evaluation WHERE stdID ='$sid'";
+        $result = $this->db->select($query);
+        return $result;
+    }
+    
     
 
 
@@ -55,7 +62,7 @@ class User
         else{
             $query = "INSERT INTO evaluation(stdID,area1,area2,area3,area4,area5,area6,area7,exSuper,date)
                       VALUES(
-                            '$sid'
+                            '$sid',
                           '$area1',
                           '$area2',
                           '$area3',
@@ -65,10 +72,8 @@ class User
                           '$area7',
                           '$exsup',
                           '$date'                    
-                    )
-                      
-                      
-                      ";
+                    )";
+            
             $result = $this->db->insert($query);
             if($result){
                 $msg = "<span class='alert alert-success msg'>Data inserted successfully!</span>";

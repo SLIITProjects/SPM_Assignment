@@ -81,6 +81,12 @@ class Examiner
 
     }
 
+    public function getExaminarById($id){
+        $query = "SELECT * from student_performance where IT_number='$id'";
+        $result = $this->db->select($query);
+        return $result;
+    }
+
 }
 
 ?>

@@ -7,7 +7,6 @@ if($login==false){
 }
 ?>
 <?php
-
 $dataPoints = array();
 
 $data = $department->getCompanyDepartment(Session::get('uid'));

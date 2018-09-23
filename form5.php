@@ -4,8 +4,8 @@
 
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-    $sid=Session::get('search');
-    $InsertEvaluation = $user->InsertEvaluation($_POST,$sid);
+    $sid=$_POST['search'];
+    $InsertEvaluation = $form->InsertEvaluation($_POST,$sid);
 }
 ?>
 
@@ -55,13 +55,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 <div class="card">
                     <div class="card-body">
 
+                        
+                        
+                <?php 
+                        if(isset($InsertEvaluation)){
+                            
+                            echo $InsertEvaluation;
+                        }
+                 ?> 
+                        
                         <form action="form5.php" method="post">
                             
                          <fieldset> 
                          <div class="form-group">
                                 <label for="EngineCap" class="col-sm-3 control-label">Student ID</label>
                                 <div class="col-sm-4">
-                                       <input type="text" id="search" placeholder="Enter Student ID" class="form-control">
+                                       <input type="text" id="search" placeholder="Enter Student ID" class="form-control" name="search">
                                 </div>
                            </div>
                              
@@ -387,8 +396,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 							<button type='submit' class='btn btn-primary' name='submit'>Submit</button>
 						</fieldset>
                         </form>
-               
-                    
+         
                 </div>
 
              

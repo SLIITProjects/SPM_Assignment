@@ -9,6 +9,14 @@
 ?>
    
 
+<?php
+     include('classes/Manager.php'); 
+    $av = new Manager();
+    if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])){
+        $addSchedule = $av->addSchedule($_POST);
+    }
+
+?>
 <!--Include Navbar from another file-->
 <?php include('inc/navbar.php')?>
 
@@ -94,7 +102,7 @@
                 <td class="pt-3-half" contenteditable="true"><?php echo $rows['Start_date']; ?></td>
                 <td class="pt-3-half" contenteditable="true"><?php echo $rows['End_date']; ?></td>
                 <td class="pt-3-half" contenteditable="true">
-                <button type="button" data-role="update"  onclick="myFunction(this.id)" id='<?php echo $rows['Reg_no'];?>' >Schedule</button>
+                <button type="button" class='btn btn-primary' data-role="update"  onclick="myFunction(this.id)" id='<?php echo $rows['Reg_no'];?>' >Schedule</button>
                 </td>
                 
                 </tr>
@@ -136,7 +144,7 @@ function myFunction(elem) {
         </div>
       
          <input type="time" style="width:200px;" class="form-control" name="time">    
-        <button type='submit' class='btn btn-primary' name='submitSchedule'>Submit</button>
+        <button type='submit' class='btn btn-primary' name='submit'>Submit</button>
                 
 
             <script>
@@ -160,27 +168,6 @@ function myFunction(elem) {
 </div>
 </section>
 
-<?php
-include('DBConnection.php');
-if($_SERVER['REQUEST_METHOD']=='POST')
-{
-	if(isset($_POST['submitSchedule']))
-	{
-        $vdate=$_POST['viva_date'];
-        $regNo=$_POST['regId'];
-        $time=$_POST['time'];
-        
-        $sql="update schedule_tab set Viva_date='$vdate', Time='$time' where Reg_no='$regNo'";
-			
-			if (!mysqli_query($con,$sql)) 
-			{
-				die('Error: ' . mysqli_error($con));
-			}
 
-			echo"<script>alert('Details saved')</script>";	
-			mysqli_close($con);
-    }
-}
-?>
 
         
