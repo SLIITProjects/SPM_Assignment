@@ -1,8 +1,9 @@
 <?php
-include_once("../classes/Form.php");
+$filepath = realpath(dirname(__FILE__));
+include_once ($filepath.'/../classes/Form.php');
 use PHPUnit\Framework\TestCase;
 
-class FormTest extends TestCase
+class FormTest extends PHPUnit_Framework_TestCase
 {
 /*Test whether the form 5 data inserted correctly */
     public function testForm5()
@@ -35,4 +36,3 @@ class FormTest extends TestCase
         $this->assertEquals('IT16030268',$actual);
     }
 }
-
