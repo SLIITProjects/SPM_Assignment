@@ -103,5 +103,12 @@ class Manager
         $result = $this->db->select($query);
         return $result;
     }
+
+    public function getSchedule(){
+        $query="select * from schedule_tab";
+        $result = $this->db->select($query);
+        return $result;
+
+    }
 }
 ?>
