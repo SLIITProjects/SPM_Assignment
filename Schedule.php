@@ -1,19 +1,14 @@
 <!--Include header from another file-->
 <?php include('inc/header.php'); ?>
 
+
+
 <!--Include DB connection from another file-->
-<?php
-    include('DBConnection.php');
-    $query="select Reg_no,Name,Company,Start_date,End_date from schedule_tab";
-    $result=mysqli_query($con,$query);
-?>
    
 
 <?php
-     include('classes/Manager.php'); 
-    $av = new Manager();
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])){
-        $addSchedule = $av->addSchedule($_POST);
+        $addSchedule = $manager->addSchedule($_POST);
     }
 
 ?>
@@ -49,20 +44,41 @@
     <div class="row">
 
             <!--Start Sidebar section-->
-        <div class="col col-md-3 col-lg-3 text-center">
+            <div class="col col-md-3 col-lg-3 text-center">
                 <div class="card">
                     <div class="card-body">
-                        <img src="img/mlogo.png" alt="" class="img-fluid rounded-circle w-50 mb-1">
-                        <h4>Rajitha lakshan</h4>
-                        <h5 class="text-muted">Industrial Training Manager</h5>
+                        <img src="<?php echo Session::get('photo');?>" alt="" class="img-fluid rounded-circle w-50 mb-1">
+                        <h4><?php echo Session::get('name');?></h4>
+                        <h5 class="text-muted"><?php echo Session::get('role');?></h5>
                         <div class="list-group">
-                            <a href="index.php" class="list-group-item list-group-item-action active">Home</a>
-                            <a href="Schedule.php" class="list-group-item list-group-item-action">Schedule viva</a>
-                            <a href="schedule_report.php" class="list-group-item list-group-item-action">Generate Report</a>
+                            <a href="index.php" class="list-group-item list-group-item-action">Home</a>
+                            <a href="register_supervisor.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="CMP"){echo "display:none";}?>">Register Supervisor</a>
+                            <a href="student_list.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="CMP"){echo "display:none";}?>">Allocate Supervisor</a>
+                            <a href="form1Student.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="STD"){echo "display:none";}?>">Form I-1</a>
+                            <a href="form1SupervisorRList.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="SUP"){echo "display:none";}?>">Form I-1
+                                <?php
+                                include('DBConnection.php');
+                                $supId=Session::get('uid');
+                                $sql="SELECT * FROM form1_student_details WHERE supervisor='$supId' AND sup_response='in progress'";
+                                $result=mysqli_query($con,$sql);
+                                $count=mysqli_num_rows($result);
+                                echo '<span class="badge badge-success ml-3"><b>'.$count.'</b></span>';
+                                ?>
+                            </a>
+                            <a href="form-i-3.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="STD"){echo "display:none";}?>">Form I-3</a>
+                            <a href="form5.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="SUP"){echo "display:none";}?>">Form I-5</a>
+                            <a href="form_I-7.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Form I-7</a>
+                            <a href="getPerformances.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Performance</a>
+                            <a href="form-i-3-supervisor.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="STD"){echo "display:none";}?>">Certify And Email Form I-3</a>
+                            <a href="grade.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Grading-From</a>
+                            <a href="marking_summary.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Marking Summary From</a>
+                            <a href="Schedule.php" class="list-group-item list-group-item-action active" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Schedule</a>
+                            <a href="schedule_report.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Schedule Report</a>
                         </div>
                     </div>
                 </div>
         </div>
+      
         <!--End Sidebar Section-->
 
 <!--Start Main section-->
@@ -90,8 +106,9 @@
                 
                 <?php
                 $count=1;
-                
-                    while($rows=mysqli_fetch_assoc($result))
+                $data = $manager->getSchedule();
+                if($data){
+                    while($rows=$data->fetch_assoc())
                     {      
                  ?>
                 <tr id="<?php echo $rows['Reg_no']; ?>">
@@ -110,7 +127,7 @@
 
                 <?php
                 $count++;
-                }
+                }}
                 ?>
                      
         </table>
