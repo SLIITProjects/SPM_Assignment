@@ -12,6 +12,20 @@ class Session
             }
         }
     }
+    public static function checkSession(){
+        self::init();
+        if (self::get("adminLogin")== false) {
+            self::destroy();
+            header("Location:../admin_area/index.php");
+        }
+    }
+
+    public static function checkLogin(){
+        self::init();
+        if (self::get("adminLogin")== true) {
+            header("Location:../admin_area/main.php");
+        }
+    }
 
     public static function set($key, $val){
         $_SESSION[$key] = $val;
