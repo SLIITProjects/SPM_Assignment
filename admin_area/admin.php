@@ -4,7 +4,7 @@
 <?php include('inc/navbar.php')?>
 
 <section id="users">
-    <div class="container">
+<div class="container-fluid">
         <div class="row">
 
             <!--Start sidebar section-->
@@ -43,9 +43,15 @@
                     <div class="col-md-4 text-center">
                         <div class="card faculties">
                             <div class="card-body">
-                                <i class="fa fa-building fa-3x"></i>
+                            <img src="img/faculty.png">
                                 <h3 class="text-uppercase">Faculties</h3>
-                                <h1></h1>
+                                <h1><?php
+                                    $count = $user->getCount("faculty");
+                                    if($count){
+                                        $value= $count->fetch_assoc();
+                                        echo $value['tCount'];
+                                    }
+                                    ?></h1>
                             </div>
                         </div>
                     </div>
@@ -54,9 +60,15 @@
                     <div class="col-md-4 text-center">
                         <div class="card students">
                             <div class="card-body">
-                                <i class="fa fa-user fa-3x"></i>
+                            <img src="img/user.png">
                                 <h3 class="text-uppercase">Students</h3>
-                                <h1></h1>
+                                <h1><?php
+                                    $count = $user->getStudentCount("users");
+                                    if($count){
+                                        $value= $count->fetch_assoc();
+                                        echo $value['tCount'];
+                                    }
+                                    ?></h1>
                             </div>
                         </div>
                     </div>
@@ -65,9 +77,15 @@
                     <div class="col-md-4 text-center">
                         <div class="card universities">
                             <div class="card-body">
-                                <i class="fa fa-users fa-3x"></i>
+                            <img src="img/uni.png">
                                 <h3 class="text-uppercase">Universites</h3>
-                                <h1></h1>
+                                <h1><?php
+                                    $count = $user->getCount("university");
+                                    if($count){
+                                        $value= $count->fetch_assoc();
+                                        echo $value['tCount'];
+                                    }
+                                    ?></h1>
                             </div>
                         </div>
                     </div>

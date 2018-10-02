@@ -29,7 +29,7 @@
 
 <body class="text-center">
 <form class="form-signin" action="index.php" method="post" autocomplete="off">
-    <h1 class="h3 font-weight-normal">Login</h1>
+<h1 class="text-center">Admin Login</h1>
     <span style="color:red">
             <?php
                 if(isset($checkLogin)){
