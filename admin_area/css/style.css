@@ -1,0 +1,52 @@
+body {
+  font-family: 'Quicksand', sans-serif;
+  background: #f7f7f7;
+  margin-top: 105px;
+}
+#showcase {
+  position: relative;
+  background: url('../img/mountains.jpg');
+  min-height: 750px;
+}
+#showcase .primary-overlay {
+  background: rgba(50, 146, 166, 0.8);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.navbar {
+  color: #fff;
+}
+.footer {
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin-top: 200px;
+  padding: 1rem;
+  background-color: #2e3133;
+  text-align: center;
+}
+.universities {
+  background: linear-gradient(to right, #33ccff 0%, #00ffff 100%);
+  border: none;
+  height: 170px;
+  color: #ffffff;
+  box-shadow: 5px 7px 18px #888888;
+}
+.students {
+  background: linear-gradient(to right, #cc66ff 0%, #9933ff 100%);
+  border: none;
+  height: 170px;
+  color: #ffffff;
+  box-shadow: 5px 7px 18px #888888;
+}
+.faculties {
+  background: linear-gradient(to right, #ff9933 0%, #ff3300 100%);
+  border: none;
+  height: 170px;
+  color: #ffffff;
+  box-shadow: 5px 7px 18px #888888;
+}

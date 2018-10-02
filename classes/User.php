@@ -332,11 +332,9 @@ class User
         }
     }
 	
-	/**
-		Student entering details handeling function
-	**/
-	public function form1Student()
-	{
+		//Student entering details handeling function
+
+	public function form1Student(){
         include('DBConnection.php');
 		if(isset($_POST['submitStudent']))
 		{
@@ -424,15 +422,13 @@ class User
 		}
 	}
 
-	public function getStudentLastRow()
-	{
+	public function getStudentLastRow(){
 		$sql="SELECT * FROM form1_student_details ORDER BY stdID DESC LIMIT 1";
 		$result=$this->db->select($sql);	
 		return $result;
 	}
 	
-	public function form1Student1()
-	{
+	public function form1Student1(){
 		include('DBConnection.php');
 		if(isset($_POST['submitStudent']))
 		{
@@ -508,11 +504,10 @@ class User
 		}
 	}
 	
-	/**
-		Supervisor entering details handeling function
-	**/
-	public function form1Supervisor()
-	{
+
+		//Supervisor entering details handeling function
+
+    public function form1Supervisor(){
 		include('DBConnection.php');
 		if(isset($_POST['submitSupervisor']))
 		{
@@ -573,7 +568,58 @@ class User
 				mysqli_close($con);
 			}
 		}
-	}
+    }
+    //Accept the user request and activate the user
+    public function activateAccount($uid){
+        $query = "UPDATE users SET status=1 WHERE uid='$uid'";
+        $result=$this->db->update($query);
+        if($result){
+            $msg = "<script>alert('User Activated')</script>";
+            return $msg;
+        }else{
+            $msg = "<script>alert('User cannot activated')</script>";
+            return $msg;
+        }
+    }
+
+    //Get all Deactivated users from database
+    public function getDeactivateUsers(){
+        $query = "SELECT *
+          FROM users
+          WHERE status=0 ORDER BY uid DESC";
+
+        $result = $this->db->select($query);
+        return $result;
+    }
+
+    //Delete user
+    public function deleteUsers($uid){
+        $query = "DELETE FROM users WHERE uid='$uid'";
+        $result =$this->db->delete($query);
+        if($result){
+            $msg = "<script>alert('Delete successfully')</script>";
+            return $msg;
+        }else{
+            $msg = "<script>alert('Cannot deactivated')</script>";
+            return $msg;
+        }
+    }
+
+    //Get Student count
+    public function getStudentCount($table){
+        $query = "SELECT COUNT(*) as tCount
+          FROM $table
+          WHERE role='STD'";
+        $result = $this->db->select($query);
+        return $result;
+    }
+     //Get count
+     public function getCount($table){
+        $query = "SELECT COUNT(*) as tCount
+          FROM $table";
+        $result = $this->db->select($query);
+        return $result;
+    }
 
 }
 
