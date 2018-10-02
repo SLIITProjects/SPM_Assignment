@@ -16,7 +16,7 @@
                         <h4><?php echo Session::get('adminName')?></h4>
                         <h5 class="text-muted"><?php echo Session::get('role')?></h5>
                         <div class="list-group">
-                        <a href="index.php" class="list-group-item list-group-item-action">Home</a>
+                        <a href="admin.php" class="list-group-item list-group-item-action">Home</a>
                             <a href="addFaculties.php" class="list-group-item list-group-item-action">Add Faculties</a>
                             <a href="addUniversity.php" class="list-group-item list-group-item-action">Add Universities</a>
                             <a href="signup_request.php" class="list-group-item list-group-item-action active">Signup requests</a>

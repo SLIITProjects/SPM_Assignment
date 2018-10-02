@@ -1,5 +1,23 @@
 
 <?php include('inc/header.php')?>
+
+<!--Add university using Method in University class-->
+<?php
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $uniName = $_POST['university'];
+
+    $response = $university->addUniversity($uniName);
+}
+?>
+
+<!--Get unid and Delete that record using Method in University class-->
+<?php
+    if(isset($_GET['deluniversity'])){
+        $id = $_GET['deluniversity'];
+        $deluni = $university->delUniversity($id);
+    }
+?>
+
 <?php include('inc/navbar.php')?>
 
 <section id="users">
@@ -15,7 +33,7 @@
                         <h4><?php echo Session::get('adminName')?></h4>
                         <h5 class="text-muted"><?php echo Session::get('role')?></h5>
                         <div class="list-group">
-                        <a href="index.php" class="list-group-item list-group-item-action">Home</a>
+                        <a href="admin.php" class="list-group-item list-group-item-action">Home</a>
                             <a href="addFaculties.php" class="list-group-item list-group-item-action">Add Faculties</a>
                             <a href="addUniversity.php" class="list-group-item list-group-item-action active">Add Universities</a>
                             <a href="signup_request.php" class="list-group-item list-group-item-action">Signup requests</a>
@@ -33,11 +51,11 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title h5">Add a University</div>
-                        <form action="addRoles.php" method="post">
+                        <form action="addUniversity.php" method="post">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="role">Enter University</label>
-                                    <input type="text" class="form-control" name="roleName" placeholder="University Name" >
+                                    <input type="text" class="form-control" name="university" placeholder="University Name" >
                                 </div>
                             </div>
                             <input type="submit" href="#" class="btn btn-success" value="Add">&nbsp;
@@ -62,11 +80,24 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <!--Get user Universities from the database and display them in a table-->
-                           
+                            <!--Get universities from the database and display them in a table-->
+                            <?php
+                                $universities = $university->getUniversities();
+                                if($universities){
+                                    $i=0;
+                                    while ($result = $universities->fetch_assoc()){
+                                        $i++;
+                            ?>
+                            <tr>
+                                <th scope="row"><?php echo $i?></th>
+                                <td><?php echo $result['uname']?></td>
+                                <td><a onclick="return confirm('Are you sure to delete?')" href="?deluniversity=<?php echo $result['unid']?>" class="btn btn-danger btn-sm">Remove</a></td>
+                            </tr>
+                           <?php }}?>
                             </tbody>
                         </table>
-            
+                        <?php if(isset($delUni)){echo $delUni;}?>
+                        <?php if(isset($response)){echo $response;}?>
                     </div>
                 </div>
             </div>

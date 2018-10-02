@@ -23,7 +23,7 @@ class Session
     public static function checkLogin(){
         self::init();
         if (self::get("adminLogin")== true) {
-            header("Location:../admin_area/main.php");
+            header("Location:../admin_area/admin.php");
         }
     }
 
@@ -42,5 +42,10 @@ class Session
     public static function Client_session_destroy(){
         session_destroy();
         header("Location:index.php");
+    }
+
+    public static function Admin_session_destroy(){
+        session_destroy();
+        header("Location:../admin_area/index.php");
     }
 }

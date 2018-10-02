@@ -1,5 +1,24 @@
 
 <?php include('inc/header.php')?>
+
+<!--Add faulty using Method in Faculty class-->
+<?php
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $facultyName = $_POST['faculty'];
+
+    $response = $faculty->addFaculty($facultyName);
+}
+?>
+
+<!--Get fid and Delete that record using Method in Faculty class-->
+<?php
+    if(isset($_GET['delfaculty'])){
+        $id = $_GET['delfaculty'];
+        $delfaculty = $faculty->delFaculty($id);
+    }
+?>
+
+
 <?php include('inc/navbar.php')?>
 
 <section id="users">
@@ -15,7 +34,7 @@
                         <h4><?php echo Session::get('adminName')?></h4>
                         <h5 class="text-muted"><?php echo Session::get('role')?></h5>
                         <div class="list-group">
-                        <a href="index.php" class="list-group-item list-group-item-action">Home</a>
+                        <a href="admin.php" class="list-group-item list-group-item-action">Home</a>
                             <a href="addFaculties.php" class="list-group-item list-group-item-action active">Add Faculties</a>
                             <a href="addUniversity.php" class="list-group-item list-group-item-action">Add Universities</a>
                             <a href="signup_request.php" class="list-group-item list-group-item-action">Signup requests</a>
@@ -28,16 +47,16 @@
             <!--Start Main Section-->
             <div class="col col-md-9 col-lg-9 dashboard">
 
-                <!--Add a user role to the System-->
+                <!--Add a user faculty to the System-->
 
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title h5">Add a Faculty</div>
-                        <form action="addRoles.php" method="post">
+                        <form action="addFaculties.php" method="post">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="role">Enter Faculty</label>
-                                    <input type="text" class="form-control" name="roleName" placeholder="Faculty Name" >
+                                    <input type="text" class="form-control" name="faculty" placeholder="Faculty Name" >
                                 </div>
                             </div>
                             <input type="submit" href="#" class="btn btn-success" value="Add">&nbsp;
@@ -48,7 +67,7 @@
 
                 <br/>
 
-                <!--Display User faculties in a table-->
+                <!--Display faculties in a table-->
 
                 <div class="card">
                     <div class="card-body">
@@ -62,11 +81,24 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <!--Get user faculty from the database and display them in a table-->
-                           
+                            <!--Get faculties from the database and display them in a table-->
+                            <?php
+                                $faculties = $faculty->getFaculties();
+                                if($faculties){
+                                    $i=0;
+                                    while ($result = $faculties->fetch_assoc()){
+                                        $i++;
+                            ?>
+                            <tr>
+                                <th scope="row"><?php echo $i?></th>
+                                <td><?php echo $result['fname']?></td>
+                                <td><a onclick="return confirm('Are you sure to delete?')" href="?delfaculty=<?php echo $result['fid']?>" class="btn btn-danger btn-sm">Remove</a></td>
+                            </tr>
+                           <?php }}?>
                             </tbody>
                         </table>
-            
+                        <?php if(isset($delfaculty)){echo $delfaculty;}?>
+                        <?php if(isset($response)){echo $response;}?>
                     </div>
                 </div>
             </div>

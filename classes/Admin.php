@@ -34,7 +34,7 @@ class Admin
                 Session::set("adminLogin",true);
                 Session::set("admin_id",$value['admin_id']);
                 Session::set("username",$value['username']);
-                Session::set("adminName",$value['adminName']);
+                Session::set("admin_name",$value['admin_name']);
                 Session::set("photo",$value['photo']);
                 header("Location:admin.php");
             }else{
