@@ -24,7 +24,7 @@ class Form
         return $result;
     }
     
-       public function getdata($sid){
+    public function getdata($sid){
         $query = "SELECT * FROM evaluation WHERE stdID ='$sid'";
         $result = $this->db->select($query);
         return $result;

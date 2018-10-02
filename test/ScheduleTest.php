@@ -1,6 +1,6 @@
 <?php
 $filepath = realpath(dirname(__FILE__));
-include_once ($filepath.'/../classes/Manager.php');
+include_once($filepath . '/../classes/Manager.php');
 use PHPUnit\Framework\TestCase;
 
 class ScheduleTest extends PHPUnit_Framework_TestCase
