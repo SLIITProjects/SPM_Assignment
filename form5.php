@@ -4,8 +4,8 @@
 
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-    $sid=Session::get('search');
-    $InsertEvaluation = $user->InsertEvaluation($_POST,$sid);
+    $sid=$_POST['search'];
+    $InsertEvaluation = $form->InsertEvaluation($_POST,$sid);
 }
 ?>
 
@@ -26,18 +26,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
             <div class="col col-md-3 col-lg-3 text-center">
                 <div class="card">
                     <div class="card-body">
-                        <img src="img/mlogo.png" alt="" class="img-fluid rounded-circle w-50 mb-1">
+                        <img src="<?php echo Session::get('photo');?>" alt="" class="img-fluid rounded-circle w-50 mb-1">
                         <h4><?php echo Session::get('name');?></h4>
                         <h5 class="text-muted"><?php echo Session::get('role');?></h5>
                         <div class="list-group">
                             <a href="index.php" class="list-group-item list-group-item-action">Home</a>
-                            <a href="register_supervisor.php" class="list-group-item list-group-item-action active" style="<?php if(Session::get('role')!="CMP"){echo "display:none";}?>">Register Supervisor</a>
+                            <a href="register_supervisor.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="CMP"){echo "display:none";}?>">Register Supervisor</a>
                             <a href="student_list.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="CMP"){echo "display:none";}?>">Allocate Supervisor</a>
-                            <a href="form-i-3.php" class="list-group-item list-group-item-action">Form I-3</a>
-                            <a href="form5.php" class="list-group-item list-group-item-action">Form I-5</a>
-                            <a href="grade.php" class="list-group-item list-group-item-action">Grading-From</a>
-                            <a href="form1Student.php" class="list-group-item list-group-item-action">Form I-1</a>
-
+                            <a href="form1Student.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="STD"){echo "display:none";}?>">Form I-1</a>
+                            <a href="form1SupervisorRList.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="SUP"){echo "display:none";}?>">Form I-1
+                                <?php
+                                include('DBConnection.php');
+                                $supId=Session::get('uid');
+                                $sql="SELECT * FROM form1_student_details WHERE supervisor='$supId' AND sup_response='in progress'";
+                                $result=mysqli_query($con,$sql);
+                                $count=mysqli_num_rows($result);
+                                echo '<span class="badge badge-success ml-3"><b>'.$count.'</b></span>';
+                                ?>
+                            </a>
+                            <a href="form-i-3.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="STD"){echo "display:none";}?>">Form I-3</a>
+                            <a href="form5.php" class="list-group-item list-group-item-action active" style="<?php if(Session::get('role')!="SUP"){echo "display:none";}?>">Form I-5</a>
+                            <a href="form_I-7.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Form I-7</a>
+                            <a href="getPerformances.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Performance</a>
+                            <a href="form-i-3-supervisor.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="STD"){echo "display:none";}?>">Certify And Email Form I-3</a>
+                            <a href="grade.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Grading-From</a>
+                            <a href="marking_summary.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Marking-Summary-From</a>
+                            <a href="Schedule.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Schedule</a>
+                            <a href="schedule_report.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Schedule Report</a>
                         </div>
                     </div>
                 </div>
@@ -55,13 +70,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 <div class="card">
                     <div class="card-body">
 
+                        
+                        
+                <?php 
+                        if(isset($InsertEvaluation)){
+                            
+                            echo $InsertEvaluation;
+                        }
+                 ?> 
+                        
                         <form action="form5.php" method="post">
                             
                          <fieldset> 
                          <div class="form-group">
                                 <label for="EngineCap" class="col-sm-3 control-label">Student ID</label>
                                 <div class="col-sm-4">
-                                       <input type="text" id="search" placeholder="Enter Student ID" class="form-control">
+                                       <input type="text" id="search" placeholder="Enter Student ID" class="form-control" name="search">
                                 </div>
                            </div>
                              
@@ -387,8 +411,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 							<button type='submit' class='btn btn-primary' name='submit'>Submit</button>
 						</fieldset>
                         </form>
-               
-                    
+         
                 </div>
 
              

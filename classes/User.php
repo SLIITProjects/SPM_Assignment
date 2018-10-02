@@ -41,8 +41,14 @@ class User
         if($university=="" || $company=="" || $name=="" || $studentid=="" || $faculty=="" || $address=="" || $email=="" || $password=="" || $cpassword=="" || $phone=="" || $year=="" || $sem==""){
             $msg = "<span class='alert alert-warning'>Field cannot be Empty!</span>";
             return $msg;
-        }else {
-            if ($file_size > 1048567) {
+        }else if(!preg_match("/^[0-9]{10}$/",$phone)){
+            $msg = "<span class='alert alert-warning msg'>Invalid phone number!</span>";
+            return $msg;
+        }else if(!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i",$email)) {
+            $msg = "<span class='alert alert-warning msg'>Invalid email address!</span>";
+            return $msg;
+        }else{
+        	if ($file_size > 1048567) {
                 $msg = "<span class='alert alert-warning msg'>File size too large!</span>";
                 return $msg;
             } elseif (in_array($file_ext, $permit) == false) {
@@ -114,7 +120,10 @@ class User
         if($name=="" || $address=="" || $email=="" || $password=="" || $cpassword==""){
             $msg = "<span class='alert alert-warning'>Field cannot be Empty!</span>";
             return $msg;
-        }else {
+        }else if(!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i",$email)) {
+            $msg = "<span class='alert alert-warning msg'>Invalid email address!</span>";
+            return $msg;
+        }else{
             if ($file_size > 1048567) {
                 $msg = "<span class='alert alert-warning msg'>File size too large!</span>";
                 return $msg;
@@ -240,8 +249,8 @@ class User
         $email =  mysqli_real_escape_string($this->db->link,$data['email']);
         $password =  mysqli_real_escape_string($this->db->link,md5($data['password']));
         $cpassword =  mysqli_real_escape_string($this->db->link,md5($data['cpassword']));
-        $department =  mysqli_real_escape_string($this->db->link,md5($data['department']));
-
+        $department =  mysqli_real_escape_string($this->db->link,$data['department']);
+        $position =  mysqli_real_escape_string($this->db->link,$data['position']);
 
         $permit = array('jpg','jpeg','png','gif');
         $file_name = $_FILES['image']['name'];
@@ -253,10 +262,16 @@ class User
         $unique_image = substr(md5(time()),0,10).'.'.$file_ext;
         $uploaded_image = "uploads/".$unique_image;
 
-        if($name=="" || $address=="" || $email=="" || $password=="" || $cpassword=="" || $contact=""){
+        if($name=="" || $address=="" || $department==""|| $position=="" || $email=="" || $password=="" || $cpassword=="" || $contact==""){
             $msg = "<span class='alert alert-warning'>Field cannot be Empty!</span>";
             return $msg;
-        }else {
+        }else if(!preg_match("/^[0-9]{10}$/",$contact)){
+            $msg = "<span class='alert alert-warning msg'>Invalid phone number!</span>";
+            return $msg;
+		}else if(!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i",$email)) {
+            $msg = "<span class='alert alert-warning msg'>Invalid email address!</span>";
+            return $msg;
+        }else{
             if ($file_size > 1048567) {
                 $msg = "<span class='alert alert-warning msg'>File size too large!</span>";
                 return $msg;
@@ -275,7 +290,7 @@ class User
                     $msg = "<span class='alert alert-danger'>Email already exists!</span>";
                     return $msg;
                 }else{
-                    $query = "INSERT INTO users(name,department,company,address,contact,photo,email,password,role,status)
+                    $query = "INSERT INTO users(name,department,company,address,contact,photo,email,password,position,role,status)
                       VALUES(
                           '$name',
                           '$department',
@@ -285,6 +300,7 @@ class User
                           '$uploaded_image',
                           '$email',
                           '$password',
+                          '$position',
                           'SUP',
                           1
                       )";
@@ -316,7 +332,106 @@ class User
         }
     }
 	
+	/**
+		Student entering details handeling function
+	**/
 	public function form1Student()
+	{
+        include('DBConnection.php');
+		if(isset($_POST['submitStudent']))
+		{
+			$sid=$_POST['stdID'];
+			$address=$_POST['address'];
+			$hphn=$_POST['hphone'];
+			$mphn=$_POST['mphone'];
+			$email=$_POST['email1'];
+			$year=$_POST['year'];
+			$sem=$_POST['sem'];
+			$cgpa=$_POST['cgpa'];
+			$date=date('Y-m-d H:i:s');
+			
+			/**
+				Form Validation
+			**/
+			if(Session::get('uid'))
+			{
+				$userID=Session::get('uid');
+			}
+			else
+			{
+				$userID=1;
+			}
+			$sql="SELECT studentId FROM users WHERE uid=$userID";
+			$result=mysqli_query($con,$sql);
+			$row=mysqli_fetch_array($result);
+
+			if(empty($sid)||empty($address)||empty($hphn)||empty($mphn)||empty($email)||empty($cgpa))
+			{
+				echo"<script>alert('One are more fields are empty')</script>";
+			}
+			else if($row[0]!=$sid)
+			{
+				echo"<script>alert('Invalid Student ID')</script>";		
+			}
+			else if(!preg_match("/^[0-9]{10}$/",$hphn)||!preg_match("/^[0-9]{10}$/",$mphn)||!preg_match("/^[0-3]{1}.[0-99]$/",$cgpa)||!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i",$email))
+			{
+				
+				if(!preg_match("/^[0-9]{10}$/",$hphn))
+				{
+					echo"<script>alert('Invalid Home Phone Number')</script>";	
+				}
+				if(!preg_match("/^[0-9]{10}$/",$mphn))
+				{
+					echo"<script>alert('Invalid Mobile Phone Number')</script>";	
+				}
+				if(!preg_match("/^[0-3]{1}.[0-99]$/",$cgpa))
+				{
+					echo"<script>alert('Invalid CGPA')</script>";	
+				}
+				if(!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i",$email))
+				{
+					echo"<script>alert('Invalid Email Address')</script>";	
+				}
+			}
+			/**
+				Inserting data into DB if data is valid
+			**/
+			else
+			{
+				if(Session::get('uid'))
+				{
+					$stdId=Session::get('uid');
+				}
+				else
+				{
+					$stdId=1;
+				}
+				$sql="SELECT supervisor FROM users WHERE uid=$stdId";
+				$result=mysqli_query($con,$sql);
+				$row=mysqli_fetch_array($result);
+				$supervisor=$row[0];
+				
+				$sql="INSERT INTO form1_student_details(stdID, address, homePhn, mobilePhn, email, year, semester, cgpa, requested_date, supervisor) VALUES('$sid', '$address', '$hphn', '$mphn', '$email', '$year', '$sem', '$cgpa', '$date','$supervisor')";
+				
+				if (!mysqli_query($con,$sql)) 
+				{
+					die('Error: ' . mysqli_error($con));
+				}
+
+				echo"<script>alert('Details sent to supervisor')</script>";	
+				mysqli_close($con);
+			}
+		}
+	}
+
+	public function getStudentLastRow()
+	{
+		$sql="SELECT * FROM form1_student_details ORDER BY stdID DESC LIMIT 1";
+		$result=$this->db->select($sql);	
+		return $result;
+	}
+	
+	public function form1Student1()
 	{
 		include('DBConnection.php');
 		if(isset($_POST['submitStudent']))
@@ -334,7 +449,9 @@ class User
 			/**
 				Form Validation
 			**/
-			$userID=Session::get('uid');
+			
+			$userID=1;
+			
 			$sql="SELECT studentId FROM users WHERE uid=$userID";
 			$result=mysqli_query($con,$sql);
 			$row=mysqli_fetch_array($result);
@@ -371,14 +488,14 @@ class User
 			**/
 			else
 			{
-				$stdId=Session::get('uid');
 				
+				$stdId=1;
 				$sql="SELECT supervisor FROM users WHERE uid=$stdId";
 				$result=mysqli_query($con,$sql);
 				$row=mysqli_fetch_array($result);
 				$supervisor=$row[0];
 				
-				$sql="INSERT INTO form1_student_details(stdID, address, homePhn, mobilePhn, email, year, semester, cgpa, requested_date, supervisor) VALUES('$sid', '$address', '$hphn', '$mphn', '$email', '$year', '$sem', '$cgpa', '$date',$supervisor)";
+				$sql="INSERT INTO form1_student_details(stdID, address, homePhn, mobilePhn, email, year, semester, cgpa, requested_date, supervisor) VALUES('$sid', '$address', '$hphn', '$mphn', '$email', '$year', '$sem', '$cgpa', '$date','$supervisor')";
 				
 				if (!mysqli_query($con,$sql)) 
 				{
@@ -391,6 +508,9 @@ class User
 		}
 	}
 	
+	/**
+		Supervisor entering details handeling function
+	**/
 	public function form1Supervisor()
 	{
 		include('DBConnection.php');
@@ -454,8 +574,6 @@ class User
 			}
 		}
 	}
-
-	
 
 }
 
