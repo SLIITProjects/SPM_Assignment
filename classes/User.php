@@ -14,6 +14,7 @@ class User
         $this->db = new Database();
         $this->fm = new Format();
     }
+    //Register student
     public function registerStudent($data,$file){
         $university =  mysqli_real_escape_string($this->db->link,$data['university']);
         $company=  mysqli_real_escape_string($this->db->link,$data['company']);
@@ -39,20 +40,20 @@ class User
         $uploaded_image = "uploads/".$unique_image;
 
         if($university=="" || $company=="" || $name=="" || $studentid=="" || $faculty=="" || $address=="" || $email=="" || $password=="" || $cpassword=="" || $phone=="" || $year=="" || $sem==""){
-            $msg = "<span class='alert alert-warning'>Field cannot be Empty!</span>";
+            $msg = "<script>alert('Field cannot be Empty!')</script>";
             return $msg;
         }else if(!preg_match("/^[0-9]{10}$/",$phone)){
-            $msg = "<span class='alert alert-warning msg'>Invalid phone number!</span>";
+            $msg = "<script>alert('Invalid phone number!')</script>";
             return $msg;
         }else if(!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i",$email)) {
-            $msg = "<span class='alert alert-warning msg'>Invalid email address!</span>";
+            $msg = "<script>alert('Invalid email address!')</script>";
             return $msg;
         }else{
         	if ($file_size > 1048567) {
-                $msg = "<span class='alert alert-warning msg'>File size too large!</span>";
+                $msg = "<script>alert('File size is too large!')</script>";
                 return $msg;
             } elseif (in_array($file_ext, $permit) == false) {
-                $msg = "<span class='alert alert-warning msg'>Invalid file type!</span>";
+                $msg = "<script>alert('Invalid file type')</script>";
                 return $msg;
             } else {
                 move_uploaded_file($file_temp,$uploaded_image);
@@ -61,10 +62,10 @@ class User
                 $res = $this->db->select($getmail);
 
                 if(strcmp($password,$cpassword)!=0){
-                    $msg = "<span class='alert alert-danger'>Passwords is does not match!</span>";
+                    $msg = "<script>alert('Password does not match!')</script>";
                     return $msg;
                 }else if($res!=false){
-                    $msg = "<span class='alert alert-danger'>Email already exists!</span>";
+                    $msg = "<script>alert('Email already exist!')</script>";
                     return $msg;
                 }else{
                     $query = "INSERT INTO users(name,university,faculty,cyear,csem,studentid,company,address,contact,photo,email,password,role)
@@ -86,10 +87,10 @@ class User
 
                     $result = $this->db->insert($query);
                     if($result){
-                        $msg = "<span class='alert alert-success msg'>Registered Successfully!</span>";
+                        $msg = "<script>alert('Registered successfully!')</script>";
                         return $msg;
                     }else{
-                        $msg = "<span class='alert alert-danger msg'>Cannot Register!</span>";
+                        $msg = "<script>alert('Cannot register!')</script>";
                         return $msg;
                     }
                 }
@@ -99,7 +100,7 @@ class User
 
 
     }
-
+    //Register Company
     public function registerCompany($data,$files){
         $name =  mysqli_real_escape_string($this->db->link,$data['fullname']);
         $address =  mysqli_real_escape_string($this->db->link,$data['address']);
@@ -118,17 +119,17 @@ class User
         $uploaded_image = "uploads/".$unique_image;
 
         if($name=="" || $address=="" || $email=="" || $password=="" || $cpassword==""){
-            $msg = "<span class='alert alert-warning'>Field cannot be Empty!</span>";
+            $msg = "<script>alert('Field cannot be Empty!')</script>";
             return $msg;
         }else if(!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i",$email)) {
-            $msg = "<span class='alert alert-warning msg'>Invalid email address!</span>";
+            $msg = "<script>alert('Invalid email address!')</script>";
             return $msg;
         }else{
             if ($file_size > 1048567) {
-                $msg = "<span class='alert alert-warning msg'>File size too large!</span>";
+                $msg = "<script>alert('File size is too large!')</script>";
                 return $msg;
             } elseif (in_array($file_ext, $permit) == false) {
-                $msg = "<span class='alert alert-warning msg'>Invalid file type!</span>";
+                $msg = "<script>alert('Invalid file type')</script>";
                 return $msg;
             } else {
                 move_uploaded_file($file_temp,$uploaded_image);
@@ -137,10 +138,10 @@ class User
                 $res = $this->db->select($getmail);
 
                 if(strcmp($password,$cpassword)!=0){
-                    $msg = "<span class='alert alert-danger'>Passwords is does not match!</span>";
+                    $msg = "<script>alert('Password does not match!')</script>";
                     return $msg;
                 }else if($res!=false){
-                    $msg = "<span class='alert alert-danger'>Email already exists!</span>";
+                    $msg = "<script>alert('Email already exist!')</script>";
                     return $msg;
                 }else{
                     $query = "INSERT INTO users(name,address,photo,email,password,role)
@@ -154,10 +155,10 @@ class User
                       )";
                     $result = $this->db->insert($query);
                     if($result){
-                        $msg = "<span class='alert alert-success msg'>Registered Successfully!</span>";
+                        $msg = "<script>alert('Registered successfully!')</script>";
                         return $msg;
                     }else{
-                        $msg = "<span class='alert alert-danger msg'>Cannot Register!</span>";
+                        $msg = "<script>alert('Cannot register!')</script>";
                         return $msg;
                     }
                 }
@@ -170,14 +171,14 @@ class User
 
 
     }
-
+    //Retrieve all companies
     public function getCompanies(){
         $query = "SELECT * from users WHERE role='CMP'";
         $result = $this->db->select($query);
         return $result;
 
     }
-
+    //Get all supervisors from database
     public function getSupervisors($company,$start_from,$num_of_pages){
         $query = "SELECT * 
         from users 
@@ -196,13 +197,13 @@ class User
         return $result;
 
     }
-
+    //Allocate supervisor for a student
     public function allocateSupervisor($data,$stid){
         $sup =  mysqli_real_escape_string($this->db->link,$data['supervisor']);
         $dep =  mysqli_real_escape_string($this->db->link,$data['department']);
 
         if($sup=="" || $dep ==""){
-            $msg = "<span class='alert alert-warning'>Field cannot be Empty!</span>";
+            $msg = "<script>alert('Field cannot be empty!')</script>";
             return $msg;
         }
         else{
@@ -211,16 +212,16 @@ class User
 
             $result=$this->db->update($query);
             if($result){
-                $msg = "<span class='alert alert-success msg'>Allocate Successfully!</span>";
+                $msg = "<script>alert('Allocate successfully!')</script>";
                 return $msg;
             }else{
-                $msg = "<span class='alert alert-danger msg'>Cannot Allocate!</span>";
+                $msg = "<script>alert('Cannot Allocate!')</script>";
                 return $msg;
             }
         }
 
     }
-
+    //Get all students
     public function getAllStudents($company,$stdid){
         $query = "SELECT * 
         from users 
@@ -230,7 +231,7 @@ class User
         $result = $this->db->select($query);
         return $result;
     }
-
+    //Register student for pager
     public function getStudents($company,$start_from,$num_of_pages){
         $query = "SELECT uid,name,studentId,contact,supervisor,university.uname,faculty.fname
         from users 
@@ -241,7 +242,7 @@ class User
         return $result;
 
     }
-
+    //Register supervisor
     public function registerSupervisor($data,$company,$files){
         $name =  mysqli_real_escape_string($this->db->link,$data['fullname']);
         $address =  mysqli_real_escape_string($this->db->link,$data['address']);
@@ -263,20 +264,20 @@ class User
         $uploaded_image = "uploads/".$unique_image;
 
         if($name=="" || $address=="" || $department==""|| $position=="" || $email=="" || $password=="" || $cpassword=="" || $contact==""){
-            $msg = "<span class='alert alert-warning'>Field cannot be Empty!</span>";
+            $msg = "<script>alert('Field cannot be Empty!')</script>";
             return $msg;
         }else if(!preg_match("/^[0-9]{10}$/",$contact)){
-            $msg = "<span class='alert alert-warning msg'>Invalid phone number!</span>";
+            $msg = "<script>alert('Invalid phone number!')</script>";
             return $msg;
 		}else if(!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i",$email)) {
-            $msg = "<span class='alert alert-warning msg'>Invalid email address!</span>";
+            $msg = "<script>alert('Invalid email address!')</script>";
             return $msg;
         }else{
             if ($file_size > 1048567) {
-                $msg = "<span class='alert alert-warning msg'>File size too large!</span>";
+                $msg = "<script>alert('File size is too large!')</script>";
                 return $msg;
             } elseif (in_array($file_ext, $permit) == false) {
-                $msg = "<span class='alert alert-warning msg'>Invalid file type!</span>";
+                $msg = "<script>alert('invalid file type!')</script>";
                 return $msg;
             } else {
                 move_uploaded_file($file_temp, $uploaded_image);
@@ -284,10 +285,10 @@ class User
                 $res = $this->db->select($getmail);
 
                 if(strcmp($password,$cpassword)!=0){
-                    $msg = "<span class='alert alert-danger'>Passwords is does not match!</span>";
+                    $msg = "<script>alert('Password does not match!')</script>";
                     return $msg;
                 }else if($res!=false){
-                    $msg = "<span class='alert alert-danger'>Email already exists!</span>";
+                    $msg = "<script>alert('Email already exist!')</script>";
                     return $msg;
                 }else{
                     $query = "INSERT INTO users(name,department,company,address,contact,photo,email,password,position,role,status)
@@ -306,10 +307,10 @@ class User
                       )";
                     $result = $this->db->insert($query);
                     if($result){
-                        $msg = "<span class='alert alert-success msg'>Registered Successfully!</span>";
+                        $msg = "<script>alert('Registered successfully!')</script>";
                         return $msg;
                     }else{
-                        $msg = "<span class='alert alert-danger msg'>Cannot Register!</span>";
+                        $msg = "<script>alert('Cannot registered!')</script>";
                         return $msg;
                     }
                 }
@@ -319,15 +320,15 @@ class User
             }
         }
     }
-
+    //Delete supervisor from system
     public function delSupervisor($uid){
         $query = "UPDATE users SET delete_status=1 WHERE uid='$uid'";
         $result = $this->db->update($query);
         if($result){
-            $msg = "<span class='alert alert-success'>Successfully Deleted!</span>";
+            $msg = "<script>alert('Successfully deleted!')</script>";
             return $msg;
         }else{
-            $msg = "<span class='alert alert-danger'>Cannot Delete!</span>";
+            $msg = "<script>alert('Cannot deleted!')</script>";
             return $msg;
         }
     }
