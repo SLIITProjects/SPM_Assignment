@@ -513,6 +513,7 @@ class User
 	**/
 	public function form1Supervisor()
 	{
+		/**Database connection file*/
 		include('DBConnection.php');
 		if(isset($_POST['submitSupervisor']))
 		{
@@ -533,6 +534,7 @@ class User
 			{
 				echo"<script>alert('One are more fields are empty')</script>";
 			}
+			/**Validating data fields*/
 			else if(!preg_match("/^[0-9]{10}$/",$sphone)||!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i",$semail)||!preg_match("/^[0-9]{1}.[0-9]{1}|^[0-9]{2}.[0-9]{1}|^[0-9]{3}.[0-9]{1}|^[0-9]{1}|^[0-9]{2}|^[0-9]{3}$/",$hoursPerWeek)||strtotime($sdate) > strtotime($edate))
 			{
 				if(!preg_match("/^[0-9]{10}$/",$sphone))
@@ -555,6 +557,8 @@ class User
 			else
 			{
 				$StdID=$_SERVER['QUERY_STRING'];
+
+				/**Inserts data into the form1_supervisor table*/
 				$sql="INSERT INTO form1_supervisor(supID,stdID,employer_name,employer_address,sup_name,sup_phone,sup_title,sup_email,internship_sDate,internship_eDate,noHoursPerWeek,tasks_desc,learn_desc) VALUES('$sup_id','$StdID','$ename','$eaddress','$sname','$sphone','$stitle','$semail','$sdate','$edate','$hoursPerWeek','$taskList','$learnList')";
 					
 				if (!mysqli_query($con,$sql)) 
@@ -568,8 +572,37 @@ class User
 					die('Error: ' . mysqli_error($con));
 				}
 
-				
-				echo"<script>alert('Details emailed to industrial training manager')</script>";	
+				/**Send mail*/
+                require 'mailer/PHPMailerAutoload.php';
+
+                $mail = new PHPMailer;
+
+                $mail->isSMTP();                                      // Set mailer to use SMTP
+                $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+                $mail->SMTPAuth = true;                               // Enable SMTP authentication
+                $mail->Username = 'spm200ok@gmail.com';                 // SMTP username
+                $mail->Password = 'abcdspm@1234';                           // SMTP password
+                $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+                $mail->Port = 465;                                    // TCP port to connect to
+
+                $mail->setFrom('from@example.com', 'Mailer');
+                $mail->addAddress('spmmanager96@gmail.com', 'Joe User');
+
+                $mail->isHTML(true);                                  // Set email format to HTML
+
+                $mail->Subject = 'Internship Acceptance Form';
+                $mail->Body    = 'Dear Industrial Training Manager,<br><br>We have selected the student with student ID <b>'.$StdID.'</b> for our internship program.<br><br>Employer Name: '.$ename.'<br>Employer Address: '.$eaddress.'<br><br>Supervisor Name: '.$sname.'<br>Supervisor Title: '.$stitle.'<br>Supervisor Phone: '.$sphone.'<br>Supervisor Email: '.$semail.'<br><br><b>Internship Start date: </b>'.$sdate.'<br><b>Internship End date: </b>'.$edate.'<br><br>Working Hours Per Week: '.$hoursPerWeek.'<br><br><b>Tasks List: </b>'.$taskList.'<br><br><b>Learning Areas: </b>'.$learnList.'<br><br>Thank You.';
+                $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+                if(!$mail->send()) {
+                    echo 'Message could not be sent.';
+                    echo 'Mailer Error: ' . $mail->ErrorInfo;
+                } else {
+                    echo"<script>alert('Details emailed to industrial training manager')</script>";
+                }
+
+
+               // echo"<script>alert('Details emailed to industrial training manager')</script>";
 				mysqli_close($con);
 			}
 		}
