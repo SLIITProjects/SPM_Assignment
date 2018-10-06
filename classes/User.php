@@ -569,8 +569,8 @@ class User
                 $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
                 $mail->Port = 465;                                    // TCP port to connect to
 
-                $mail->setFrom('from@example.com', 'Mailer');
-                $mail->addAddress('spmmanager96@gmail.com', 'Joe User');
+                $mail->setFrom('from@example.com', $ename);
+                $mail->addAddress('spmmanager96@gmail.com', 'Manager');
 
                 $mail->isHTML(true);                                  // Set email format to HTML
 
@@ -585,8 +585,6 @@ class User
                     echo"<script>alert('Details emailed to industrial training manager')</script>";
                 }
 
-
-               // echo"<script>alert('Details emailed to industrial training manager')</script>";
 				mysqli_close($con);
 			}
 		}
