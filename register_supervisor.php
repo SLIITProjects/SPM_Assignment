@@ -1,18 +1,20 @@
 <!--Include header from another file-->
 <?php include('inc/header.php'); ?>
+<!--if invalid access redirect to login.php--!>
 <?php
 $login = Session::get('userLogin');
 if($login==false){
     header("Location:login.php");
 }
 ?>
+<!--Register supervisor--!>
 <?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']) || isset($_POST['image'])) {
     $company=Session::get('uid');
-    $registerSup = $user->registerSupervisor($_POST,$company);
+    $registerSup = $user->registerSupervisor($_POST,$company,$_FILES);
 }
 ?>
-
+<!--Delete supervisor--!>
 <?php
     if(isset($_GET['delid'])){
         $uid = $_GET['delid'];
@@ -43,17 +45,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
         <div class="col col-md-3 col-lg-3 text-center">
                 <div class="card">
                     <div class="card-body">
-                        <img src="img/mlogo.png" alt="" class="img-fluid rounded-circle w-50 mb-1">
+                        <img src="<?php echo Session::get('photo');?>" alt="" class="img-fluid rounded-circle w-50 mb-1">
                         <h4><?php echo Session::get('name');?></h4>
                         <h5 class="text-muted"><?php echo Session::get('role');?></h5>
                         <div class="list-group">
                             <a href="index.php" class="list-group-item list-group-item-action">Home</a>
                             <a href="register_supervisor.php" class="list-group-item list-group-item-action active" style="<?php if(Session::get('role')!="CMP"){echo "display:none";}?>">Register Supervisor</a>
                             <a href="student_list.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="CMP"){echo "display:none";}?>">Allocate Supervisor</a>
-                            <a href="form-i-3.php" class="list-group-item list-group-item-action">Form I-3</a>
-                            <a href="grade.php" class="list-group-item list-group-item-action">Grading-From</a>
-							              <a href="form1Student.php" class="list-group-item list-group-item-action">Form I-1</a>
-
+                            <a href="form1Student.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="STD"){echo "display:none";}?>">Form I-1</a>
+                            <a href="form1SupervisorRList.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="SUP"){echo "display:none";}?>">Form I-1
+                                <?php
+                                include('DBConnection.php');
+                                $supId=Session::get('uid');
+                                $sql="SELECT * FROM form1_student_details WHERE supervisor='$supId' AND sup_response='in progress'";
+                                $result=mysqli_query($con,$sql);
+                                $count=mysqli_num_rows($result);
+                                echo '<span class="badge badge-success ml-3"><b>'.$count.'</b></span>';
+                                ?>
+                            </a>
+                            <a href="form-i-3.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="STD"){echo "display:none";}?>">Form I-3</a>
+                            <a href="form5.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="SUP"){echo "display:none";}?>">Form I-5</a>
+                            <a href="form_I-7.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Form I-7</a>
+                            <a href="getPerformances.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Performance</a>
+                            <a href="form-i-3-supervisor.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="STD"){echo "display:none";}?>">Certify And Email Form I-3</a>
+                            <a href="grade.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Grading-From</a>
+                            <a href="marking_summary.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Marking-Summary-From</a>
+                            <a href="Schedule.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Schedule</a>
+                            <a href="schedule_report.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Schedule Report</a>
                         </div>
                     </div>
                 </div>
@@ -71,16 +89,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
         <div class="card">
                     <div class="card-body">
 
-                        <form action="register_supervisor.php" method="post">
+                        <form action="register_supervisor.php" method="post" enctype="multipart/form-data">
 
                             <div class="form-row">
 
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                     <input type="text" class="form-control" name="fullname" placeholder="Name">
                                 </div>
 
                                 <div class="form-group col-md-3">
-                                <select class="form-control" name="role">
+                                <select class="form-control" name="position">
                                 <option>Select the postion</option>
                                     <option value="Software Engineer">Software Engineer</option>
                                     <option value="Business Analysis">Business Analysis</option>
@@ -88,18 +106,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                                     <option value="Quality Assurance Engineer">Quality Assurance Engineer</option>
                                 </select>
                             </div>
+                                <div class="form-group col-md-3">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="contact" placeholder="Mobile Number">
+                                    </div>
+                                </div>
 
                             </div>
-
                             <div class="form-row">
-                                <div class="form-group col-md-7">
+                                <div class="form-group col-md-5">
                                     <textarea class="form-control" name="address" placeholder="Address" rows="2"></textarea>
                                 </div>
-                                <div class="form-group col-md-3">
-                                                <div class="input-group">
-                                                    <input type="number" class="form-control" name="contact" placeholder="Mobile Number">
-                                                </div>
-                                            </div>
+
+                                <div class="form-group col-md-5 mt-5">
+                                    <div class="input-group">
+                                        <select class="form-control" name="department">
+                                            <option value="">Select Department</option>
+                                            <?php
+                                            $getDepartment= $department->getCompanyDepartment(Session::get('uid'));
+                                            if($getDepartment){
+                                                while($result=$getDepartment->fetch_assoc()){
+                                                    ?>
+                                                    <option value="<?php echo $result['did'];?>"><?php echo $result['dname'];?></option>
+                                                <?php }}?>
+                                        </select>
+                                    </div>
+                                </div>
+
                             </div>
 
                             <div class="form-row">
@@ -115,7 +148,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                                     <input type="password" class="form-control" name="cpassword" placeholder="Confirm password">
                                 </div>
                             </div>
-                            <button type="submit" name="submit" class="btn btn-info"><i class="fa fa-plus"></i> Add</button>
+                            <div class="form-group col-md-5 mt-3">
+                                <label><b>Upload profile photo</b></label>
+                                <div class="input-group">
+                                    <input name="image" type="file"/>
+                                </div>
+                            </div>
+                            <button type="submit" name="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Add</button>
                             <?php if(isset($registerSup)){echo $registerSup;}?>
                         </form>
                     </div>

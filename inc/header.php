@@ -14,6 +14,11 @@ spl_autoload_register(function($class){
     $faculty = new Faculty();
     $login = new Login();
     $page = new Pagination();
+    $department = new Department();
+    $chart = new Chart();
+    $manager = new Manager();
+
+$form = new Form();
   
 ?>
 

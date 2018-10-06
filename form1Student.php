@@ -11,18 +11,38 @@
 <section id="authors" class="">
 <div class="container-fluid">
     <div class="row">
-
-        <!--Start Sidebar section-->
+		
+		<!--Start Sidebar section-->
         <div class="col col-md-3 col-lg-3 text-center">
                 <div class="card">
                     <div class="card-body">
-                        <img src="img/mlogo.png" alt="" class="img-fluid rounded-circle w-50 mb-1">
-                        <h4>Rajitha lakshan</h4>
-                        <h5 class="text-muted">Student</h5>
+                        <img src="<?php echo Session::get('photo');?>" alt="" class="img-fluid rounded-circle w-50 mb-1">
+                        <h4><?php echo Session::get('name');?></h4>
+                        <h5 class="text-muted"><?php echo Session::get('role');?></h5>
                         <div class="list-group">
-                            <a href="index.php" class="list-group-item list-group-item-action active">Home</a>
-                            <a href="" class="list-group-item list-group-item-action">Functions</a>
-							<a href="form1Student.php" class="list-group-item list-group-item-action">Form I-1</a>
+                            <a href="index.php" class="list-group-item list-group-item-action">Home</a>
+                            <a href="register_supervisor.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="CMP"){echo "display:none";}?>">Register Supervisor</a>
+                            <a href="student_list.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="CMP"){echo "display:none";}?>">Allocate Supervisor</a>
+                            <a href="form1Student.php" class="list-group-item list-group-item-action active" style="<?php if(Session::get('role')!="STD"){echo "display:none";}?>">Form I-1</a>
+                            <a href="form1SupervisorRList.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="SUP"){echo "display:none";}?>">Form I-1
+                                <?php
+                                include('DBConnection.php');
+                                $supId=Session::get('uid');
+                                $sql="SELECT * FROM form1_student_details WHERE supervisor='$supId' AND sup_response='in progress'";
+                                $result=mysqli_query($con,$sql);
+                                $count=mysqli_num_rows($result);
+                                echo '<span class="badge badge-success ml-3"><b>'.$count.'</b></span>';
+                                ?>
+                            </a>
+                            <a href="form-i-3.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="STD"){echo "display:none";}?>">Form I-3</a>
+                            <a href="form5.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="SUP"){echo "display:none";}?>">Form I-5</a>
+                            <a href="form_I-7.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Form I-7</a>
+                            <a href="getPerformances.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Performance</a>
+                            <a href="form-i-3-supervisor.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="STD"){echo "display:none";}?>">Certify And Email Form I-3</a>
+                            <a href="grade.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Grading-From</a>
+                            <a href="marking_summary.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Marking-Summary-From</a>
+                            <a href="Schedule.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Schedule</a>
+                            <a href="schedule_report.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Schedule Report</a>
                         </div>
                     </div>
                 </div>
@@ -106,64 +126,10 @@
 include('DBConnection.php');
 if($_SERVER['REQUEST_METHOD']=='POST')
 {
-	if(isset($_POST['submitStudent']))
-	{
-		$sid=$_POST['stdID'];
-		$address=$_POST['address'];
-		$hphn=$_POST['hphone'];
-		$mphn=$_POST['mphone'];
-		$email=$_POST['email1'];
-		$year=$_POST['year'];
-		$sem=$_POST['sem'];
-		$cgpa=$_POST['cgpa'];
-		$date=date('Y-m-d H:i:s');
-		
-		/**
-			Form Validation
-		**/
-		if(empty($sid)||empty($address)||empty($hphn)||empty($mphn)||empty($email)||empty($cgpa))
-		{
-			echo"<script>alert('One are more fields are empty')</script>";
-		}
-		else if(!preg_match("/^IT|BM|EN[0-9]{8}$/",$sid)||!preg_match("/^[0-9]{10}$/",$hphn)||!preg_match("/^[0-9]{10}$/",$mphn)||!preg_match("/^[0-3]{1}.[0-99]$/",$cgpa)||!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i",$email))
-		{
-			if(!preg_match("/^IT|BM|EN[0-9]{8}$/",$sid))
-			{
-				echo"<script>alert('Invalid Student ID')</script>";		
-			}
-			if(!preg_match("/^[0-9]{10}$/",$hphn))
-			{
-				echo"<script>alert('Invalid Home Phone Number')</script>";	
-			}
-			if(!preg_match("/^[0-9]{10}$/",$mphn))
-			{
-				echo"<script>alert('Invalid Mobile Phone Number')</script>";	
-			}
-			if(!preg_match("/^[0-3]{1}.[0-99]$/",$cgpa))
-			{
-				echo"<script>alert('Invalid CGPA')</script>";	
-			}
-			if(!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i",$email))
-			{
-				echo"<script>alert('Invalid Email Address')</script>";	
-			}
-		}
-		/**
-			Inserting data into DB if data is valid
-		**/
-		else
-		{
-			$sql="INSERT INTO form1_student_details(stdID, address, homePhn, mobilePhn, email, year, semester, cgpa, requested_date) VALUES('$sid', '$address', '$hphn', '$mphn', '$email', '$year', '$sem', '$cgpa', '$date')";
-			
-			if (!mysqli_query($con,$sql)) 
-			{
-				die('Error: ' . mysqli_error($con));
-			}
-
-			echo"<script>alert('Details sent to supervisor')</script>";	
-			mysqli_close($con);
-		}
-	}
+	/**
+		calling function in User class
+	**/
+	$user->form1Student();
 }
 ?>
 

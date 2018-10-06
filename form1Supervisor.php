@@ -11,26 +11,38 @@
 <section id="authors" class="">
 <div class="container-fluid">
     <div class="row">
-
-        <!--Start Sidebar section-->
+		
+		<!--Start Sidebar section-->
         <div class="col col-md-3 col-lg-3 text-center">
                 <div class="card">
                     <div class="card-body">
-                        <img src="img/mlogo.png" alt="" class="img-fluid rounded-circle w-50 mb-1">
-                        <h4>Supervisor</h4>
-                        <h5 class="text-muted">Supervisor</h5>
+                        <img src="<?php echo Session::get('photo');?>" alt="" class="img-fluid rounded-circle w-50 mb-1">
+                        <h4><?php echo Session::get('name');?></h4>
+                        <h5 class="text-muted"><?php echo Session::get('role');?></h5>
                         <div class="list-group">
-                            <a href="supervisor.php" class="list-group-item list-group-item-action active">Home</a>
-                            <a href="" class="list-group-item list-group-item-action">Functions</a>
-							<a href="form1SupervisorRList.php" class="list-group-item list-group-item-action">Form I-1
-							<?php
-								include('DBConnection.php');
-								$sql="SELECT * FROM form1_student_details WHERE sup_response='in progress'";
-								$result=mysqli_query($con,$sql);
-								$count=mysqli_num_rows($result);
-								echo "&nbsp&nbsp&nbsp<b>$count</b>";
-							?>
-							</a>
+                            <a href="index.php" class="list-group-item list-group-item-action">Home</a>
+                            <a href="register_supervisor.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="CMP"){echo "display:none";}?>">Register Supervisor</a>
+                            <a href="student_list.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="CMP"){echo "display:none";}?>">Allocate Supervisor</a>
+                            <a href="form1Student.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="STD"){echo "display:none";}?>">Form I-1</a>
+                            <a href="form1SupervisorRList.php" class="list-group-item list-group-item-action active" style="<?php if(Session::get('role')!="SUP"){echo "display:none";}?>">Form I-1
+                                    <?php
+                                include('DBConnection.php');
+                                $supId=Session::get('uid');
+                                $sql="SELECT * FROM form1_student_details WHERE supervisor='$supId' AND sup_response='in progress'";
+                                $result=mysqli_query($con,$sql);
+                                $count=mysqli_num_rows($result);
+                                    echo '<span class="badge badge-success ml-3"><b>'.$count.'</b></span>';
+                                ?>
+                            </a>
+                            <a href="form-i-3.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="STD"){echo "display:none";}?>">Form I-3</a>
+                            <a href="form5.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="SUP"){echo "display:none";}?>">Form I-5</a>
+                            <a href="form_I-7.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Form I-7</a>
+                            <a href="getPerformances.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Performance</a>
+                            <a href="form-i-3-supervisor.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="STD"){echo "display:none";}?>">Certify And Email Form I-3</a>
+                            <a href="grade.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Grading-From</a>
+                            <a href="marking_summary.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Marking-Summary-From</a>
+                            <a href="Schedule.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Schedule</a>
+                            <a href="schedule_report.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Schedule Report</a>
                         </div>
                     </div>
                 </div>
@@ -53,7 +65,7 @@
 						include('DBConnection.php');
 						
 						$StdID=$_SERVER['QUERY_STRING'];
-						$sql="SELECT * FROM form1_student_details WHERE stdID='$StdID'";
+						$sql="SELECT * FROM form1_student_details WHERE stdID='$StdID' AND sup_response='in progress'";
 						$result=mysqli_query($con,$sql);
 
 						if (!$result)
@@ -174,64 +186,10 @@
 include('DBConnection.php');
 if($_SERVER['REQUEST_METHOD']=='POST')
 {
-	if(isset($_POST['submitSupervisor']))
-	{
-		$ename=$_POST['ename'];
-		$eaddress=$_POST['eaddress'];
-		$sname=$_POST['sname'];
-		$sphone=$_POST['sphone'];
-		$stitle=$_POST['stitle'];
-		$semail=$_POST['semail'];
-		$sdate=$_POST['sdate']." 00:00:00";
-		$edate=$_POST['edate']." 00:00:00";
-		$hoursPerWeek=$_POST['hourPerWeek'];
-		$taskList=$_POST['tasks'];
-		$learnList=$_POST['learn'];
-		
-		if(empty($ename)||empty($eaddress)||empty($sname)||empty($sphone)||empty($stitle)||empty($semail)||empty($sdate)||empty($edate)||empty($hoursPerWeek)||empty($taskList)||empty($learnList))
-		{
-			echo"<script>alert('One are more fields are empty')</script>";
-		}
-		else if(!preg_match("/^[0-9]{10}$/",$sphone)||!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i",$semail)||!preg_match("/^[0-9]{1}.[0-9]{1}|^[0-9]{2}.[0-9]{1}|^[0-9]{3}.[0-9]{1}|^[0-9]{1}|^[0-9]{2}|^[0-9]{3}$/",$hoursPerWeek)||strtotime($sdate) > strtotime($edate))
-		{
-			if(!preg_match("/^[0-9]{10}$/",$sphone))
-			{
-				echo"<script>alert('Invalid Phone')</script>";		
-			}
-			if(!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i",$semail))
-			{
-				echo"<script>alert('Invalid Supervisor Email')</script>";		
-			}
-			if(!preg_match("/^[0-9]{1}.[0-9]{1}|^[0-9]{2}.[0-9]{1}|^[0-9]{3}.[0-9]{1}|^[0-9]{1}|^[0-9]{2}|^[0-9]{3}$/",$hoursPerWeek))
-			{
-				echo"<script>alert('Invalid Hours Per Week')</script>";		
-			}
-			if(strtotime($sdate) > strtotime($edate))
-			{
-				echo"<script>alert('Start date should be less than End date')</script>";	
-			}
-		}
-		else
-		{
-			$StdID=$_SERVER['QUERY_STRING'];
-			$sql="INSERT INTO form1_supervisor(supID,stdID,employer_name,employer_address,sup_name,sup_phone,sup_title,sup_email,internship_sDate,internship_eDate,noHoursPerWeek,tasks_desc,learn_desc) VALUES(2,'$StdID','$ename','$eaddress','$sname','$sphone','$stitle','$semail','$sdate','$edate','$hoursPerWeek','$taskList','$learnList')";
-				
-			if (!mysqli_query($con,$sql)) 
-			{
-				die('Error: ' . mysqli_error($con));
-			}
-
-			$sql="UPDATE form1_student_details SET sup_response='done' WHERE stdID='$StdID'";
-			if (!mysqli_query($con,$sql)) 
-			{
-				die('Error: ' . mysqli_error($con));
-			}
-
-			
-			echo"<script>alert('Details emailed to industrial training manager')</script>";	
-			mysqli_close($con);
-		}
-	}
+	/**
+		Calling the function in the user class
+	**/
+	$user->form1Supervisor();
 
 }
 ?>

@@ -1,19 +1,30 @@
 <?php
-include_once("../classes/Form.php");
+$filepath = realpath(dirname(__FILE__));
+include_once ($filepath.'/../classes/Form.php');
 use PHPUnit\Framework\TestCase;
 
-class FormTest extends TestCase
+class FormTest extends PHPUnit_Framework_TestCase
 {
 /*Test whether the form 5 data inserted correctly */
     public function testForm5()
     {
         $form5 = new Form();
  
-         
-        $form5->InsertEvaluation("IT16058224");
+        $_POST['area1'] ="area 1";
+        $_POST['area2'] ="area 1";
+        $_POST['area3'] ="area 1";
+        $_POST['area4'] ="area 1";
+        $_POST['area5'] ="area 1";
+        $_POST['area6'] ="area 1";
+        $_POST['area7'] ="area 1";
+        $_POST['date'] ="2018-10-04";
+        $_POST['name'] ="Nalin pushpakumara";
+
+
+        $form5->InsertEvaluation($_POST,"IT16030268");
    
         $actual=null;
-        $getForm= $form5->getdata('IT16058224');
+        $getForm= $form5->getdata('IT16030268');
         
         if($getForm){
             while($result=$getForm->fetch_assoc()){
@@ -22,20 +33,6 @@ class FormTest extends TestCase
             }
         }
 
-        $this->assertEquals('IT16058224',$actual);
-    }
-}
-
-
-        $faculty->addFaculty('Hospitality');
-        $actual=null;
-        $getFaculty=$faculty->getOneFaculty('Hospitality');
-        if($getFaculty){
-            while($result=$getFaculty->fetch_assoc()){
-                $actual = $result['fname'];
-            }
-        }
-
-        $this->assertEquals('Hospitality',$actual);
+        $this->assertEquals('IT16030268',$actual);
     }
 }
