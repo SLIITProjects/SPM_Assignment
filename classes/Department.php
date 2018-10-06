@@ -23,11 +23,11 @@ class Department
         $res = $this->db->select($getredundant);
 
         if($res!=false){
-            $msg = "<span class='alert alert-danger'>Department already exist!</span>";
+            $msg = "<script>alert('Department already exists!')</script>";
             return $msg;
         }
         else{
-            $msg = "<span class='alert alert-danger'>Successfully added!</span>";
+            $msg = "<script>alert('Successfully added!')</script>";
             return $msg;
         }
 

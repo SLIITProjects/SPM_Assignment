@@ -21,14 +21,14 @@ class Faculty
         $res = $this->db->select($getredundant);
 
         if($res!=false){
-            $msg = "<span class='alert alert-danger'>Faculty already exist!</span>";
+            $msg = "<script>alert('Faculty already exist!')</script>";
             return $msg;
         }
         else{
             $query = "insert into faculty(fname) VALUES('$name')";
             $result = $this->db->insert($query);
-            if($res) {
-                $msg = "<span class='alert alert-danger'>Successfully added!</span>";
+            if($result) {
+                $msg = "<script>alert('Successfully added')</script>";
                 return $msg;
             }
         }
@@ -47,6 +47,18 @@ class Faculty
         $result = $this->db->select($query);
         return $result;
 
+    }
+
+    public function delFaculty($fid){
+        $query = "DELETE FROM faculty WHERE fid = '$fid' ";
+        $result = $this->db->delete($query);
+        if($result){
+            $msg = "<script>alert('Successfully deleted')</script>";
+                return $msg;
+        }else{
+            $msg = "<script>alert('Cannot delete')</script>";
+                return $msg;
+        }
     }
 
 
