@@ -174,7 +174,7 @@ h1 {
                         
                                                     }
                                                 } else {
-                                                    echo "0 results";
+                                                    
                                                 }
                         
 
@@ -221,7 +221,7 @@ h1 {
 //$address= $row["studentId"];
 							}
 						} else {
-							echo "0 results";
+							
                         }
                         
 
@@ -239,7 +239,7 @@ h1 {
 //$address= $row["studentId"];
 							}
 						} else {
-							echo "0 results";
+							
 						}
 
 
@@ -341,7 +341,7 @@ h1 {
 
 							}
 						} else {
-							echo "0 results";
+							
 						}
 
 					?>
@@ -387,7 +387,7 @@ h1 {
     {
         require_once('email.php');
         email("IT16030268");
-        echo"<script>alert('Form I-3 of ".$student." For month ".$month." has been successfully sent to supervisor')</script>";
+        echo"<script>alert('Form I-3 of ".$student." For month ".$month." has been successfully sent to industrial trainig manager')</script>";
 
     }
     
