@@ -1,10 +1,10 @@
 <?php
-
+function email($student){
 require 'PHPMailer/PHPMailer/PHPMailerAutoload.php';
 
 $mail = new PHPMailer;
 
-$mail->SMTPDebug = 2;                               // Enable verbose debug output
+//$mail->SMTPDebug = 2;                               // Enable verbose debug output
 
 $mail->isSMTP();                                      // Set mailer to use SMTP
 $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
@@ -16,23 +16,58 @@ $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, 
 $mail->Port = 587;                                    // TCP port to connect to
 
 $mail->setFrom('spm200ok@gmail.com', 'Mailer');
-$mail->addAddress('ranmalmendis8@gmail.com', 'Joe User');     // Add a recipient
+$mail->addAddress('spmmanager96@gmail.com', 'Joe User');     // Add a recipient
 $mail->addAddress('ellen@example.com');               // Name is optional
 $mail->addReplyTo('info@example.com', 'Information');
 $mail->addCC('cc@example.com');
 $mail->addBCC('bcc@example.com');
 
+
+
+include('DBConnection-I-3.php');
+						
+//$StdID=$_SERVER['QUERY_STRING'];
+						$sql2="SELECT * FROM form1_supervisor  WHERE stdID='$student'";
+						$result=mysqli_query($con,$sql2);
+						if ($result->num_rows > 0) {
+							// output data of each row
+							while($row = $result->fetch_assoc()) {
+								// $StudentId= $row["studentId"];
+								// $address= $row["address"];
+								// $contact= $row["contact"];
+								// $email= $row["email"];
+								//$address= $row["studentId"];
+								$start=$row["internship_sDate"];
+								$end=$row["internship_eDate"];
+                                $company=$row['employer_name'];
+                                $supname=$row["sup_name"];
+
+
+							}
+						} else {
+							echo "0 results";
+						}
+
+
+
 //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
 //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
 $mail->isHTML(true);                                  // Set email format to HTML
 
-$mail->Subject = 'Here is the subject';
-$mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+$mail->Subject = 'Form I-3 of Student '.$student;
+
+
+
+
+
+
+$mail->Body    = '<h3>Approved Form i-3 </h3> of '.$student.'<br><br>Internship Start Date-:'.$start.'<br>Internship Ends on :'.$end.'<br>Supervisor name -:'.$supname.'<br>Company :'.$company;
 $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
 if(!$mail->send()) {
     echo 'Message could not be sent.';
     echo 'Mailer Error: ' . $mail->ErrorInfo;
 } else {
-    echo 'Message has been sent';
+}
+
 }

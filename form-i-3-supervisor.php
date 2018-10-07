@@ -3,6 +3,88 @@
 
 <style>
 
+
+h1 {
+  text-align: center;
+  font-family: Tahoma, Arial, sans-serif;
+  color: #06D85F;
+  margin: 80px 0;
+}
+
+.box {
+  width: 40%;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.2);
+  padding: 35px;
+  border: 2px solid #fff;
+  border-radius: 20px/50px;
+  background-clip: padding-box;
+  text-align: center;
+}
+
+
+.button:hover {
+  background: #06D85F;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 70%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 70%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 50%){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+/* Popup box BEGIN */
 </style>
 <script>
     $(function() {
@@ -44,7 +126,7 @@
                             <a href="form5.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="SUP"){echo "display:none";}?>">Form I-5</a>
                             <a href="form_I-7.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Form I-7</a>
                             <a href="getPerformances.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Performance</a>
-                            <a href="form-i-3-supervisor.php" class="list-group-item list-group-item-action active" style="<?php if(Session::get('role')!="STD"){echo "display:none";}?>">Certify And Email Form I-3</a>
+                            <a href="form-i-3-supervisor.php" class="list-group-item list-group-item-action " style="<?php if(Session::get('role')!="STD"){echo "display:none";}?>">Certify And Email Form I-3</a>
                             <a href="grade.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Grading-From</a>
                             <a href="marking_summary.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Marking-Summary-From</a>
                             <a href="Schedule.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Schedule</a>
@@ -59,29 +141,267 @@
         <div class="col col-md-9 col-lg-9">
                     <div class="jumbotron jumbotron-fluid text-center welcome">
                         <div class="container">
-                            <h2>Approve Form I-3-Approval</h2></br>
+                            <h2> Form I-3-Approval</h2></br>
 							
                         </div>
 
-                        <?php 
-                        require_once('PHP');
+
+
+
+
+
+                        
+                        <?php
+                        include('DBConnection-I-3.php');
+						
+                        //$StdID=$_SERVER['QUERY_STRING'];
+                                                $supervisor="9";
+                                                $sql2="SELECT * FROM i3_details  WHERE supervisor='$supervisor'";
+                                                $result=mysqli_query($con,$sql2);
+                                                if ($result->num_rows > 0) {
+                                                    // output data of each row
+                                                    while($row = $result->fetch_assoc()) {
+                                                        // $StudentId= $row["studentId"];
+                                                        // $address= $row["address"];
+                                                        // $contact= $row["contact"];
+                                                        // $email= $row["email"];
+                                                        //$address= $row["studentId"];
+
+                                                        $student=$row["studentId"];
+                                                        $month=$row["month"];
+                                                       
                         
                         
-                        ?>
-
-                        <form class="contact-form" action="email.php" method="post">
-Name : <input type="text" name="name" placeholder="Full name"><br>
-
-Email : <input type="email" name="email"placeholder="Email"><br>
-
-subject: <input type="text" name="subject"placeholder="subject"><br>
-
-Msg   : <input type="textarea" name="message"  placeholder="message"><br>
+                                                    }
+                                                } else {
+                                                    echo "0 results";
+                                                }
+                        
 
 
+                                            ?>
+                                       <div style="margin-left:300px">     
+                        <table style="text-align:center"><tr><form method="POST" ><th>Student Id</th><th>Month</th><th>Form I-3</th><th>Action</th></tr>
+                        
+                        <tr><td><?php echo "$student" ?></td>
+                        <td><?php echo "$month"?></td>
+                      <td>  
+                      <div >
+	<a class="button" href="#popup1">View Form I-3</a>
+</div>
 
-<button type="submit" name="submit">Send Mail</button>
-</form>
+<div id="popup1" class="overlay">
+	<div class="popup">
+		<h2>Form I-3</h2>
+		<a class="close" href="#">&times;</a>
+		<div class="content">
+
+
+
+
+
+		
+
+<?php
+						///
+						include('DBConnection-I-3.php');
+						
+						$StdID=$_SERVER['QUERY_STRING'];
+						$uid=$_SESSION["uid"];
+                        $address= "";
+                        $contact="";
+                        $email= "";
+//$address= $row["studentId"];
+						$sql="SELECT * FROM form1_supervisor  WHERE ID='9'";
+						$result=mysqli_query($con,$sql);
+						if ($result->num_rows > 0) {
+							// output data of each row
+							while($row = $result->fetch_assoc()) {
+							$StudentId	= $row["stdID"];
+//$address= $row["studentId"];
+							}
+						} else {
+							echo "0 results";
+                        }
+                        
+
+                        $sql4="SELECT * FROM form1_student_details  WHERE stdID='$StudentId'";
+						$result4=mysqli_query($con,$sql4);
+						if ($result4->num_rows > 0) {
+							// output data of each row
+							while($row = $result4->fetch_assoc()) {
+                            $StudentId	= $row["stdID"];
+                            
+
+                            $address= $row["address"];
+                            $contact= $row["mobilePhn"];
+                            $email= $row["email"];
+//$address= $row["studentId"];
+							}
+						} else {
+							echo "0 results";
+						}
+
+
+						// if (!$result)
+						// {	
+						// 	die(mysqli_error($con));	
+						// }
+						
+						// while($row=mysqli_fetch_array($result))
+						// {
+								
+						// 	echo "<div>".$result['studentId'];
+							
+							
+							
+						// }
+					?>
+					
+						<fieldset>
+
+							<div>
+							<div class ="jumbotron">
+							<h4 style="text-align:center"><b>Intern's Information</b></h4>
+							<hr>
+							<div class='row'>
+							<div class='col'>
+								<?php echo " <label><b>Intern's Name-:".$_SESSION["name"]."</b></label>";
+								?>
+								
+															</div>
+
+								<div class='col'>
+
+								
+
+								<?php echo " <label><b>Student ID-:".$StudentId."</b></label>";
+								?>
+
+								
+								</div>
+								<div class='col'>
+
+								
+
+									<?php echo " <label><b>Intern's Private Address-:".$address."</b></label>";
+								?>
+							
+								</div>
+								</div>
+								<div class='row'>
+								<div class='col'>
+								<?php echo " <label><b>Contact Number-:".$contact."</b></label>";
+								?>
+								
+								</div>
+								<div class='col'>
+								<?php echo " <label><b>Email-:".$email."</b></label>";
+								?>
+								
+								</div>
+								<div class='col'>
+								<!-- <label><b>Address-:{{Address}}</b></label> -->
+								<br>
+								<br>
+								</div>
+								
+								</div>
+
+
+								
+							</div>
+							
+							
+<?php
+     					 $start="";
+						$end="";
+						$company="";
+						$supname="";
+
+						///
+						include('DBConnection-I-3.php');
+						
+//$StdID=$_SERVER['QUERY_STRING'];
+						$sql2="SELECT * FROM form1_supervisor  WHERE stdID='$student'";
+						$result=mysqli_query($con,$sql2);
+						if ($result->num_rows > 0) {
+							// output data of each row
+							while($row = $result->fetch_assoc()) {
+								// $StudentId= $row["studentId"];
+								// $address= $row["address"];
+								// $contact= $row["contact"];
+								// $email= $row["email"];
+								//$address= $row["studentId"];
+								$start=$row["internship_sDate"];
+								$end=$row["internship_eDate"];
+                                $company=$row['employer_name'];
+                                $supname=$row["sup_name"];
+
+
+							}
+						} else {
+							echo "0 results";
+						}
+
+					?>
+					
+
+
+
+							<h4 style="text-align:center"><b>Internship Information</b></h4>
+							<hr>
+
+							<div class="row">
+							<div class="col"><?php echo " <label><b>Internship Title-:Intern</b></label>";?></div>
+
+						    <div class="col"><?php echo " <label><b>Company-:".$company."</b></label>";?></div>
+
+							</div>
+
+							<div class="row">
+
+							<div class="col"><?php echo " <label><b>Overall internship period from-:".$start."</b></label>";?></div>
+
+							<div class="col"><?php echo " <label><b>Overall internship period to-:".$end."</b></label>";?></div>
+
+							</div>
+
+
+
+		</div>
+	</div>
+</div>
+                      
+                      
+                      
+                      
+                      </td>
+
+                        <td><button input type="submit" name="submit" id="submit">Accept and email</button></td></form>
+                        <?php
+
+
+
+    if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
+    {
+        require_once('email.php');
+        email("IT16030268");
+        echo"<script>alert('Form I-3 of ".$student." For month ".$month." has been successfully sent to supervisor')</script>";
+
+    }
+    
+?>
+                        </tr>
+
+                        
+                        
+                        
+                        </table>
+                        
+                        </div>
+
+                        
                     </div>
 					
 					
