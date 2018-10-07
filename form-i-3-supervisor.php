@@ -126,7 +126,7 @@ h1 {
                             <a href="form5.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="SUP"){echo "display:none";}?>">Form I-5</a>
                             <a href="form_I-7.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Form I-7</a>
                             <a href="getPerformances.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Performance</a>
-                            <a href="form-i-3-supervisor.php" class="list-group-item list-group-item-action " style="<?php if(Session::get('role')!="STD"){echo "display:none";}?>">Certify And Email Form I-3</a>
+                            <a href="form-i-3-supervisor.php" class="list-group-item list-group-item-action " style="<?php if(Session::get('role')!="SUP"){echo "display:none";}?>">Certify And Email Form I-3</a>
                             <a href="grade.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Grading-From</a>
                             <a href="marking_summary.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Marking-Summary-From</a>
                             <a href="Schedule.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Schedule</a>
@@ -240,6 +240,22 @@ h1 {
 							}
 						} else {
 							
+                        }
+                        
+                        
+                        $sql8="SELECT * FROM users  WHERE studentId='$StudentId'";
+						$result8=mysqli_query($con,$sql8);
+						if ($result8->num_rows > 0) {
+							// output data of each row
+							while($row = $result8->fetch_assoc()) {
+                            $StudentName	= $row["name"];
+                            
+
+                            
+//$address= $row["studentId"];
+							}
+						} else {
+							
 						}
 
 
@@ -266,7 +282,7 @@ h1 {
 							<hr>
 							<div class='row'>
 							<div class='col'>
-								<?php echo " <label><b>Intern's Name-:".$_SESSION["name"]."</b></label>";
+								<?php echo " <label><b>Intern's Name-:".$StudentName."</b></label>";
 								?>
 								
 															</div>

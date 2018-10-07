@@ -50,6 +50,8 @@ if($data){
                                 echo '<span class="badge badge-success ml-3"><b>'.$count.'</b></span>';
                                 ?>
                             </a>
+                            <a href="form-i-3-supervisor.php" class="list-group-item list-group-item-action " style="<?php if(Session::get('role')!="SUP"){echo "display:none";}?>">Certify And Email Form I-3</a>
+
                             <a href="form-i-3.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="STD"){echo "display:none";}?>">Form I-3</a>
                             <a href="form5.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="SUP"){echo "display:none";}?>">Form I-5</a>
                             <a href="form_I-7.php" class="list-group-item list-group-item-action" style="<?php if(Session::get('role')!="ADM"){echo "display:none";}?>">Form I-7</a>
