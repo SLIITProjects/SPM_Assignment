@@ -1,14 +1,16 @@
 <!--Include header from another file-->
 <?php include('inc/header.php'); ?>
-
-
 <?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-    $sid=$_POST['search'];
-    $InsertEvaluation = $form->InsertEvaluation($_POST,$sid);
+include('DBConnection.php');
+if($_SERVER['REQUEST_METHOD']=='POST')
+{
+	/**
+		Calling the function in the user class
+	**/
+	$form->InsertEvaluation();
+
 }
 ?>
-
 
 
 <style>
@@ -91,36 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                              
                              <div id="here"></div>
                             
-                      
-<!--
-                        
-							<div class='form-group'>
-								<label><b>Student ID</b></label>
-								<input class='form-control' name='stdID' placeholder='Enter Student ID' type='text'>
-							</div>
-							<br/>
--->
-                             
-<!--
-                             
-							<div class='form-group'>
-								<label><b>Employee's Name</b></label>
-							    <input class='form-control' name='Ename' placeholder='Enter the Emplyee name' type='text'>
-							</div>
-							<br/>
--->
-<!--
-							<div class='form-group'>
-								<label><b>Student's Name</b></label>
-								<input class='form-control' name='Stdname' placeholder='Enter Student name' type='text'>
-							</div>
-							<br/>
-							<div class='form-group'>
-								<label><b>Supervisor's Name </b></label>
-								<input class='form-control' name='SupName' placeholder='Enter the supervisor name' type='text'>
-							</div>
-							<br/>
--->
+
                             
                             
                             <div class='form-group'>
@@ -129,15 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 								
 							</div>
                         
-<!--
-                            
-                            <div class='form-group'>
-								<label><b>Comments on how the internship benifited the student</b></label>
-								<textarea class='form-control' name='area2'></textarea><br>
-								
-							</div>
-                            
--->
+
                             
                             <div class ="jumbotron">
 
@@ -403,12 +368,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                             
                             <div class='form-group'>
 								<label><b>Date</b></label>
-								<input class='form-control' name='date' placeholder=' Enter Date' type="date">
+								<input class='form-control' name='date' type="date">
 							</div>
                             
 						
 					
-							<button type='submit' class='btn btn-primary' name='submit'>Submit</button>
+							<button type='submit' class='btn btn-primary' name='submit'>Send the Email</button>
 						</fieldset>
                         </form>
          
@@ -422,7 +387,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
         </div>
     </div>
 </section>
-    
+ 
+
+
+
+<!--Include Footer from another file-->
+<?php include('inc/footer.php')?>   
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.min.js"></script>
 
