@@ -153,19 +153,19 @@ $con->close();
     </div>
     <div class="form-group">
       <label ><b>Viva Marks<b></label>
-      <input class="form-control" id="vmark"type="text"  name='vmark' placeholder="(Out Of 40)">
+      <input class="form-control" id="vmark"type="number"  name='vmark' placeholder="(Out Of 40)">
      
     </div>
 
   <div class="form-group">
       <label ><b>Monthly Progress<b></label>
-      <input class="form-control" id="mpmark"type="text"  name='mpmark' placeholder="(Out Of 30)">
+      <input class="form-control" id="mpmark"type="number"  name='mpmark' placeholder="(Out Of 30)">
      
     </div>
                             
     <div class="form-group">
       <label ><b>Internship Report<b></label>
-      <input class="form-control" id="irmark"type="text"  name='irmark' placeholder="(Out Of 30)">
+      <input class="form-control" id="irmark"type="number"  name='irmark' placeholder="(Out Of 30)">
      
     </div>
 
