@@ -341,8 +341,37 @@ h1 {
 
 							}
 						} else {
-							
+                             
+                            
+
+                        }
+                        
+
+
+
+
+                        $sql6="SELECT * FROM i3_details  WHERE studentId='$student'";
+						$result6=mysqli_query($con,$sql6);
+						if ($result6->num_rows > 0) {
+							// output data of each row
+							while($row = $result6->fetch_assoc()) {
+								// $StudentId= $row["studentId"];
+								// $address= $row["address"];
+								// $contact= $row["contact"];
+								// $email= $row["email"];
+								//$address= $row["studentId"];
+								$problem=$row["problems"];
+                                $summary=$row["summary"];
+                                $month=$row["month"];
+                               
+
+							}
+						} else {
+                             
+                            
+                            
 						}
+
 
 					?>
 					
@@ -353,6 +382,7 @@ h1 {
 							<hr>
 
 							<div class="row">
+
 							<div class="col"><?php echo " <label><b>Internship Title-:Intern</b></label>";?></div>
 
 						    <div class="col"><?php echo " <label><b>Company-:".$company."</b></label>";?></div>
@@ -366,6 +396,23 @@ h1 {
 							<div class="col"><?php echo " <label><b>Overall internship period to-:".$end."</b></label>";?></div>
 
 							</div>
+
+
+<br>
+
+	<h4 style="text-align:center"><b>Details of the month</b></h4>
+							<hr>
+                            <div class="row">
+
+                            <div class="col"><?php echo " <label><b>month-:".$month."</b></label>";?></div>
+
+
+<div class="col"><?php echo " <label><b>Problems-:".$problem."</b></label>";?></div>
+
+<div class="col"><?php echo " <label><b>Summary-:".$summary."</b></label>";?></div>
+
+</div>
+
 
 
 
@@ -386,7 +433,7 @@ h1 {
     if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
     {
         require_once('email.php');
-        email("IT16030268");
+        email($StudentId);
         echo"<script>alert('Form I-3 of ".$student." For month ".$month." has been successfully sent to industrial trainig manager')</script>";
 
     }
