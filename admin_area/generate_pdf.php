@@ -11,7 +11,7 @@ class PDF extends FPDF
 function Header()
 {
     $na=$_POST['faculty'];
-    $im="img/SLIIT_Logo.png";
+    $im="../img/SLIIT_Logo.png";
     // Logo
      $this->Image($im,30,5,40);
     $this->SetFont('Arial','B',13);

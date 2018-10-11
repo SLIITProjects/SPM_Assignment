@@ -16,6 +16,7 @@ class Admin
         $this->db = new Database();
         $this->fm = new Format();
     }
+    //Admin Login function
     public function login($adminUsername,$adminPassword){
         $username = $this->fm->validation($adminUsername);
         $password = $this->fm->validation($adminPassword);
@@ -23,6 +24,7 @@ class Admin
         $username = mysqli_real_escape_string($this->db->link,$username);
         $password = mysqli_real_escape_string($this->db->link,$password);
 
+        //Check and validate admin login details
         if(empty($adminUsername) || empty($adminPassword)){
             $message = "Username or Password is Empty!!";
             return $message;

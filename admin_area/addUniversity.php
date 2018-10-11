@@ -37,6 +37,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                             <a href="addFaculties.php" class="list-group-item list-group-item-action">Add Faculties</a>
                             <a href="addUniversity.php" class="list-group-item list-group-item-action active">Add Universities</a>
                             <a href="signup_request.php" class="list-group-item list-group-item-action">Signup requests</a>
+                            <a href="grade.php" class="list-group-item list-group-item-action" >Grading-From</a>
+                            <a href="marking_summary.php" class="list-group-item list-group-item-action">Marking-Summary-From</a>
+                            <a href="Schedule.php" class="list-group-item list-group-item-action" >Schedule</a>
+                            <a href="schedule_report.php" class="list-group-item list-group-item-action" >Schedule Report</a>
+                            <a href="form_I-7.php" class="list-group-item list-group-item-action" >Form I-7</a>
+                            <a href="getPerformances.php" class="list-group-item list-group-item-action" ">Performance</a>
+                            <a href="Performance_SummaryReport.php" class="list-group-item list-group-item-action" >Performance Summary Report </a>
+
                         </div>
                     </div>
                 </div>

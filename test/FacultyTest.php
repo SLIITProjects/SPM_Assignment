@@ -3,11 +3,11 @@ $filepath = realpath(dirname(__FILE__));
 include_once ($filepath.'/../classes/Faculty.php');
 use PHPUnit\Framework\TestCase;
 
-class FacultyTest extends PHPUnit_Framework_TestCase
+class FacultyTest extends TestCase
 {
 /*Test whether faulty is insert correctly and get specific faculty correctly*/
     /**
-     * @covers BankAccount::getBalance
+     * @covers Faculty::getOneFaculty
      */
     public function testGetOneFaculty()
     {

@@ -1,8 +1,8 @@
 <?php
 $filepath = realpath(dirname(__FILE__));
 include_once ($filepath.'/../classes/User.php');
-
-class form1StudentTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+class form1StudentTest extends TestCase
 {
 /*Test whether student information inserts correctly*/
     public function testStudentInfo()

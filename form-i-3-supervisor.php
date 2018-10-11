@@ -155,7 +155,7 @@ h1 {
                         include('DBConnection-I-3.php');
 						
                         //$StdID=$_SERVER['QUERY_STRING'];
-                                                $supervisor="9";
+                                                $supervisor="23";
                                                 $sql2="SELECT * FROM i3_details  WHERE supervisor='$supervisor'";
                                                 $result=mysqli_query($con,$sql2);
                                                 if ($result->num_rows > 0) {

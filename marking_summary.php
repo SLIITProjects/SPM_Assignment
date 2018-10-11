@@ -65,7 +65,7 @@ if($login==false){
                     <!-- <h3 class="text-primary"> Computing Faculty :</h3> <h3 class="text-warning">Business Faculty  :</h3>     <h3 class="text-success">Engineering Faculty :</h3> -->
                     	
 					<!--Form filled by student-->	
-					 <form  method="post" action="generate_pdf.php">
+					 <form  method="post" action="admin_area/generate_pdf.php">
 						<fieldset>
 							
 					

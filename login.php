@@ -100,7 +100,7 @@ if($login==true){
                 <div class="col-md-5 text-center py-5 loginForm">
                     <div class="container-fluid">
                         <div class="row">
-                                <form class="login" action="login.php" method="post">
+                                <form class="login" action="login.php" autocomplete="off" method="post">
                                     <div class="form-group">
                                         <div class="input-group ">
                                             <span class="input-group-addon"><i class="fa fa-user mr-2 mt-2"></i></span>

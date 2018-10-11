@@ -3,7 +3,7 @@ $filepath = realpath(dirname(__FILE__));
 include_once ($filepath.'/../classes/Examiner.php');
 use PHPUnit\Framework\TestCase;
 
-class PerformanceTest extends PHPUnit_Framework_TestCase
+class PerformanceTest extends TestCase
 {
 /*Test whether faulty is insert correctly and get specific faculty correctly*/
     public function testAddPerformance()

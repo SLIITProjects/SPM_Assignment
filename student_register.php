@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']) || isset($_P
                     <h2 class="display-5 pt-2 text-white">Student Registration</h2>
                         <div class="row justify-content-center">
 
-                                    <form class="mt-3" action="student_register.php" method="post" enctype="multipart/form-data">
+                                    <form  autocomplete="off" class="mt-3" action="student_register.php" method="post" enctype="multipart/form-data">
 
                                         <div class="form-group">
                                             <div class="input-group">

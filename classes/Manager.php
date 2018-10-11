@@ -33,8 +33,6 @@ class Manager
                       
             $result = $this->db->update($query);
             if($result){
-                $msg = "<span class='alert alert-success msg'>Scheduled Successfully!</span>";
-                return $msg;
                 echo"<script>alert('updated Successfully!!')</script>";
             }else{
                 

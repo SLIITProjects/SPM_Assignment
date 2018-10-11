@@ -7,7 +7,7 @@ $filepath = realpath(dirname(__FILE__));
 include_once($filepath . '/../classes/Manager.php');
 use PHPUnit\Framework\TestCase;
 
-class MarkingTest extends PHPUnit_Framework_TestCase
+class MarkingTest extends TestCase
 {
 /*Test whether Marks are insert correctly and get specific student  marks correctly*/
     public function testTotal()

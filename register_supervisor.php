@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']) || isset($_P
         <div class="card">
                     <div class="card-body">
 
-                        <form action="register_supervisor.php" method="post" enctype="multipart/form-data">
+                        <form action="register_supervisor.php" method="post" autocomplete="off" enctype="multipart/form-data">
 
                             <div class="form-row">
 

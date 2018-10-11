@@ -504,7 +504,8 @@ class User
 			}
 		}
 	}
-	
+    public function form1Supervisor()
+    {
 		include('DBConnection.php');
 		if(isset($_POST['submitSupervisor']))
 		{

@@ -15,6 +15,7 @@ class Faculty
         $this->db = new Database();
         $this->fm = new Format();
     }
+    //Insert faculty to database
     public function addFaculty($name){
 
         $getredundant = "SELECT * FROM faculty WHERE fname='$name' LIMIT 1";
@@ -34,7 +35,7 @@ class Faculty
         }
     }
 
-
+    //Get faculties from database
     public function getFaculties(){
         $query = "SELECT * from faculty";
         $result = $this->db->select($query);
@@ -42,6 +43,7 @@ class Faculty
 
     }
 
+    //Get one faculty from database
     public function getOneFaculty($name){
         $query = "SELECT * from faculty where fname='$name'";
         $result = $this->db->select($query);
@@ -49,6 +51,7 @@ class Faculty
 
     }
 
+    //Delete faculty
     public function delFaculty($fid){
         $query = "DELETE FROM faculty WHERE fid = '$fid' ";
         $result = $this->db->delete($query);
