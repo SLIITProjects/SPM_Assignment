@@ -38,6 +38,10 @@
                             <a href="form-i-3-supervisor.php" class="list-group-item list-group-item-action">Certify And Email Form I-3</a>
                             <a href="grade.php" class="list-group-item list-group-item-action">Grading-From</a>
                             <a href="marking_summary.php" class="list-group-item list-group-item-action">Marking-Summary-From</a>
+			    <a href="form-i-3.php" class="list-group-item list-group-item-action">Form I-3</a>
+                            <a href="form-i-3-supervisor.php" class="list-group-item list-group-item-action">Certify And Email Form I-3</a>
+                            <a href="grade.php" class="list-group-item list-group-item-action">Grading-From</a>
+                            <a href="marking_summary.php" class="list-group-item list-group-item-action">Marking-Summary-From</a>
                         </div>
                     </div>
                 </div>
